@@ -16,5 +16,5 @@ before_script:
   - while ! sudo lsof -Pi :5000 -sTCP:LISTEN -t; do sleep 1; done
 
 script:
-  - python -m unittest discover -v
-  
+  - pytest unit_test
+  - pytest integration_test
