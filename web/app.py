@@ -44,7 +44,9 @@ def sign_up():
             return redirect(url_for('index'))
         else:
             flash('This email already has an account.')
-            return render_template('sign_up.html')
+            # makes more sense to redirect a registered user to login page
+            return render_template('login.html')
+            # return render_template('sign_up.html')
 
 # route will depend on whether how we structure pages
 # is index the login + homepage or the page selecting preferences to then be matched?
