@@ -8,19 +8,20 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-
-
+#
+#
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(200))
 
-db.create_all()
+db.create_all()  # create the DB tables
 example_user = User(id=1, name="Philip Sterne")
 db.session.merge(example_user)
 db.session.commit()
 
 @app.route('/')
 def index():
+    #return render_template('sign_up.html')
     return render_template('index.html')
 
 @app.route('/users')

@@ -1,5 +1,4 @@
 # https://flask-login.readthedocs.io/en/latest/
-
 # pip install flask-login
 
 from flask import Flask, render_template, request, redirect, url_for, flash, session
@@ -11,9 +10,10 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
 path = os.path.abspath(os.getcwd()) + '\\app.db')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + path
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////' + path
 
 db = SQLAlchemy(app)
+db.create_all(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -34,7 +34,10 @@ def sign_up():
     # when button to sign up on login page is clicked
     if request.method == 'GET':
         return render_template('sign_up.html')
+
     elif request.method == 'POST':
+        # return redirect(url_for('index'))
+
         # check that email is not already registered
         user = db.session.query(User).filter(User.email==request.form['email']).first()
         if not user:
@@ -55,6 +58,7 @@ def login():
     if request.method == 'GET':
         return render_template('login.html')
     elif request.method == 'POST':
+        #return redirect(url_for('index'))
         user = db.session.query(User).filter(User.email==request.form['email'], password=request.form['password']).first()
         # check that the user is in the database
         if not user:
@@ -63,16 +67,17 @@ def login():
         return redirect(url_for('index'))
 
 # placeholder reference to homepage
-@app.route('/', methods['GET'])
-@login_required
+@app.route('/', methods=['GET','POST'])
+# @login_required
 def index():
+    ## take login as the default index pages
     return render_template('index.html')
 
-@app.route('/logout')
+@app.route('/logout', methods=['GET'])
 @login_required
 def log_out():
     logout_user()
-        return redirect(url_for(('index'))
+    return redirect(url_for(('login'))
 
 if __name__ == '__main__':
     sess.init_app(app)
