@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- FontAwesome file -->
     <script src="https://kit.fontawesome.com/e7a847d88f.js" crossorigin="anonymous"></script>
@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
 
     <!-- CSS file -->
-    <link rel="stylesheet" type="text/css" href="login.css">
+    <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='login.css') }}>
 
     <title>Login</title>
 </head>
@@ -39,13 +39,13 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1"><i class="fas fa-envelope"></i></span>
                         </div>
-                        <input type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" required>
+                        <input type="email" name="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" required>
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required>
+                        <input type="password" name="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required>
                     </div>
                     <div class="form-group form-check">
                         <input type="checkbox" class="form-check-input" id="loggedIn">
@@ -54,21 +54,21 @@
                     <button type="submit" class="btn btn-primary mb-4" id="loginButton">Log in  <i class="fas fa-sign-in-alt"></i></button>
                 </form>
                 <p id="forgotPass"><a href="/forgotPassword" id="forgotPass">Forgot password ?</a></p>
-
-                <p id="createAcc">Don't have an account? <a href="/signUp.html">Sign up here <i class="fas fa-arrow-alt-circle-right"></i></a></p>
+                <form action="/signup" method="GET">
+                  <p id="createAcc">Don't have an account? <a href="{{url_for('signup')}}">Sign up here <i class="fas fa-arrow-alt-circle-right"></i></a></p>
+                </form>
             </div>
           </div>
         </div>
     </div>
-    
+
   <!-- Bootstrap JS files -->
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" 
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
   integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
   integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
   integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  
+
 </body>
 </html>
- 
