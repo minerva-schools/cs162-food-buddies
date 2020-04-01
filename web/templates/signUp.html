@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
 
     <!-- CSS file -->
-    <link rel="stylesheet" type="text/css" href="signUp.css">
+    <link rel="stylesheet" type="text/css" href="../static/signUp.css">
 
     <title>Sign up</title>
 </head>
@@ -26,7 +26,6 @@
 
       function checkForm(form)
       {
-    
         if(form.pwd1.value == form.pwd2.value) {
             return true;
           }
@@ -48,35 +47,34 @@
             </div>
           </div>
 
-
           <div class="col signupHalf  d-flex align-items-center justify-content-center" >
             <div class="signupForm">
               <h3 id="signupTitle">Sign Up</h3>
               <p id="signupSubTitle">Join our community and enjoy company for any meal, whenever you want.</p>
-                <form action="#" method="POST" onsubmit="return checkForm(this);">
+                <form action="{{ url_for('authentication.sign_up') }}" method="POST" onsubmit="return checkForm(this);">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1"><i class="fas fa-envelope"></i></span>
                         </div>
-                        <input type="email" class="form-control" placeholder="Minerva Email (@minerva.kgi.edu)" aria-label="Email" aria-describedby="basic-addon1" required>
+                        <input type="email" name="email" class="form-control" placeholder="Minerva Email (@minerva.kgi.edu)" aria-label="Email" aria-describedby="basic-addon1" required>
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon2"><i class="fas fa-signature"></i></span>
                         </div>
-                        <input type="text" class="form-control" placeholder="First Name" aria-label="firstName" aria-describedby="basic-addon2" required>
+                        <input type="text" name="first_name" class="form-control" placeholder="First Name" aria-label="firstName" aria-describedby="basic-addon2" required>
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon3"><i class="fas fa-signature"></i></span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Last Name" aria-label="lastName" aria-describedby="basic-addon3" required>
+                        <input type="text" name="last_name" class="form-control" placeholder="Last Name" aria-label="lastName" aria-describedby="basic-addon3" required>
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon4"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon4" 
+                        <input type="password" name="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon4"
                         minlength="8" maxlength="16" name="pwd1" required>
                     </div>
                     <div class="input-group mb-3">
@@ -104,7 +102,7 @@
                     <p class = "mb-3"id="terms">By creating an account you agree to our <a href="/">Terms & Privacy</a></p>
                     <button type="submit" class="btn btn-primary mb-4" id="signupButton"><i class="fas fa-plus-circle"></i>  Create an Account</button>
                 </form>
-                <p id="login">I have an account! <a href="/login.html">Login</a></p>
+                <p id="login">I have an account! <a href={{ url_for('authentication.login') }}>Login</a></p>
 
             </div>
           </div>
