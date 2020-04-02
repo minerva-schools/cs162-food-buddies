@@ -23,6 +23,6 @@ def client():
 
 def test_empty_db(client):
     """Start with a blank database."""
-
+    # Changed the original test case bcs '/' redirects to the current login page
     rv = client.get('/')
-    assert b'Hello World!' in rv.data
+    assert b'Login' in rv.data
