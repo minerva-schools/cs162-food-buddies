@@ -1,0 +1,32 @@
+#errorMessage {
+    text-align: center;
+    color: #F5F5F5;
+    font-size: 30px;
+    margin-bottom: 4% ;
+
+}
+
+#errorDescription {
+    text-align: center;
+    color: #F5F5F5;
+    font-size: 20px;
+
+}
+
+@media (min-width:800px){
+    
+#errorMessage {
+    text-align: center;
+    color: #F5F5F5;
+    font-size: 65px;
+    margin-bottom: 3% ;
+
+}
+
+#errorDescription {
+    text-align: center;
+    color: #F5F5F5;
+    font-size: 30px;
+
+}
+}
