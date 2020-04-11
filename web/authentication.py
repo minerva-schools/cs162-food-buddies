@@ -45,12 +45,11 @@ def login():
                 # return redirect(url_for('index'))
                 return "<h1>You're logged</h1>"
             else:
-                flash('Incorrect Password')
-
-                return "<h1>Incorrect Pwd</h1>"
+                flash('Incorrect Password!')
+                return redirect(url_for('authentication.login'))
         else:
             flash('This email does not have an account.')
-            return "<h1>email error</h1>"
+            return redirect(url_for('authentication.login'))
 
 @authentication.route('/logout')
 @login_required
