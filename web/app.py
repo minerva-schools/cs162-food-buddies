@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask_login import login_required, current_user
 import os
 from .models import db
 from .authentication import authentication, login_manager
@@ -19,6 +20,12 @@ login_manager.init_app(app)
 @app.route('/')
 def index():
     return render_template('login.html')
+
+
+@app.route('/preference')
+@login_required
+def preference():
+    return render_template('preference.html')
 
 @app.errorhandler(404)
 def page_not_found(e):
