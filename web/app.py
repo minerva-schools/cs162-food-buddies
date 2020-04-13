@@ -38,6 +38,12 @@ def page_not_found(e):
 
     return render_template('404.html'), 404
 
+@app.errorhandler(401)
+def custom_401(e):
+
+    flash('You need to login for accessing this page!')
+    return redirect(url_for('authentication.login'))
+
 if __name__ == '__main__':
     app.run()
 
