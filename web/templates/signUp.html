@@ -51,6 +51,13 @@
             <div class="signupForm">
               <h3 id="signupTitle">Sign Up</h3>
               <p id="signupSubTitle">Join our community and enjoy company for any meal, whenever you want.</p>
+              {% with messages = get_flashed_messages() %}
+              {% if messages %}
+              <div class="alert alert-danger" role="alert" style="text-align: center;">
+                {{ messages[0] }} Go to <a href="{{ url_for('authentication.login') }}">login page</a>.
+              </div>
+              {% endif %}
+              {% endwith %}
                 <form action="{{ url_for('authentication.sign_up') }}" method="POST" onsubmit="return checkForm(this);">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -98,7 +105,7 @@
                           <option value="London">London</option>
                           <option value="Taipei">Taipei</option>
                         </select>
-                      </div>
+                    </div>
                     <p class = "mb-3"id="terms">By creating an account you agree to our <a href="/">Terms & Privacy</a></p>
                     <button type="submit" class="btn btn-primary mb-4" id="signupButton"><i class="fas fa-plus-circle"></i>  Create an Account</button>
                 </form>
