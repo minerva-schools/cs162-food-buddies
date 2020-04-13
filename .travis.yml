@@ -11,10 +11,10 @@ install:
   - pip install -r requirements-unit.txt
 
 before_script:
-  - export FLASK_CONFIG=test
   - export SQLALCHEMY_DATABASE_URI='sqlite:///web.db'
   - python3 -m flask run > /dev/null &
   - while ! sudo lsof -Pi :5000 -sTCP:LISTEN -t; do sleep 1; done
+  - export FLASK_CONFIG=dev
   - export TEST_SQLALCHEMY_DATABASE_URI='sqlite:///test.db'
 
 script:
