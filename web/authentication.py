@@ -1,10 +1,11 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from flask_login import LoginManager, login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import db,User
+from . import login_manager
+from flask import current_app as app
 
 authentication = Blueprint("authentication",__name__)
-login_manager = LoginManager()
 
 @login_manager.user_loader
 def load_user(id):
