@@ -29,7 +29,7 @@ def sign_up():
             #Login the user after signup
             logged_user = User.query.filter_by(email=email).first()
             login_user(logged_user, remember=False)
-            return redirect(url_for('preference'))
+            return redirect(url_for('main_route.preference'))
         else:
             flash('This email already has an account.')
             return render_template('signUp.html')
@@ -48,7 +48,7 @@ def login():
             if check_password_hash(user.password, request.form['password']):
                 login_user(user)
                 # return redirect(url_for('index'))
-                return redirect(url_for('preference'))
+                return redirect(url_for('main_route.preference'))
             else:
                 flash('Incorrect Password!')
                 return redirect(url_for('authentication.login'))

@@ -6,7 +6,7 @@ from web.models import db
 
 login_manager = LoginManager()
 
-def create_app(config_name):
+def create_app(config_name='dev'):
     app = Flask(__name__)
 
     config_name = os.environ.get('FLASK_CONFIG', config_name)
