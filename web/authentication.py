@@ -24,7 +24,11 @@ def sign_up():
             user = User(first_name=request.form['first_name'],last_name=request.form['last_name'], email=email,password=hashed_pwd)
             db.session.add(user)
             db.session.commit()
-            return redirect(url_for('index'))
+
+            #Login the user after signup
+            logged_user = User.query.filter_by(email=email).first()
+            login_user(logged_user, remember=False)
+            return redirect(url_for('preference'))
         else:
             flash('This email already has an account.')
             return render_template('signUp.html')
