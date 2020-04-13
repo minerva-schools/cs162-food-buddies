@@ -43,7 +43,7 @@ def login():
             if check_password_hash(user.password, request.form['password']):
                 login_user(user)
                 # return redirect(url_for('index'))
-                return "<h1>You're logged</h1>"
+                return redirect(url_for('preference'))
             else:
                 flash('Incorrect Password!')
                 return redirect(url_for('authentication.login'))

@@ -25,7 +25,7 @@ def index():
 @app.route('/preference', methods=['GET','POST'])
 @login_required
 def preference():
-    return render_template('preference.html')
+    return render_template('preference.html', firstName=current_user.first_name.capitalize())
     #For getting the location of use the following line
     # request.form.get ("location")
     #For getting the mealTime use the following line 
