@@ -63,7 +63,7 @@
                                 <div class="input-group-prepend">
                                     <label class="input-group-text" for="inputGroupSelect01"><i class="fas fa-map-marked-alt"></i></label>
                                 </div>
-                                <select class="custom-select" id="inputGroupSelect01" required>
+                                <select class="custom-select" id="location" name="location" required>
                                 <option value="" disabled selected hidden>Location (city)</option>
                                 <option value="San Francisco">San Francisco</option>
                                 <option value="Seoul">Seoul</option>
@@ -81,25 +81,25 @@
 
                                 <div class="btn-group-toggle d-flex justify-content-around preferenceFood" data-toggle="buttons">
                                     <label class="btn btn-outline-info checkButton">
-                                        <input class="form-check-input" type="checkbox" > Vegetarian
+                                        <input class="form-check-input" type="checkbox" name="dietary" value ="vegetarian"> Vegetarian
                                     </label>
                                     <label class="btn btn-outline-info checkButton">
-                                        <input class="form-check-input " type="checkbox" > Gluten-Free
+                                        <input class="form-check-input " type="checkbox" name="dietary" value ="glutenFree"> Gluten-Free
                                     </label>
                                 </div>
 
                                 <div class="btn-group-toggle d-flex justify-content-around preferenceFood" data-toggle="buttons">
                                     <label class="btn btn-outline-info checkButton">
-                                        <input class="form-check-input" type="checkbox" > Vegan
+                                        <input class="form-check-input" type="checkbox" name="dietary" value ="vegan"> Vegan
                                     </label>
                                     <label class="btn btn-outline-info checkButton">
-                                        <input class="form-check-input" type="checkbox" > Halal
+                                        <input class="form-check-input" type="checkbox" name="dietary" value ="halal"> Halal
                                     </label>
                                 </div>
 
                                 <div class="btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
                                     <label class="btn btn-outline-info checkButton">
-                                        <input class="form-check-input" type="checkbox" > Dairy-Free
+                                        <input class="form-check-input" type="checkbox" name="dietary" value ="dairyFree"> Dairy-Free
                                     </label>
                                 </div>
 
@@ -109,13 +109,13 @@
                             <label class="foodTime">When are you planning to have this meal?</label>
                             <div class="btn-group-toggle foodTime d-flex justify-content-around" data-toggle="buttons">
                                 <label class="btn btn-outline-info radioButton active">
-                                <input type="radio" name="mealTime" id="breakfast" autocomplete="off" checked> Breakfast
+                                <input type="radio" name="mealTime" value="breakfast" autocomplete="off" checked> Breakfast
                                 </label>
                                 <label class="btn btn-outline-info radioButton">
-                                <input type="radio" name="mealTime" id="lunch" autocomplete="off"> Lunch
+                                <input type="radio" name="mealTime" value="lunch" autocomplete="off"> Lunch
                                 </label>
                                 <label class="btn btn-outline-info radioButton">
-                                <input type="radio" name="mealTime" id="dinner" autocomplete="off"> Dinner
+                                <input type="radio" name="mealTime" value="dinner" autocomplete="off"> Dinner
                                 </label>
                             </div>
                             </div>

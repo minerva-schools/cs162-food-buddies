@@ -22,10 +22,16 @@ def index():
     return render_template('login.html')
 
 
-@app.route('/preference')
+@app.route('/preference', methods=['GET','POST'])
 @login_required
 def preference():
     return render_template('preference.html')
+    #For getting the location of use the following line
+    # request.form.get ("location")
+    #For getting the mealTime use the following line 
+    #request.form.get ("mealTime")
+    #For getting the dietary preferences use the following line
+    #request.form.getlist ("dietary")
 
 @app.errorhandler(404)
 def page_not_found(e):
