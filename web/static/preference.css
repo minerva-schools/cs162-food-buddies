@@ -1,0 +1,93 @@
+html, body {
+  height:100%;
+}
+
+body {
+  background-color: rgb(255, 250, 254);
+  font-family: 'Arvo', serif;
+}
+
+#mainContainer {
+  height: 100%;
+}
+
+#mainRow {
+  height: 100%;
+}
+
+#informativeText {
+  text-align: center;
+  color: #F5F5F5;
+}
+
+.preferenceHalf{
+  background: #F5F5F5;
+  padding-top: 1%;
+}
+
+.informativeHalf{
+  background: #364F6B;
+}
+
+#title{
+  color: #364F6B;
+  margin-bottom:2%px; 
+  font-weight: bold;
+  font-size: 25px;
+}
+
+#subtitle{
+  color: #364F6B;
+  font-size: 18px;
+}
+
+#nextButton{
+  margin-top: 7%;
+  width: 220px;
+}
+
+.preferenceForm{
+width: 80%;
+}
+
+#profilePic {
+  width: 100%;
+  margin-right: 10%;
+}
+
+#edit{
+  font-size: 15px;
+  text-align: center;
+}
+
+.checkButton{
+  width: 150px;
+  height: 40px;
+  text-align: center;
+}
+
+.radioButton{
+  width: 130px;
+  height: 40px;
+  text-align: center;
+}
+
+.preferenceFood{
+  margin-bottom: 3.5%;
+  font-size: 17px;
+}
+
+.foodTime {
+  margin-bottom: 4%;
+  font-size: 17px;
+}
+
+@media (min-width:760px){
+  .checkButton{
+    width: 200px;
+    text-align: center;
+  }
+  .preferenceForm{
+    width: 65%;
+  }
+}  

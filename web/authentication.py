@@ -24,7 +24,11 @@ def sign_up():
             user = User(first_name=request.form['first_name'],last_name=request.form['last_name'], email=email,password=hashed_pwd)
             db.session.add(user)
             db.session.commit()
-            return redirect(url_for('index'))
+
+            #Login the user after signup
+            logged_user = User.query.filter_by(email=email).first()
+            login_user(logged_user, remember=False)
+            return redirect(url_for('preference'))
         else:
             flash('This email already has an account.')
             return render_template('signUp.html')
@@ -43,14 +47,13 @@ def login():
             if check_password_hash(user.password, request.form['password']):
                 login_user(user)
                 # return redirect(url_for('index'))
-                return "<h1>You're logged</h1>"
+                return redirect(url_for('preference'))
             else:
-                flash('Incorrect Password')
-
-                return "<h1>Incorrect Pwd</h1>"
+                flash('Incorrect Password!')
+                return redirect(url_for('authentication.login'))
         else:
             flash('This email does not have an account.')
-            return "<h1>email error</h1>"
+            return redirect(url_for('authentication.login'))
 
 @authentication.route('/logout')
 @login_required
