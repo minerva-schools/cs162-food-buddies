@@ -60,5 +60,5 @@ def login():
 @login_required
 def log_out():
     logout_user()
-    return redirect(url_for(('index')))
+    return redirect(url_for(('main_route.index')))
 

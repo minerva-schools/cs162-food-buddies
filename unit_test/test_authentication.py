@@ -21,6 +21,7 @@ def test_valid_sign_up(app):
     assert resp.status_code == 200
 
 def test_invalid_sign_up(app):
+    # Attempt to sign-up with a duplicate email
     client = app.test_client()
     resp = client.post('/sign_up', data=dict(email="testemail@gmail.com", first_name="Test", last_name="User",
                                              password="passsword123"), follow_redirects=True)
@@ -30,11 +31,13 @@ def test_invalid_sign_up(app):
     assert b"This email already has an account." in resp.data
 
 def test_invalid_login(app):
+    # Attempt to sign-in with a non-existing account
     client = app.test_client()
     resp = client.post('/login', data=dict(email="testemail@gmail.com", password="passsword123"), follow_redirects=True)
     assert b"This email does not have an account" in resp.data
 
 def test_invalid_password(app):
+    # Attempt to sign-in with the wrong password
     client = app.test_client()
     # Create an account
     resp = client.post('/sign_up', data=dict(email="testemail@gmail.com", first_name="Test", last_name="User",
@@ -43,5 +46,37 @@ def test_invalid_password(app):
     # Try to login with the wrong password
     resp = client.post('/login', data=dict(email="testemail@gmail.com", password="passsword456"), follow_redirects=True)
     assert b"Incorrect Password!" in resp.data
+
+def test_valid_login(app):
+    # After logging-in the User should see the preferences page
+    client = app.test_client()
+
+    # Create an account
+    resp = client.post('/sign_up', data=dict(email="testemail@gmail.com", first_name="Test", last_name="User",
+                                             password="passsword123"), follow_redirects=True)
+    assert resp.status_code == 200
+
+    #Login with that account
+    resp = client.post('/login', data=dict(email="testemail@gmail.com", password="passsword123"), follow_redirects=True)
+    assert resp.status_code == 200
+    assert b"Preferences" in resp.data
+
+def test_logout(app):
+    # After logging-in the User should see the preferences page
+    client = app.test_client()
+
+    # Create an account
+    resp = client.post('/sign_up', data=dict(email="testemail@gmail.com", first_name="Test", last_name="User",
+                                             password="passsword123"), follow_redirects=True)
+    assert resp.status_code == 200
+
+    #Login with that account
+    resp = client.post('/login', data=dict(email="testemail@gmail.com", password="passsword123"), follow_redirects=True)
+    assert resp.status_code == 200
+    assert b"Preferences" in resp.data
+
+    resp = client.get('/logout',follow_redirects=True)
+    assert resp.status_code == 200
+    assert b"Login" in resp.data
 
 

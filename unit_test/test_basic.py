@@ -12,7 +12,12 @@ def client():
     yield client  # this is where the testing happens!
     ctx.pop()
 
-def test_home_page(client):
+def test_landing_page(client):
+    resp = client.get('/')
+    assert b"Login" in resp.data
+    assert resp.status_code == 200
+
+def test_login_page(client):
     resp = client.get('/login')
     assert b"Login" in resp.data
     assert resp.status_code == 200
@@ -25,3 +30,9 @@ def test_signup_page(client):
 def test_non_existing_page(client):
     resp = client.get('/non_existing_page')
     assert resp.status_code == 404
+    assert b"Etiher you requested invaild page or you don't have permission to access this page." in resp.data
+
+def test_redirect_preferences(client):
+    resp = client.get('/preference',follow_redirects=True)
+    assert resp.status_code == 200
+    assert b'You need to login for accessing this page!' in resp.data
