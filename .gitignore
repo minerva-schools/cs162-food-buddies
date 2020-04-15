@@ -1,5 +1,6 @@
 # Project specific files to ignore
 web/web.db
+web/test.db
 venv_unit/
 venv_integration/
 

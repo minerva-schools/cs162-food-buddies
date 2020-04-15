@@ -1,10 +1,11 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from flask_login import LoginManager, login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import db,User
+from . import login_manager
+from flask import current_app as app
 
 authentication = Blueprint("authentication",__name__)
-login_manager = LoginManager()
 
 @login_manager.user_loader
 def load_user(id):
@@ -28,7 +29,7 @@ def sign_up():
             #Login the user after signup
             logged_user = User.query.filter_by(email=email).first()
             login_user(logged_user, remember=False)
-            return redirect(url_for('preference'))
+            return redirect(url_for('main_route.preference'))
         else:
             flash('This email already has an account.')
             return render_template('signUp.html')
@@ -47,7 +48,7 @@ def login():
             if check_password_hash(user.password, request.form['password']):
                 login_user(user)
                 # return redirect(url_for('index'))
-                return redirect(url_for('preference'))
+                return redirect(url_for('main_route.preference'))
             else:
                 flash('Incorrect Password!')
                 return redirect(url_for('authentication.login'))
@@ -59,5 +60,5 @@ def login():
 @login_required
 def log_out():
     logout_user()
-    return redirect(url_for(('index')))
+    return redirect(url_for(('main_route.index')))
 
