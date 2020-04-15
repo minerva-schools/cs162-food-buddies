@@ -3,7 +3,7 @@ web/web.db
 web/test.db
 venv_unit/
 venv_integration/
-
+web/keys.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
