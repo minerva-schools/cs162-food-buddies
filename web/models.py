@@ -15,8 +15,8 @@ class MinervaCities(enum.Enum):
 class User(db.Model,UserMixin):
     __tablename__ = 'User'
     id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(100), unique=True)
-    last_name = db.Column(db.String(100), unique=True)
+    first_name = db.Column(db.String(100))
+    last_name = db.Column(db.String(100))
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(200))
     city = db.Column(db.Enum(MinervaCities))

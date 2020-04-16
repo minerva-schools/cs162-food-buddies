@@ -1,0 +1,48 @@
+version: "3.2"
+services:
+  web:
+    image: cs162-flask
+    depends_on:
+      - db
+    deploy:
+      replicas: 4
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: 64M
+      restart_policy:
+        condition: "on-failure"
+    ports:
+      - 5000:5000
+    networks:
+      - webnet
+    volumes:
+      - .:/app
+
+  # db:
+  #   image: postgres:alpine
+  #   ports:
+  #   - 5432:5432
+  #   environment:
+  #     POSTGRES_DB: "cs162"
+  #     POSTGRES_USER: "cs162_user"
+  #     POSTGRES_PASSWORD: "cs162_password"
+  #   networks:
+  #     - webnet
+  #   deploy:
+  #     restart_policy:
+  #       condition: "on-failure"
+  #
+  # adminer:
+  #   image: adminer
+  #   depends_on:
+  #     - db
+  #   deploy:
+  #     restart_policy:
+  #       condition: "on-failure"
+  #   ports:
+  #     - 8080:8080
+  #   networks:
+  #     - webnet
+networks:
+  webnet:
