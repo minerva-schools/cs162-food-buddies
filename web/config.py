@@ -1,5 +1,10 @@
 import os
-from web.keys import username, password 
+try:
+    from web.keys import username, password
+except ImportError:
+    username = ""
+    password = ""
+
 class Config:
     SECRET_KEY = os.getenv('SECRET_KEY')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
