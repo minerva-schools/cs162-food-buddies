@@ -23,5 +23,3 @@ class User(db.Model,UserMixin):
     password = db.Column(db.String(200))
     city = db.Column(db.Enum(MinervaCities))
     # contact ?? can add facebook accounts
-
-
