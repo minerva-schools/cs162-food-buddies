@@ -19,5 +19,5 @@ class User(db.Model,UserMixin):
     last_name = db.Column(db.String(100))
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(200))
-    city = db.Column(ENUM(MinervaCities))
+    city = db.Column(db.ENUM(MinervaCities))
     #contact = db.Column(db.String(200))
