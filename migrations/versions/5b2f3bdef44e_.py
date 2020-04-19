@@ -1,7 +1,7 @@
 """empty message
 
 Revision ID: 5b2f3bdef44e
-Revises: 
+Revises:
 Create Date: 2020-04-19 12:33:56.048933
 
 """
@@ -24,7 +24,7 @@ def upgrade():
     sa.Column('last_name', sa.String(length=100), nullable=True),
     sa.Column('email', sa.String(length=100), nullable=True),
     sa.Column('password', sa.String(length=200), nullable=True),
-    sa.Column('city', sa.Enum('SanFrancisco', 'Seoul', 'Hyderabad', 'Berlin', 'BuenosAires', 'London', 'Taipei', name='minervacities'), nullable=True),
+    sa.Column('city', sa.Enum('SanFrancisco', 'Seoul', 'Hyderabad', 'Berlin', 'BuenosAires', 'London', 'Taipei'), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email')
     )
