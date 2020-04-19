@@ -3,7 +3,7 @@ from flask_login import UserMixin
 from sqlalchemy.dialects.postgresql import ENUM
 db = SQLAlchemy()
 
-class MinervaCities(enum.Enum):
+class MinervaCities(ENUM):
     SanFrancisco = 'San Francisco'
     Seoul = 'Seoul'
     Hyderabad = 'Hyderabad'
