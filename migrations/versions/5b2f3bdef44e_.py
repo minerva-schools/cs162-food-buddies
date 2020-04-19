@@ -7,6 +7,7 @@ Create Date: 2020-04-19 12:33:56.048933
 """
 from alembic import op
 import sqlalchemy as sa
+from sqlalchemy.dialects import postgresql
 
 
 # revision identifiers, used by Alembic.
@@ -24,7 +25,7 @@ def upgrade():
     sa.Column('last_name', sa.String(length=100), nullable=True),
     sa.Column('email', sa.String(length=100), nullable=True),
     sa.Column('password', sa.String(length=200), nullable=True),
-    sa.Column('city', sa.Enum('SanFrancisco', 'Seoul', 'Hyderabad', 'Berlin', 'BuenosAires', 'London', 'Taipei', name='minervacities', create_type=False), nullable=True),
+    sa.Column('city', postgresql.ENUM('SanFrancisco', 'Seoul', 'Hyderabad', 'Berlin', 'BuenosAires', 'London', 'Taipei', name='minervacities', create_type=False), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email')
     )
