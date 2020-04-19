@@ -1,5 +1,7 @@
+from flask_migrate import MigrateCommand
+from flask_script import Manager
 from web import create_app
-from flask_migrate import MigrateCommand, Manager
 
-manager = Manager(create_app)
+app = create_app()
+manager = Manager(app)
 manager.add_command('db', MigrateCommand)

@@ -3,8 +3,11 @@ from flask_login import LoginManager
 import os
 from .config import config_by_name
 from web.models import db
+from flask_script import Manager
+from flask_migrate import Migrate, MigrateCommand
 
 login_manager = LoginManager()
+migrate = Migrate()
 
 def page_not_found(e):
     return render_template('404.html'), 404
@@ -21,6 +24,7 @@ def create_app(config_name='dev'):
 
     db.init_app(app)
     login_manager.init_app(app)
+    migrate.init_app(app,db)
 
     app.register_error_handler(404, page_not_found)
     app.register_error_handler(401, custom_401)
