@@ -12,7 +12,7 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = "mysql://" + username + ":" + password + "@test-db-instance.cnv6hbuo38a0.us-east-1.rds.amazonaws.com:3306/foodbuddies"
+    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
     SECRET_KEY = os.getenv('SECRET_KEY')
 
 class TestingConfig(Config):
