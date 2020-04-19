@@ -3,7 +3,6 @@ from flask_login import LoginManager
 import os
 from .config import config_by_name
 from web.models import db
-from .commands import create_tables
 
 login_manager = LoginManager()
 
@@ -33,6 +32,6 @@ def create_app(config_name='dev'):
         app.register_blueprint(main_routes,url_prefix='/')
 
         # Create DB Models
-        app.cli.add_command(create_tables)
+        db.create_all()
 
     return app
