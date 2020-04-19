@@ -39,3 +39,4 @@ def create_app(config_name='dev'):
         # db.create_all()
 
     return app
+    
