@@ -1,9 +1,10 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
+import enum
 from sqlalchemy.dialects.postgresql import ENUM
 db = SQLAlchemy()
 
-class MinervaCities(ENUM):
+class MinervaCities(enum.Enum):
     SanFrancisco = 'San Francisco'
     Seoul = 'Seoul'
     Hyderabad = 'Hyderabad'
@@ -19,5 +20,5 @@ class User(db.Model,UserMixin):
     last_name = db.Column(db.String(100))
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(200))
-    city = db.Column(db.ENUM(MinervaCities))
+    city = db.Column(ENUM(MinervaCities, create_type=False))
     #contact = db.Column(db.String(200))
