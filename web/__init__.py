@@ -36,6 +36,6 @@ def create_app(config_name='dev'):
         app.register_blueprint(main_routes,url_prefix='/')
 
         # Create DB Models
-        db.create_all()
+        # db.create_all()
 
     return app
