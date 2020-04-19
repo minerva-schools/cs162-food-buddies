@@ -1,5 +1,5 @@
 import os
-from web.keys import username, password 
+from web.keys import username, password
 class Config:
     SECRET_KEY = os.getenv('SECRET_KEY')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -7,7 +7,7 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = "mysql://" + username + ":" + password + "@test-db-instance.cnv6hbuo38a0.us-east-1.rds.amazonaws.com:3306/foodbuddies"
+    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
     SECRET_KEY = os.getenv('SECRET_KEY')
 
 class TestingConfig(Config):
