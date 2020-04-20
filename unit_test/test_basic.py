@@ -30,7 +30,7 @@ def test_signup_page(client):
 def test_non_existing_page(client):
     resp = client.get('/non_existing_page')
     assert resp.status_code == 404
-    assert b"Etiher you requested invaild page or you don't have permission to access this page." in resp.data
+    assert b"Either you requested invaild page or you don't have permission to access this page." in resp.data
 
 def test_redirect_preferences(client):
     resp = client.get('/preference',follow_redirects=True)
