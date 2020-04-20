@@ -8,7 +8,7 @@
     
     <!-- Tab icon -->
     <link rel="icon" href="{{ url_for('static', filename='icons/mainIcon.ico') }}">
-    
+
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -95,11 +95,21 @@
                         <input type="password" class="form-control" placeholder="Repeat Password" aria-label="Repeat Password" aria-describedby="basic-addon5"
                         minlength="8" maxlength="16" name="pwd2" required>
                     </div>
+
                     <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon6"><i class="fas fa-signature"></i></span>
+                      <div class="input-group-prepend">
+                          <select class="custom-select" name ="contact_method" required>
+                            <option value="" disabled selected hidden>Method</option>
+                            <option value="Messenger">Messenger</option>
+                            <option value="WhatsApp">WhatsApp</option>
+                            <option value="Phone">Phone</option>
+                          </select>
                         </div>
-                        <input type="text" name="contact" class="form-control" placeholder="Facebook" aria-label="Facebook" aria-describedby="basic-addon6" required>
+                      <input type="text" class="form-control" name="contact_info" placeholder="Contact Info." required>
+                      <small class="form-text text-muted">
+                        Please select your preferred method of contact. If you are choosing Facebook, please enter your profile URL .
+                        Otherwise, please enter your Phone number, including the international code.
+                      </small>
                     </div>
 
                     <div class="input-group mb-4">
