@@ -24,6 +24,8 @@ def sign_up():
         city_selected = request.form.get('city_selected')
         if not user: # create a new user profile
             hashed_pwd = generate_password_hash(request.form['password'], method='sha256')
+            #request.form['contact_info'] -- For getting the contact info!
+            #request.form['contact_method'] -- For getting the contact method
             user = User(first_name=request.form['first_name'],last_name=request.form['last_name'], email=email,password=hashed_pwd, city=str(city_selected))
             db.session.add(user)
             db.session.commit()
