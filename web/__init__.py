@@ -10,7 +10,7 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 def custom_401(e):
-     flash('You need to login for accessing this page!')
+     flash('You need to login for accessing this page!', "error")
      return redirect(url_for('authentication.login'))
 
 def create_app(config_name='dev'):

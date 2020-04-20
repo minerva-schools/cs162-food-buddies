@@ -40,13 +40,22 @@
             <div class="loginForm" >
               <h3 id="loginTitle">Login</h3>
 
-                {% with messages = get_flashed_messages() %}
+                {% with messages = get_flashed_messages(category_filter=["error"]) %}
                 {% if messages %}
                 <div class="alert alert-danger" role="alert" style="text-align: center;">
                   {{ messages[0] }}
                 </div>
                 {% endif %}
                 {% endwith %}
+
+                {% with inform = get_flashed_messages(category_filter=["inform"]) %}
+                {% if inform %}
+                <div class="alert alert-success" role="alert" style="text-align: center;">
+                  {{ inform[0] }}
+                </div>
+                {% endif %}
+                {% endwith %}
+
 
                 <form action="{{ url_for('authentication.login') }}" method="POST">
                     <div class="input-group mb-3">
@@ -82,14 +91,14 @@
                         </button>
                       </div>
                       <div class="modal-body">
-                        <form id="verifyEmail" action="/verifyEmail" method="POST">
+                        <form id="verifyEmail" action="{{ url_for('authentication.verifyEmail') }}" method="POST">
                           <label class="mb-3">Please enter the email you used during registration</label>
                           <div class="input-group mb-3">
                               <div class="input-group-prepend">
                                   <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                               </div>
                               <input type="email" class="form-control" placeholder="Email" aria-label="Email" 
-                              name="email" required>
+                              name="verEmail" required>
                           </div>
                         </form>
                       </div>
