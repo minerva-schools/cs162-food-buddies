@@ -21,3 +21,7 @@ def preference():
     #request.form.get ("mealTime")
     #For getting the dietary preferences use the following line
     #request.form.getlist ("dietary")
+    #For getting the Availability time from, use the following line
+    #request.form.get ("ava_from")
+    #For getting the Availability time to, use the following line
+    #request.form.get ("ava_to")
