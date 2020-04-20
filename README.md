@@ -51,14 +51,20 @@ All environment variables are stored within the `.env` file and loaded with dote
 
 **Never** commit your local settings to the Github repository!
 
-## Run Application
 
-Start the server by running:
-
+## Run the Application
+    $ python -m venv venv
+    $ source venv/bin/activate
+    # Activate virtual environment if MAC/UNIX
+    $ venv\Scripts\activate
+    # Activate virtual environment in WINDOWS
+    $ pip install -r requirements.txt
     $ export FLASK_ENV=development
+    $ export FLASK_CONFIG=dev
     $ export FLASK_APP=web
     $ python3 -m flask run
-
+    
+    
 ## Unit Tests
 To run the unit tests use the following commands:
 
