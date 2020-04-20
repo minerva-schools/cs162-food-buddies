@@ -7,6 +7,7 @@ from flask import current_app as app
 
 authentication = Blueprint("authentication",__name__)
 
+# routes on user management
 @login_manager.user_loader
 def load_user(id):
     return User.query.get(int(id))
@@ -20,9 +21,10 @@ def sign_up():
         # check that email is not already registered
         email = str(request.form['email']).lower()
         user = db.session.query(User).filter(User.email==email).first()
-        if not user:
+        city_selected = request.form.get('city_selected')
+        if not user: # create a new user profile
             hashed_pwd = generate_password_hash(request.form['password'], method='sha256')
-            user = User(first_name=request.form['first_name'],last_name=request.form['last_name'], email=email,password=hashed_pwd)
+            user = User(first_name=request.form['first_name'],last_name=request.form['last_name'], email=email,password=hashed_pwd, city=str(city_selected))
             db.session.add(user)
             db.session.commit()
 
