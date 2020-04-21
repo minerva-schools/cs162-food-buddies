@@ -56,6 +56,14 @@
                 {% endif %}
                 {% endwith %}
 
+                {% with inform = get_flashed_messages(category_filter=["success"]) %}
+                {% if inform %}
+                <div class="alert alert-success" role="alert" style="text-align: center;">
+                  {{ inform[0] }}
+                </div>
+                {% endif %}
+                {% endwith %}
+
 
                 <form action="{{ url_for('authentication.login') }}" method="POST">
                     <div class="input-group mb-3">
