@@ -74,10 +74,14 @@ def verifyEmail():
     # check that the user is in the database
     if user:
         flash('An email sent to you for resetting your password!', 'inform')
-        
+
         #Send an Email here with the token!
 
         return redirect(url_for('authentication.login'))
     else:
         flash('This email does not have an account.', "error")
         return redirect(url_for('authentication.login'))
+
+@authentication.route('/resetPassword', methods=['GET', 'POST'])
+def resetPassword():
+    return render_template('resetPassword.html')
