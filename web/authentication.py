@@ -7,6 +7,7 @@ from flask import current_app as app
 
 authentication = Blueprint("authentication",__name__)
 
+# routes on user management
 @login_manager.user_loader
 def load_user(id):
     return User.query.get(int(id))
@@ -20,9 +21,12 @@ def sign_up():
         # check that email is not already registered
         email = str(request.form['email']).lower()
         user = db.session.query(User).filter(User.email==email).first()
-        if not user:
+        city_selected = request.form.get('city_selected')
+        if not user: # create a new user profile
             hashed_pwd = generate_password_hash(request.form['password'], method='sha256')
-            user = User(first_name=request.form['first_name'],last_name=request.form['last_name'], email=email,password=hashed_pwd)
+            #request.form['contact_info'] -- For getting the contact info!
+            #request.form['contact_method'] -- For getting the contact method
+            user = User(first_name=request.form['first_name'],last_name=request.form['last_name'], email=email,password=hashed_pwd, city=str(city_selected))
             db.session.add(user)
             db.session.commit()
 
@@ -50,10 +54,10 @@ def login():
                 # return redirect(url_for('index'))
                 return redirect(url_for('main_route.preference'))
             else:
-                flash('Incorrect Password!')
+                flash('Incorrect Password!', "error")
                 return redirect(url_for('authentication.login'))
         else:
-            flash('This email does not have an account.')
+            flash('This email does not have an account.', "error")
             return redirect(url_for('authentication.login'))
 
 @authentication.route('/logout')
@@ -62,3 +66,22 @@ def log_out():
     logout_user()
     return redirect(url_for(('main_route.index')))
 
+
+@authentication.route('/verifyEmail', methods=['POST'])
+def verifyEmail():
+    email = str(request.form['verEmail']).lower()
+    user = db.session.query(User).filter(User.email == email).first()
+    # check that the user is in the database
+    if user:
+        flash('An email sent to you for resetting your password!', 'inform')
+
+        #Send an Email here with the token!
+
+        return redirect(url_for('authentication.login'))
+    else:
+        flash('This email does not have an account.', "error")
+        return redirect(url_for('authentication.login'))
+
+@authentication.route('/resetPassword', methods=['GET', 'POST'])
+def resetPassword():
+    return render_template('resetPassword.html')

@@ -2,8 +2,11 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from flask_login import login_required, current_user
 from flask import Blueprint
 from flask import current_app as app
+#from .models import db, User
 
+# create an app factory
 main_routes = Blueprint('main_route',__name__,template_folder='templates')
+
 
 # placeholder reference to homepage
 @main_routes.route('/')
@@ -14,9 +17,11 @@ def index():
 @login_required
 def preference():
     return render_template('preference.html', firstName=current_user.first_name.capitalize())
-    #For getting the location of use the following line
-    # request.form.get ("location")
     #For getting the mealTime use the following line
     #request.form.get ("mealTime")
     #For getting the dietary preferences use the following line
     #request.form.getlist ("dietary")
+    #For getting the Availability time from, use the following line
+    #request.form.get ("ava_from")
+    #For getting the Availability time to, use the following line
+    #request.form.get ("ava_to")

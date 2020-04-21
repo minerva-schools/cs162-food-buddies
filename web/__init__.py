@@ -10,7 +10,7 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 def custom_401(e):
-     flash('You need to login for accessing this page!')
+     flash('You need to login for accessing this page!', "error")
      return redirect(url_for('authentication.login'))
 
 def create_app(config_name='dev'):
@@ -20,6 +20,8 @@ def create_app(config_name='dev'):
     app.config.from_object(config_by_name[config_name])
 
     db.init_app(app)
+    
+
     login_manager.init_app(app)
 
     app.register_error_handler(404, page_not_found)
@@ -33,5 +35,5 @@ def create_app(config_name='dev'):
 
         # Create DB Models
         db.create_all()
-
+        
     return app

@@ -1,9 +1,4 @@
 import os
-try:
-    from web.keys import username, password
-except ImportError:
-    username = ""
-    password = ""
 
 class Config:
     SECRET_KEY = os.getenv('SECRET_KEY')
@@ -12,7 +7,7 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
     SECRET_KEY = os.getenv('SECRET_KEY')
 
 class TestingConfig(Config):

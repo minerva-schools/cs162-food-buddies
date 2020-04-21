@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    
+    <!-- Tab icon -->
+    <link rel="icon" href="{{ url_for('static', filename='icons/mainIcon.ico') }}">
+
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- FontAwesome file -->
     <script src="https://kit.fontawesome.com/e7a847d88f.js" crossorigin="anonymous"></script>
@@ -91,20 +95,38 @@
                         <input type="password" class="form-control" placeholder="Repeat Password" aria-label="Repeat Password" aria-describedby="basic-addon5"
                         minlength="8" maxlength="16" name="pwd2" required>
                     </div>
+
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                          <select class="custom-select" name ="contact_method" required>
+                            <option value="" disabled selected hidden>Method</option>
+                            <option value="Messenger">Messenger</option>
+                            <option value="WhatsApp">WhatsApp</option>
+                            <option value="Phone">Phone</option>
+                          </select>
+                        </div>
+                      <input type="text" class="form-control" name="contact_info" placeholder="Contact Info." required>
+                      <small class="form-text text-muted">
+                        Please select your preferred method of contact. If you are choosing Facebook, please enter your profile URL .
+                        Otherwise, please enter your Phone number, including the international code.
+                      </small>
+                    </div>
+
                     <div class="input-group mb-4">
                         <div class="input-group-prepend">
                           <label class="input-group-text" for="inputGroupSelect01"><i class="fas fa-map-marked-alt"></i></label>
                         </div>
-                        <select class="custom-select" id="inputGroupSelect01" required>
-                          <option value="" disabled selected hidden>Location (city)</option>
-                          <option value="San Francisco">San Francisco</option>
-                          <option value="Seoul">Seoul</option>
-                          <option value="Hyderabad">Hyderabad</option>
-                          <option value="Berlin">Berlin</option>
-                          <option value="Buenos Aires">Buenos Aires</option>
-                          <option value="London">London</option>
-                          <option value="Taipei">Taipei</option>
+                        <select name='city_selected' class="custom-select" id="inputGroupSelect01" required>
+                          <option  value="" disabled selected hidden>Location (city)</option>
+                          <option  value="San Francisco">San Francisco</option>
+                          <option  value="Seoul">Seoul</option>
+                          <option  value="Hyderabad">Hyderabad</option>
+                          <option  value="Berlin">Berlin</option>
+                          <option  value="Buenos Aires">Buenos Aires</option>
+                          <option  value="London">London</option>
+                          <option  value="Taipei">Taipei</option>
                         </select>
+
                     </div>
                     <p class = "mb-3"id="terms">By creating an account you agree to our <a href="/">Terms & Privacy</a></p>
                     <button type="submit" class="btn btn-primary mb-4" id="signupButton"><i class="fas fa-plus-circle"></i>  Create an Account</button>
@@ -117,12 +139,12 @@
 
     </div>
   <!-- Bootstrap JS files -->
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" 
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
   integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
   integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
   integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  
+
 </body>
 </html>
