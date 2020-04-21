@@ -4,6 +4,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from .models import db,User
 from . import login_manager
 from flask import current_app as app
+from itsdangerous import URLSafeTimedSerializer
+from .utils import send_email
 
 authentication = Blueprint("authentication",__name__)
 
@@ -74,14 +76,38 @@ def verifyEmail():
     # check that the user is in the database
     if user:
         flash('An email sent to you for resetting your password!', 'inform')
-
-        #Send an Email here with the token!
-
+        send_password_reset_email(user.email)
         return redirect(url_for('authentication.login'))
     else:
         flash('This email does not have an account.', "error")
         return redirect(url_for('authentication.login'))
 
-@authentication.route('/resetPassword', methods=['GET', 'POST'])
-def resetPassword():
-    return render_template('resetPassword.html')
+@authentication.route('/reset/<token>', methods=["GET", "POST"])
+def reset_with_token(token):
+    try:
+        password_reset_serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])
+        email = password_reset_serializer.loads(token, salt='password-reset-salt', max_age=3600)
+    except:
+        flash('The password reset link is invalid or has expired.', 'error')
+        return redirect(url_for('authentication.login'))
+
+    if request.method == 'POST':
+        try:
+            user = User.query.filter_by(email=email).first_or_404()
+        except:
+            flash('Invalid email address!', 'error')
+            return redirect(url_for('users.login'))
+
+        user.password = generate_password_hash(request.form['password'], method='sha256')
+        db.session.add(user)
+        db.session.commit()
+        flash('Your password has been updated!', 'success')
+        return redirect(url_for('authentication.login'))
+    else:
+        return render_template('resetPassword.html', token=token)
+
+def send_password_reset_email(user_email):
+    password_reset_serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])
+    password_reset_url = url_for('authentication.reset_with_token',token=password_reset_serializer.dumps(user_email, salt='password-reset-salt'), _external=True)
+    html = render_template('email_password_reset.html', password_reset_url=password_reset_url)
+    send_email('Password Reset Requested', [user_email], html)
