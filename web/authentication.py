@@ -76,6 +76,7 @@ def verifyEmail():
     # check that the user is in the database
     if user:
         flash('An email sent to you for resetting your password!', 'inform')
+        # Send the email with token
         send_password_reset_email(user.email)
         return redirect(url_for('authentication.login'))
     else:
@@ -85,6 +86,7 @@ def verifyEmail():
 @authentication.route('/reset/<token>', methods=["GET", "POST"])
 def reset_with_token(token):
     try:
+        # We try to decode the given token. Only tokens that are less than 3600 seconds old will be considered
         password_reset_serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])
         email = password_reset_serializer.loads(token, salt='password-reset-salt', max_age=3600)
     except:
@@ -98,6 +100,7 @@ def reset_with_token(token):
             flash('Invalid email address!', 'error')
             return redirect(url_for('users.login'))
 
+        # Find which user this email corresponds and updates the user password
         user.password = generate_password_hash(request.form['password'], method='sha256')
         db.session.add(user)
         db.session.commit()
@@ -107,7 +110,11 @@ def reset_with_token(token):
         return render_template('resetPassword.html', token=token)
 
 def send_password_reset_email(user_email):
+    # We will use the password_reset_serializer to create the token, which the user will receive through email.
+    # The method creates a hash using SHA-512, to assure the user's safety.
     password_reset_serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])
     password_reset_url = url_for('authentication.reset_with_token',token=password_reset_serializer.dumps(user_email, salt='password-reset-salt'), _external=True)
+    # We render the email design saved in the "email_password_reset" file
     html = render_template('email_password_reset.html', password_reset_url=password_reset_url)
+    # Finally send the email
     send_email('Password Reset Requested', [user_email], html)
