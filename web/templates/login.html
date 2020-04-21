@@ -40,13 +40,22 @@
             <div class="loginForm" >
               <h3 id="loginTitle">Login</h3>
 
-                {% with messages = get_flashed_messages() %}
+                {% with messages = get_flashed_messages(category_filter=["error"]) %}
                 {% if messages %}
                 <div class="alert alert-danger" role="alert" style="text-align: center;">
                   {{ messages[0] }}
                 </div>
                 {% endif %}
                 {% endwith %}
+
+                {% with inform = get_flashed_messages(category_filter=["inform"]) %}
+                {% if inform %}
+                <div class="alert alert-success" role="alert" style="text-align: center;">
+                  {{ inform[0] }}
+                </div>
+                {% endif %}
+                {% endwith %}
+
 
                 <form action="{{ url_for('authentication.login') }}" method="POST">
                     <div class="input-group mb-3">
@@ -67,9 +76,40 @@
                     </div>
                     <button type="submit" class="btn btn-primary mb-4" id="loginButton">Log in  <i class="fas fa-sign-in-alt"></i></button>
                 </form>
-                <p id="forgotPass"><a href="/forgotPassword" id="forgotPass">Forgot password ?</a></p>
+                <p id="forgotPass"><a href="" data-toggle="modal" data-target="#fogotPassword" id="forgotPass">Forgot password ?</a></p>
 
                 <p id="createAcc">Don't have an account? <a href={{ url_for('authentication.sign_up') }}>Sign up here <i class="fas fa-arrow-alt-circle-right"></i></a></p>
+
+                <!--Verify Email Modal -->
+                <div class="modal fade" id="fogotPassword" tabindex="-1" role="dialog"  aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Forgot Password</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form id="verifyEmail" action="{{ url_for('authentication.verifyEmail') }}" method="POST">
+                          <label class="mb-3">Please enter the email you used during registration</label>
+                          <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                  <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                              </div>
+                              <input type="email" class="form-control" placeholder="Email" aria-label="Email" 
+                              name="verEmail" required>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button form ="verifyEmail" type="submit" class="btn btn-primary" >Send me an Email!</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
             </div>
           </div>
         </div>
