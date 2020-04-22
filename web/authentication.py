@@ -23,22 +23,28 @@ def sign_up():
         # check that email is not already registered
         email = str(request.form['email']).lower()
         user = db.session.query(User).filter(User.email==email).first()
-        if not user: # create a new user profile
-            # hash user password
-            hashed_pwd = generate_password_hash(request.form['password'], method='sha256')
-            # determine city
-            city = db.session.query(City).filter(City.city_name==request.form.get('city_selected')).first()
-            # add new user
-            user = User(city_id=city.id, first_name=request.form['first_name'],last_name=request.form['last_name'], email=email,password=hashed_pwd, contact_method=request.form.get('contact_method'), contact_info=request.form['contact_info'])
-            db.session.add(user)
-            db.session.commit()
+        if not user:
+            # Check that the user has indeed a Minerva e-mail
+            if email.split("@")[1] == "minerva.kgi.edu":
+                # create a new user profile
+                # hash user password
+                hashed_pwd = generate_password_hash(request.form['password'], method='sha256')
+                # determine city
+                city = db.session.query(City).filter(City.city_name==request.form.get('city_selected')).first()
+                # add new user
+                user = User(city_id=city.id, first_name=request.form['first_name'],last_name=request.form['last_name'], email=email,password=hashed_pwd, contact_method=request.form.get('contact_method'), contact_info=request.form['contact_info'])
+                db.session.add(user)
+                db.session.commit()
 
-            # Login the user after signup
-            logged_user = User.query.filter_by(email=email).first()
-            login_user(logged_user, remember=False)
-            return redirect(url_for('main_route.preference'))
+                # Login the user after signup
+                logged_user = User.query.filter_by(email=email).first()
+                login_user(logged_user, remember=False)
+                return redirect(url_for('main_route.preference'))
+            else:
+                flash('Sorry, FoodBuddies is currently available only for Minerva students.',"inform")
+                return render_template('signUp.html')
         else:
-            flash('This email already has an account.')
+            flash('This email already has an account.',"error")
             return render_template('signUp.html')
 
 # route will depend on whether how we structure pages

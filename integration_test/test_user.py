@@ -18,12 +18,12 @@ def testSession():
 
 def test_valid_user_flow(testSession):
     # SignUp a new User
-    r = requests.post('http://127.0.0.1:5000/sign_up',data=dict(email="testemail@gmail.com", first_name="Test", last_name="User",password="passsword123",
+    r = requests.post('http://127.0.0.1:5000/sign_up',data=dict(email="testemail@minerva.kgi.edu", first_name="Test", last_name="User",password="passsword123",
         contact_method='Phone', contact_info='88888888', city_selected='San Francisco'),allow_redirects=True)
     assert r.status_code == 200
 
     # The User should be in the database
-    u = testSession.query(User).filter(User.email=="testemail@gmail.com").first()
+    u = testSession.query(User).filter(User.email=="testemail@minerva.kgi.edu").first()
     assert u.first_name == "Test"
     assert u.last_name == "User"
 
@@ -32,7 +32,7 @@ def test_valid_user_flow(testSession):
     assert "Login" in r.text
 
     # Now log-in with the same User
-    r = requests.post('http://127.0.0.1:5000/login',data=dict(email="testemail@gmail.com", password="passsword123"))
+    r = requests.post('http://127.0.0.1:5000/login',data=dict(email="testemail@minerva.kgi.edu", password="passsword123"))
     assert r.status_code == 200
     assert "Preferences" in r.text
 
