@@ -75,13 +75,13 @@
        					<input class="form-check-input " type="radio" name="cuisines" value ="Asian">Asian
        				</label>
        				<label class="btn btn-outline-info checkButton">
-       					<input class="form-check-input " type="radio" name="cuisines" value ="Latam"> Latin American
+       					<input class="form-check-input " type="radio" name="cuisines" value ="Latin American"> Latin American
        				</label>
               <label class="btn btn-outline-info checkButton">
                 <input class="form-check-input" type="radio" name="cuisines" value ="European"> European
              </label>
              <label class="btn btn-outline-info checkButton">
-              <input class="form-check-input" type="radio" name="cuisines" value ="MiddleEast"> Middle Eastern
+              <input class="form-check-input" type="radio" name="cuisines" value ="Middle Eastern"> Middle Eastern
              </label>
             <label class="btn btn-outline-info checkButton">
               <input class="form-check-input" type="radio" name="cuisines" value ="American"> American
@@ -146,8 +146,9 @@
 	    <p> Preferred Contact: {{ user.contact_info }} </p>
 	    <p> Email Contact: {{ user.email }} </p>
    		 		 </div>
-	                       {%end if%}
+	                       
    		 		</div>
+				{%end for%}
           <!--
    		 		<div id="secondmatch">
    		 			<div class="container">
