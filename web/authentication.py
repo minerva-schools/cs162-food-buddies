@@ -44,7 +44,7 @@ def sign_up():
                 flash('Sorry, FoodBuddies is currently only available for Minerva students.',"inform")
                 return render_template('signUp.html')
         else:
-            flash('This email already has an account.')
+            flash('This email already has an account.',"error")
             return render_template('signUp.html')
 
 # route will depend on whether how we structure pages
