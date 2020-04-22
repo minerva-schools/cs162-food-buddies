@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models import db,User,City,Cuisine,DineTime
+from .models import db,User,City
 from . import login_manager
 from flask import current_app as app
 from itsdangerous import URLSafeTimedSerializer

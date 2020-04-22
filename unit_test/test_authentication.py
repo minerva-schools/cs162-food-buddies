@@ -1,5 +1,7 @@
 import pytest
-from web import create_app, db
+
+from web import create_app,db
+
 import requests
 
 @pytest.fixture
@@ -38,15 +40,16 @@ def test_invalid_sign_up(app):
 def test_invalid_login(app):
     # Attempt to sign-in with a non-existing account
     client = app.test_client()
-    resp = client.post('/login', data=dict(email="testemail@gmail.com", password="passsword123"), follow_redirects=True)
+    resp = client.post('/login', data=dict(email="notestemail@gmail.com", password="passsword123"), follow_redirects=True)
     assert b"This email does not have an account" in resp.data
 
 def test_invalid_password(app):
     # Attempt to sign-in with the wrong password
     client = app.test_client()
     # Create an account
-    resp = client.post('/sign_up', data=dict(email="testemail@gmail.com", first_name="Test", last_name="User",password="passsword123",
+    resp = client.post('/sign_up', data=dict(email="testemail@gmail.com", first_name="Test", last_name="User",password="passsWord123",
         contact_method='Phone', contact_info='88888888', city_selected='San Francisco'), follow_redirects=True)
+        
     assert resp.status_code == 200
     # Try to login with the wrong password
     resp = client.post('/login', data=dict(email="testemail@gmail.com", password="passsword456"), follow_redirects=True)
