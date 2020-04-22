@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models import db,User,City
+from .models import db, User, City
 from . import login_manager
 from flask import current_app as app
 from itsdangerous import URLSafeTimedSerializer
@@ -23,21 +23,13 @@ def sign_up():
         # check that email is not already registered
         email = str(request.form['email']).lower()
         user = db.session.query(User).filter(User.email==email).first()
-        
         if not user: # create a new user profile
-            city_selected = str(request.form.get('city_selected'))
-            # retrieve corresponding city id to be stored as foreign key in User table
-            result = db.session.query(City.id).filter(City.city_name == city_selected).first()
-            for id in result:
-                city_id = id
             # hash user password
             hashed_pwd = generate_password_hash(request.form['password'], method='sha256')
-            
-            contact_method_selected = str(request.form.get('contact_method'))
-            contact_info = str(request.form['contact_info']) # cast to string
-            # create a new user profile
-            user = User(city_id=city_id, first_name=request.form['first_name'],last_name=request.form['last_name'], email=email,password=hashed_pwd,
-                    contact_method=contact_method_selected, contact_info=contact_info)
+            # determine city
+            city = db.session.query(City).filter(City.city_name==request.form.get('city_selected')).first()
+            # add new user
+            user = User(city_id=city.id, first_name=request.form['first_name'],last_name=request.form['last_name'], email=email,password=hashed_pwd, contact_method=request.form.get('contact_method'), contact_info=request.form['contact_info'])
             db.session.add(user)
             db.session.commit()
 
@@ -55,7 +47,7 @@ def sign_up():
 def login():
     if request.method == 'GET':
         return render_template('login.html')
-        
+
     elif request.method == 'POST':
         email = str(request.form['email']).lower()
         user = db.session.query(User).filter(User.email == email).first()

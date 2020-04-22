@@ -36,15 +36,15 @@
                     <p>Looking for a companion for your next meal?</p>
                 </div>
             </div>
-            
+
             <div class="col preferenceHalf" >
             <div class="container">
                 <div class="row d-flex justify-content-end">
                     <form class="form-inline" action="{{ url_for('authentication.log_out') }}">
                         <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Log Out</button>
-                    </form> 
+                    </form>
                 </div>
-                
+
                 <div class="row d-flex align-items-center" style="margin-top:10%;">
                     <div class="col-2 justify-content-center d-none d-md-block">
                         <p><img src="../static/profilePicPlaceholder.png" alt="Profile Picture" class="rounded-circle"  id="profilePic"></p>
@@ -69,25 +69,25 @@
 
                                 <div class="btn-group-toggle d-flex justify-content-around preferenceFood" data-toggle="buttons">
                                     <label class="btn btn-outline-info checkButton">
-                                        <input class="form-check-input" type="checkbox" name="dietary" value ="vegetarian"> Vegetarian
+                                        <input class="form-check-input" type="checkbox" name="vegetarian"> Vegetarian
                                     </label>
                                     <label class="btn btn-outline-info checkButton">
-                                        <input class="form-check-input " type="checkbox" name="dietary" value ="glutenFree"> Gluten-Free
+                                        <input class="form-check-input " type="checkbox" name="glutenFree"> Gluten-Free
                                     </label>
                                 </div>
 
                                 <div class="btn-group-toggle d-flex justify-content-around preferenceFood" data-toggle="buttons">
                                     <label class="btn btn-outline-info checkButton">
-                                        <input class="form-check-input" type="checkbox" name="dietary" value ="vegan"> Vegan
+                                        <input class="form-check-input" type="checkbox" name="vegan"> Vegan
                                     </label>
                                     <label class="btn btn-outline-info checkButton">
-                                        <input class="form-check-input" type="checkbox" name="dietary" value ="halal"> Halal
+                                        <input class="form-check-input" type="checkbox" name="halal"> Halal
                                     </label>
                                 </div>
 
                                 <div class="btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
                                     <label class="btn btn-outline-info checkButton">
-                                        <input class="form-check-input" type="checkbox" name="dietary" value ="dairyFree"> Dairy-Free
+                                        <input class="form-check-input" type="checkbox" name="dairyFree"> Dairy-Free
                                     </label>
                                 </div>
 
@@ -96,14 +96,14 @@
                             <div class="form-group">
                             <label class="foodTime">When are you planning to have this meal?</label>
                             <div class="btn-group-toggle foodTime d-flex justify-content-around" data-toggle="buttons">
+                                <label class="btn btn-outline-info radioButton">
+                                <input type="radio" name="mealTime" value="Breakfast" autocomplete="off"> Breakfast
+                                </label>
                                 <label class="btn btn-outline-info radioButton active">
-                                <input type="radio" name="mealTime" value="breakfast" autocomplete="off" checked> Breakfast
+                                <input type="radio" name="mealTime" value="Lunch" autocomplete="off" checked> Lunch
                                 </label>
                                 <label class="btn btn-outline-info radioButton">
-                                <input type="radio" name="mealTime" value="lunch" autocomplete="off"> Lunch
-                                </label>
-                                <label class="btn btn-outline-info radioButton">
-                                <input type="radio" name="mealTime" value="dinner" autocomplete="off"> Dinner
+                                <input type="radio" name="mealTime" value="Dinner" autocomplete="off"> Dinner
                                 </label>
                             </div>
                             </div>
@@ -128,14 +128,14 @@
                             <div class="row d-flex justify-content-end">
                                 <button type="submit" class="btn btn-primary mb-4" id="nextButton">Let's find you a buddy!  <i class="fas fa-arrow-right"></i></button>
                             </div>
-                            
+
                         </form>
 
                 </div>
                 </div>
             </div>
-            </div>  
-        </div>          
+            </div>
+        </div>
 
     </div>
 
