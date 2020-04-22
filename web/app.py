@@ -2,15 +2,10 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from flask_login import login_required, current_user
 from flask import Blueprint
 from flask import current_app as app
-from .models import db, City, Cuisine, DineTime, dump_defaults
 
 # create an app factory
 main_routes = Blueprint('main_route',__name__,template_folder='templates')
 
-# dump default data upon db creation
-dump_defaults()
-
-    
 # placeholder reference to homepage
 @main_routes.route('/')
 def index():
