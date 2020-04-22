@@ -23,7 +23,7 @@ def test_valid_user_flow(testSession):
     assert r.status_code == 200
 
     # The User should be in the database
-    u = testSession.query(User).filter(User.email=="testemail@gmail.com").first()
+    u = testSession.query(User).filter(User.email=="testemail@minerva.kgi.edu").first()
     assert u.first_name == "Test"
     assert u.last_name == "User"
 
