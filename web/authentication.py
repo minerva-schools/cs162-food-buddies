@@ -41,7 +41,7 @@ def sign_up():
                 login_user(logged_user, remember=False)
                 return redirect(url_for('main_route.preference'))
             else:
-                flash('Sorry, FoodBuddies is currently only available for Minerva students.',"inform")
+                flash('Sorry, FoodBuddies is currently available only for Minerva students.',"inform")
                 return render_template('signUp.html')
         else:
             flash('This email already has an account.',"error")

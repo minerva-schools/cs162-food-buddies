@@ -83,4 +83,4 @@ def test_non_minervan_sign_up(app):
         password="passsword123",
         contact_method='Phone', contact_info='88888888', city_selected='San Francisco'), follow_redirects=True)
 
-    assert b"Sorry, FoodBuddies is currently only available for Minerva students." in resp.data
+    assert b"Sorry, FoodBuddies is currently available only for Minerva students." in resp.data
