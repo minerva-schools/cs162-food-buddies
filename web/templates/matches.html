@@ -132,21 +132,22 @@
    		</div>
 
    		 <div class="grid-item3">
-        <form action="{{ url_for('main_route.results) }}" method="POST">
+        <!-- <form action="{{ url_for('main_route.results) }}" method="POST"> -->
    		 	<label class="matches" > Your Matches!</label>
    		 	<div class="flex-container">
-          
+          			{% for users in Preference %}
    		 		<div id="firstmatch">
    		 		 <div class="container">
    		 		 	<p><img src="../static/profilePicPlaceholder.png" alt="Profile Picture" class="rounded-circle"  id="profilePic"></p>
-            <p> Name: {{ first_name }} {{ last_name }}</p>
-            <p> Cuisine: {{ cuisine_name }}</p>
-            <p> Meal: {{ dinetime_name }}</p>
-            <p> Contact: {{ email }} </p>
+            <p> Name: {{ user.user_id }} {{ user.last_name }}</p>
+            <p> Dietary Preference:</p>
+            <p> Cuisine: {{ user.cuisine_id }}</p>
+            <p> Meal: {{ user.dinetime_id }} </p>
+	    <p> Contact: {{ user.email }} </p>
    		 		 </div>
 
    		 		</div>
-          
+          <!--
    		 		<div id="secondmatch">
    		 			<div class="container">
    		 		 	<p><img src="../static/profilePicPlaceholder.png" alt="Profile Picture" class="rounded-circle"  id="profilePic"></p>
@@ -164,7 +165,7 @@
             <p> Meal: {{ dinetime_name }}</p>
             <p> Contact: {{ email }} </p>
    		 		 </div>
-   		 		</div>
+   		 		</div> -->
           <form action="{{ url_for('main_route.followup') }}" method="POST">
             <div class="btn-group-toggle d-flex justify-content-end foodTime" data-toggle="buttons">
               <form class="form-inline" action="{{ url_for('main_route.followup') }}">
