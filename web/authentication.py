@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models import db,User
+from .models import db,User,City,Cuisine,DineTime
 from . import login_manager
 from flask import current_app as app
 from itsdangerous import URLSafeTimedSerializer
@@ -23,16 +23,25 @@ def sign_up():
         # check that email is not already registered
         email = str(request.form['email']).lower()
         user = db.session.query(User).filter(User.email==email).first()
-        city_selected = request.form.get('city_selected')
+        
         if not user: # create a new user profile
+            city_selected = str(request.form.get('city_selected'))
+            # retrieve corresponding city id to be stored as foreign key in User table
+            result = db.session.query(City.id).filter(City.city_name == city_selected).first()
+            for id in result:
+                city_id = id
+            # hash user password
             hashed_pwd = generate_password_hash(request.form['password'], method='sha256')
-            #request.form['contact_info'] -- For getting the contact info!
-            #request.form['contact_method'] -- For getting the contact method
-            user = User(first_name=request.form['first_name'],last_name=request.form['last_name'], email=email,password=hashed_pwd, city=str(city_selected))
+            
+            contact_method_selected = str(request.form.get('contact_method'))
+            contact_info = str(request.form['contact_info']) # cast to string
+            # create a new user profile
+            user = User(city_id=city_id, first_name=request.form['first_name'],last_name=request.form['last_name'], email=email,password=hashed_pwd,
+                    contact_method=contact_method_selected, contact_info=contact_info)
             db.session.add(user)
             db.session.commit()
 
-            #Login the user after signup
+            # Login the user after signup
             logged_user = User.query.filter_by(email=email).first()
             login_user(logged_user, remember=False)
             return redirect(url_for('main_route.preference'))
@@ -46,6 +55,7 @@ def sign_up():
 def login():
     if request.method == 'GET':
         return render_template('login.html')
+        
     elif request.method == 'POST':
         email = str(request.form['email']).lower()
         user = db.session.query(User).filter(User.email == email).first()
