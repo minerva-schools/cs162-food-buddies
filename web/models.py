@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 
-# create db
+# create a db
 db = SQLAlchemy()
 
 # create table schema
@@ -11,7 +11,7 @@ class City(db.Model):
     __tablename__ = 'City'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     city_name = db.Column(db.String(80))
-    
+
 class User(db.Model, UserMixin):
     '''The User table store user name, city of residence, and contact info.
         * City_id as foreign key for buddy filtering'''
@@ -24,14 +24,14 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(200))
     contact_method = db.Column(db.String(100))
     contact_info = db.Column(db.String(300))
- 
-    
+
+
 class Cuisine(db.Model):
     '''single-choice: cuisine options'''
     __tablename__ = 'Cuisine'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     cuisine_name = db.Column(db.String(100))
-    
+
 class DineTime(db.Model):
     '''single-choice: dining time of the day'''
     __tablename__ = 'DineTime'
@@ -47,19 +47,19 @@ class Preference(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     #date_time = db.Column(db.DateTime)
     date_time=db.Column(db.String(100))
-    
+
     user_id = db.Column(db.Integer, db.ForeignKey('User.id'))
     city_id = db.Column(db.Integer, db.ForeignKey('City.id'))
     cuisine_id = db.Column(db.Integer, db.ForeignKey('Cuisine.id'))
     dinetime_id = db.Column(db.Integer, db.ForeignKey('DineTime.id'))
-    
+
     # multi-selection of food restrictions
     require_vegetarian = db.Column(db.Boolean, default=False )
     require_vegan = db.Column(db.Boolean, default=False)
     require_halal = db.Column(db.Boolean, default=False)
     require_gluten_free = db.Column(db.Boolean,default=False )
     require_dairy_free = db.Column(db.Boolean,default=False )
-    
+
     # time availability
     # store start/end time of desired dining time as integer (0 - 24th hour of the day)
     start_time = db.Column(db.String(100))
