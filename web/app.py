@@ -25,3 +25,8 @@ def preference():
     #request.form.get ("ava_from")
     #For getting the Availability time to, use the following line
     #request.form.get ("ava_to")
+    
+@@main_routes.route('/followup', methods=['GET','POST'])
+@login_required
+def followup():
+    return render_template('followup.html', firstName=current_user.first_name.capitalize())
