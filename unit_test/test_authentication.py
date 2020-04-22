@@ -1,17 +1,20 @@
 import pytest
 
-from web import create_app,db
-
+from web import create_app, db
+import os
 import requests
 
 @pytest.fixture
 def app():
-    app = create_app('test')
+    app = create_app()
     app.config.from_object('web.config.TestingConfig')
     with app.app_context():
+        # Initialize the db tables
         db.create_all()
         yield app
-        db.drop_all()
+        # remove all the users created while testing
+        # This should be running only in test mode.
+        db.session.execute("DELETE FROM User")
     return app
 
 def test_valid_sign_up(app):

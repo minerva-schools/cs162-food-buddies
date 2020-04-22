@@ -18,8 +18,8 @@ def testSession():
 
 def test_valid_user_flow(testSession):
     # SignUp a new User
-    r = requests.post('http://127.0.0.1:5000/sign_up',data=dict(email="testemail@gmail.com", first_name="Test", last_name="User",
-                                            password="passsword123"),allow_redirects=True)
+    r = requests.post('http://127.0.0.1:5000/sign_up',data=dict(email="testemail@gmail.com", first_name="Test", last_name="User",password="passsword123",
+        contact_method='Phone', contact_info='88888888', city_selected='San Francisco'),allow_redirects=True)
     assert r.status_code == 200
 
     # The User should be in the database
