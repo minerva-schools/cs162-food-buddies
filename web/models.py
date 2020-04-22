@@ -127,7 +127,7 @@ def insert_dummy_users(*args, **kwargs):
     db.session.commit()
         
 
-# dump in some dummy user data upon db creation (for demo purpose)
+# dump in some dummy preferences upon db creation
 @db.event.listens_for(Preference.__table__, 'after_create', once=True)
 def insert_dummy_preferences(*args, **kwargs):
     '''insert one dummy user preference upon db creation'''
