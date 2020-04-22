@@ -57,7 +57,31 @@ class Preference(db.Model):
     require_halal = db.Column(db.Boolean, default=False)
     require_gluten_free = db.Column(db.Boolean,default=False )
     require_dairy_free = db.Column(db.Boolean,default=False )
+        
+    #add the matched column to the Followup class
+    #matched = db.Column(db.Boolean, default=False) # True if a buddy is found
+
+class Followup(db.Model):
+    '''single-choice: followup survey answers'''
+    __tablename__ = 'Followup'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    date_time = db.Column(db.DateTime)
     
-    matched = db.Column(db.Boolean, default=False) # True if a buddy is found
+    user_id = db.Column(db.Integer, db.ForeignKey('User.id'))
+    city_id = db.Column(db.Integer, db.ForeignKey('City.id'))
+    cuisine_id = db.Column(db.Integer, db.ForeignKey('Cuisine.id'))
+    dinetime_id = db.Column(db.Integer, db.ForeignKey('DineTime.id'))
+    # was the user matched
+    matched = db.Column(db.Boolean, default=True) # set default the True since they're past the Matching page
+    # did the user contact one of their matches
+    did_contact = db.Column(db.Boolean, default=False)
+    # did one of the matches contact the user
+    was_contacted = db.Column(db.Boolean, default=False)
+    # was the preffered contact method used
+    contact_method = db.Column(db.Boolean, default=True)
+    # matching speed rating
+    matching_speed = db.Column(db.Integer(100))
+    # matching accuracy rating
+    matching_accuracy = db.Column(db.Integer(100))
 
 
