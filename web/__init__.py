@@ -2,20 +2,9 @@ from flask import Flask,render_template,url_for, flash,redirect
 from flask_login import LoginManager
 import os
 from .config import config_by_name
-from web.models import db, City, Cuisine, DineTime
+from web.models import db
 from web.utils import mail
 
-#from web.initial_values import insert_defaults
-#from sqlalchemy.event import listen
-#def insert_city_options(*args, **kwargs):
-#    MinervaCities = ['San Francisco', 'Seoul', 'Hyderabad', 'Berlin',       'Buenos Aires', 'London', 'Taipei']
-#    for city_name in MinervaCities:
-#        db.session.add(City(city_name=city_name))
-#
-
-## hack: default value insertion upon db creation
-#global DEFAULTS_INSERTED
-#DEFAULTS_INSERTED = 0
 
 login_manager = LoginManager()
 
@@ -51,27 +40,6 @@ def create_app(config_name='dev'):
 
         # Create DB Models
         db.create_all()
-        
-#        listen(City.__table__, 'connect', insert_city_options, once=True)
-#        # another function to wait(listen to) for db creation
-#        # insert default values upon db creation
-#        if DEFAULTS_INSERTED==0:
-#
-#            MinervaCities = ['San Francisco', 'Seoul', 'Hyderabad', 'Berlin',       'Buenos Aires', 'London', 'Taipei']
-#            for city_name in MinervaCities:
-#                db.session.add(City(city_name=city_name))
-#
-#            CuisineTypes = ['Asian', 'American', 'Subcontinental', 'European']
-#            for cuisine_name in CuisineTypes:
-#                db.session.add(Cuisine(cuisine_name=cuisine_name))
-#
-#            DiningTimes = ['Lunch', 'Dinner', 'Breakfast']
-#            for dinetime_name in DiningTimes:
-#                db.session.add(DineTime(dinetime_name=dinetime_name))
-#
-#            db.session.commit()
-#            # update status to prevent dulicated insertions
-#            DEFAULTS_INSERTED += 1
 
         
     return app

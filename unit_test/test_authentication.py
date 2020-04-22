@@ -15,16 +15,21 @@ def app():
 def test_valid_sign_up(app):
     # After sign-up, the User should see the Preferences page
     client = app.test_client()
-    resp = client.post('/sign_up',data=dict(email="testemail@gmail.com", first_name="Test", last_name="User",
-                                            password="passsword123"), follow_redirects=True)
+    resp = client.post('/sign_up',data=dict(
+            email="testemail@gmail.com",
+            first_name="Test", last_name="User",
+            password="passsword123",
+            contact_method='Phone', contact_info='88888888', city_selected='San Francisco'), follow_redirects=True)
+            
     assert b"Preferences" in resp.data
     assert resp.status_code == 200
 
 def test_invalid_sign_up(app):
     # Attempt to sign-up with a duplicate email
     client = app.test_client()
-    resp = client.post('/sign_up', data=dict(email="testemail@gmail.com", first_name="Test", last_name="User",
-                                             password="passsword123"), follow_redirects=True)
+    resp = client.post('/sign_up', data=dict(email="testemail@gmail.com", first_name="Test", last_name="User",password="passsword123",
+            contact_method='Phone', contact_info='88888888', city_selected='San Francisco'), follow_redirects=True)
+            
     assert resp.status_code == 200
     resp = client.post('/sign_up', data=dict(email="testemail@gmail.com", first_name="Test 2", last_name="New User 2",
                                              password="passsword456"), follow_redirects=True)
@@ -40,8 +45,8 @@ def test_invalid_password(app):
     # Attempt to sign-in with the wrong password
     client = app.test_client()
     # Create an account
-    resp = client.post('/sign_up', data=dict(email="testemail@gmail.com", first_name="Test", last_name="User",
-                                             password="passsword123"), follow_redirects=True)
+    resp = client.post('/sign_up', data=dict(email="testemail@gmail.com", first_name="Test", last_name="User",password="passsword123",
+        contact_method='Phone', contact_info='88888888', city_selected='San Francisco'), follow_redirects=True)
     assert resp.status_code == 200
     # Try to login with the wrong password
     resp = client.post('/login', data=dict(email="testemail@gmail.com", password="passsword456"), follow_redirects=True)
@@ -52,8 +57,8 @@ def test_valid_login(app):
     client = app.test_client()
 
     # Create an account
-    resp = client.post('/sign_up', data=dict(email="testemail@gmail.com", first_name="Test", last_name="User",
-                                             password="passsword123"), follow_redirects=True)
+    resp = client.post('/sign_up', data=dict(email="testemail@gmail.com", first_name="Test", last_name="User",password="passsword123",
+        contact_method='Phone', contact_info='88888888', city_selected='San Francisco'), follow_redirects=True)
     assert resp.status_code == 200
 
     #Login with that account
@@ -66,8 +71,8 @@ def test_logout(app):
     client = app.test_client()
 
     # Create an account
-    resp = client.post('/sign_up', data=dict(email="testemail@gmail.com", first_name="Test", last_name="User",
-                                             password="passsword123"), follow_redirects=True)
+    resp = client.post('/sign_up', data=dict(email="testemail@gmail.com", first_name="Test", last_name="User",password="passsword123",
+        contact_method='Phone', contact_info='88888888', city_selected='San Francisco'), follow_redirects=True)
     assert resp.status_code == 200
 
     #Login with that account
