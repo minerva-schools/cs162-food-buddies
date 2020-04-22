@@ -64,7 +64,7 @@ class Preference(db.Model):
     # store start/end time of desired dining time as integer (0 - 24th hour of the day)
     start_time = db.Column(db.String(100))
     end_time = db.Column(db.String(100))
-
+    
     matched = db.Column(db.Boolean, default=False) # True if a buddy is found
 
 
@@ -78,7 +78,7 @@ def insert_city_options(*args, **kwargs):
     for city_name in MinervaCities:
         db.session.add(City(city_name=city_name))
     db.session.commit()
-
+        
 @db.event.listens_for(Cuisine.__table__, 'after_create', once=True)
 def insert_cuisine_options(*args, **kwargs):
     '''insert cuisine options upon db creation'''
@@ -94,8 +94,8 @@ def insert_dinetime_options(*args, **kwargs):
     for dinetime_name in DiningTimes:
         db.session.add(DineTime(dinetime_name=dinetime_name))
     db.session.commit()
-
-
+        
+               
 # dump in some dummy user data upon db creation (for demo purpose)
 @db.event.listens_for(User.__table__, 'after_create', once=True)
 def insert_dummy_users(*args, **kwargs):
@@ -107,7 +107,7 @@ def insert_dummy_users(*args, **kwargs):
         66666666: 'sha256$7nZiviKc$21edefd8abe3f32baa7284a24a90dab793b5c94cf7a63cec5e1fb283d1160f3d',
         55555555: 'sha256$V7vmFKKC$d2a91f308dc90375cf5b07021c5830cd593146ead60f757bc607c6cbfec6e4b2'
         }
-
+        
     DummyUsers = [
             [2,'Jingren', 'Wang', 'jingren.wang@minerva.kgi.edu',
         hashedPW[88888888], 'Phone', '+82 105-557-7494'], # Seoul
@@ -125,7 +125,7 @@ def insert_dummy_users(*args, **kwargs):
                 email=user_info[3], password=user_info[4],
                 contact_method=user_info[5], contact_info=user_info[6]))
     db.session.commit()
-
+        
 
 # dump in some dummy preferences upon db creation
 @db.event.listens_for(Preference.__table__, 'after_create', once=True)
