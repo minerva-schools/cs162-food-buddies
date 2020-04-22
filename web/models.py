@@ -62,10 +62,9 @@ class Preference(db.Model):
     
     # time availability
     # store start/end time of desired dining time as integer (0 - 24th hour of the day)
-    start_time = db.Column(db.Integer)
-    end_time = db.Column(db.Integer)
+    start_time = db.Column(db.String(100))
+    end_time = db.Column(db.String(100))
     
-
     matched = db.Column(db.Boolean, default=False) # True if a buddy is found
 
 
@@ -136,7 +135,7 @@ def dump_defaults():
         db.session.add(Preference(
             date_time='2020-05-01 11:05:26',
             user_id=2, city_id=5, cuisine_id=3, dinetime_id=1,
-            require_vegan=True, start_time=11, end_time=13
+            require_vegan=True, start_time='11:20', end_time='13:00'
             ))
             # *other 'require_' attributes default to Flase (0)
             
