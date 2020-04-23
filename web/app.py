@@ -17,7 +17,8 @@ def index():
 @login_required
 def preference():
     if request.method == 'GET':
-        return render_template('preference.html', user = current_user)
+        city = db.session.query(City).filter(City.id == current_user.city_id).first()
+        return render_template('preference.html', user=current_user, city=city)
     elif request.method == 'POST':
         # check whether user preferences are already set
         preference = db.session.query(Preference).filter(Preference.user_id == current_user.id).first()
@@ -131,4 +132,5 @@ def edit(update):
         preference.city_id = city.id
         current_user.city_id = city.id
     db.session.commit()
-    return render_template("preference.html",user=current_user)
+    city = db.session.query(City).filter(City.id == current_user.city_id).first()
+    return render_template("preference.html",user=current_user, city=city)

@@ -225,14 +225,14 @@
                             <label>Location</label>
                             <div class="input-group">
                                 <select name='city_selected' class="custom-select" required>
-                                    <option  value="" disabled selected hidden>Location (city)</option>
-                                    <option  value="San Francisco">San Francisco</option>
-                                    <option  value="Seoul">Seoul</option>
-                                    <option  value="Hyderabad">Hyderabad</option>
-                                    <option  value="Berlin">Berlin</option>
-                                    <option  value="Buenos Aires">Buenos Aires</option>
-                                    <option  value="London">London</option>
-                                    <option  value="Taipei">Taipei</option>
+                                    <option  value="" disabled hidden>Location (city)</option>
+                                    <option  value="San Francisco" {% if city.city_name == "San Francisco" %} selected {% endif %}>San Francisco</option>
+                                    <option  value="Seoul" {% if city.city_name == "Seoul" %} selected {% endif %}>Seoul</option>
+                                    <option  value="Hyderabad" {% if city.city_name == "Hyderabad" %} selected {% endif %}>Hyderabad</option>
+                                    <option  value="Berlin" {% if city.city_name == "Berlin" %} selected {% endif %}>Berlin</option>
+                                    <option  value="Buenos Aires" {% if city.city_name == "Buenos Aires" %} selected {% endif %}>Buenos Aires</option>
+                                    <option  value="London" {% if city.city_name == "London" %} selected {% endif %}>London</option>
+                                    <option  value="Taipei"{% if city.city_name == "Taipei" %} selected {% endif %}>Taipei</option>
                                 </select>
                                 <div class="input-group-append">
                                   <button class="btn btn-outline-primary" type="submit">Change</button>
