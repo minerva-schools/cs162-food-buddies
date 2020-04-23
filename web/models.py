@@ -24,6 +24,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(200))
     contact_method = db.Column(db.String(100))
     contact_info = db.Column(db.String(300))
+    profile_img_name = db.Column(db.String(100), nullable=True)
 
 
 class Cuisine(db.Model):
@@ -110,20 +111,26 @@ def insert_dummy_users(*args, **kwargs):
         
     DummyUsers = [
             [2,'Jingren', 'Wang', 'jingren.wang@minerva.kgi.edu',
-        hashedPW[88888888], 'Phone', '+82 105-557-7494'], # Seoul
+        hashedPW[88888888], 'Phone', '+82 105-557-7494', 'user_1.jpeg'], # Seoul
             [5,'Mary', 'Burns', 'mary.burns@minerva.kgi.edu',
-        hashedPW[77777777], 'Phone', '+54 155-5516-605'], # Buenos Aires
-            [1,'James', 'Gorden', 'james.gorden@minerva.kgi.edu',
-        hashedPW[66666666], 'Phone', '+1 729-591-1038'], # San Francisco
+        hashedPW[77777777], 'Phone', '+54 155-5516-605', 'user_2.jpg'], # Buenos Aires
+            [1,'James', 'Gordon', 'james.gordon@minerva.kgi.edu',
+        hashedPW[66666666], 'Phone', '+1 729-591-1038',None ], # San Francisco
             [1,'Kia', 'Louis', 'kia.louis@minerva.kgi.edu',
-        hashedPW[55555555], 'Phone', '+1 813-028-4012'] # San Francisco
+        hashedPW[55555555], 'Phone', '+1 813-028-4012', None] # San Francisco
         ]
 
     for user_info in DummyUsers:
+        if user_info[7]:
+            user_img_name = str(user_info[7])
+        else:
+            user_img_name = 'profilePicPlaceholder.png'
+            
         db.session.add(User( city_id=user_info[0],
             first_name=user_info[1], last_name=user_info[2],
                 email=user_info[3], password=user_info[4],
-                contact_method=user_info[5], contact_info=user_info[6]))
+                contact_method=user_info[5], contact_info=user_info[6],
+                profile_img_name = user_info[7]))
     db.session.commit()
         
 
@@ -134,7 +141,7 @@ def insert_dummy_preferences(*args, **kwargs):
     db.session.add(Preference(
         date_time='2020-05-01 11:05:26',
             user_id=2, city_id=5, cuisine_id=3, dinetime_id=1,
-            require_vegan=True, start_time='11:10', end_time='13:30'
+            require_vegan=True, start_time='11:10:00', end_time='13:30:00'
             ))
             # *other 'require_' attributes default to Flase (0)
     db.session.commit()
