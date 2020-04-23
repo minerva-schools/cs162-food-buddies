@@ -240,7 +240,7 @@
                               </div>
                         </form>
                     </div>
-                    <div class="row">
+                    <div class="row mb-4">
                         <form action="{{ url_for('main_route.edit', update='contact_method') }}" method="POST" style="width: 100%;">
                             <label>Contact Info</label>
                             <div class="input-group">
@@ -258,6 +258,16 @@
                                 </div>
                             </div>
                         </form>
+                    </div>
+                    <div class="row">
+                        <form action="{{ url_for('authentication.verifyEmail') }}" method="POST">
+
+                        </form>
+                        <div class="row justify-content-center" style="width: 100%;">
+                            <form action="{{ url_for('authentication.verifyEmail') }}" method="POST">
+                                <button type="submit"  class="btn btn-outline-warning">Request password change</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
