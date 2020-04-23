@@ -156,16 +156,20 @@
                                 <img src="../static/profilePicPlaceholder.png" alt="Profile Picture" class="rounded-circle"  id="pictureEdit">
                             </div>
                             <div class="row justify-content-center">
-                                <p id="edit"> <a href="edit">Upload Picture</a></p>
+                                <label>Upload/Change Picture</label>
+                                <div class="custom-file" style="width: 70%;">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01">
+                                    <label class="custom-file-label" for="inputGroupFile01">Choose picture</label>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <form action="/" method="POST" style="width: 100%;">
+                        <form action="{{ url_for('main_route.edit', update='first_name') }}" method="POST" style="width: 100%;">
                             <label>First Name</label>
                             <div class="form-row">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="newFirstName" placeholder="{{ firstName }}">
+                                    <input type="text" class="form-control" name="first_name" placeholder="{{ firstName }}" required>
                                     <div class="input-group-append">
                                       <button class="btn btn-outline-primary" type="submit">Change</button>
                                     </div>
@@ -174,11 +178,11 @@
                         </form>
                     </div>
                     <div class="row">
-                        <form action="/" method="POST" style="width: 100%;">
+                        <form action="{{ url_for('main_route.edit', update='last_name') }}" method="POST" style="width: 100%;">
                             <label>Last Name</label>
                             <div class="form-row">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="newFirstName" placeholder="{{ firstName }}">
+                                    <input type="text" class="form-control" name="last_name" placeholder="{{ lastName }}" required>
                                     <div class="input-group-append">
                                       <button class="btn btn-outline-primary" type="submit">Change</button>
                                     </div>
@@ -187,11 +191,11 @@
                         </form>
                     </div>
                     <div class="row">
-                        <form action="/" method="POST" style="width: 100%;">
+                        <form action="{{ url_for('main_route.edit', update='email') }}" method="POST" style="width: 100%;">
                             <label>Email</label>
                             <div class="form-row">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="newFirstName" placeholder="{{ firstName }}">
+                                    <input type="text" class="form-control" name="email" placeholder="{{ email }}" required>
                                     <div class="input-group-append">
                                       <button class="btn btn-outline-primary" type="submit">Change</button>
                                     </div>
@@ -200,10 +204,10 @@
                         </form>
                     </div>
                     <div class="row mb-3">
-                        <form action="/" method="POST" style="width: 100%;">
+                        <form action="{{ url_for('main_route.edit', update='city_id') }}" method="POST" style="width: 100%;">
                             <label>Location</label>
                             <div class="input-group">
-                                <select name='city_selected' class="custom-select">
+                                <select name='city_id' class="custom-select" required>
                                     <option  value="" disabled selected hidden>Location (city)</option>
                                     <option  value="San Francisco">San Francisco</option>
                                     <option  value="Seoul">Seoul</option>
@@ -220,7 +224,7 @@
                         </form>
                     </div>
                     <div class="row">
-                        <form action="/" method="POST" style="width: 100%;">
+                        <form action="{{ url_for('main_route.edit', update='contact_method') }}" method="POST" style="width: 100%;">
                             <label>Contact Info</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -231,7 +235,7 @@
                                       <option value="Phone">Phone</option>
                                     </select>
                                   </div>
-                                <input type="text" class="form-control" name="contact_info" placeholder="Contact Info." required>
+                                <input type="text" class="form-control" name="contact_info" placeholder="{{ contactInfo }}" required>
                                 <div class="input-group-append">
                                   <button class="btn btn-outline-primary" type="submit">Change</button>
                                 </div>
@@ -241,7 +245,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Done</button>
             </div>
           </div>
         </div>
