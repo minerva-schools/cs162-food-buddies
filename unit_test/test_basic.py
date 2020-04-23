@@ -36,3 +36,13 @@ def test_redirect_preferences(client):
     resp = client.get('/preference',follow_redirects=True)
     assert resp.status_code == 200
     assert b'You need to login for accessing this page!' in resp.data
+
+def test_redirect_matches(client):
+    resp = client.get('/matches', follow_redirects=True)
+    assert resp.status_code == 200
+    assert b'You need to login for accessing this page!' in resp.data
+
+# def test_redirect_followup(client):
+#     resp = client.get('/followup', follow_redirects=True)
+#     assert resp.status_code == 200
+#     assert b'You need to login for accessing this page!' in resp.data
