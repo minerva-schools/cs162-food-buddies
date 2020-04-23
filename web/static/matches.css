@@ -6,7 +6,7 @@ html, body, {
     right:0;
 }
 body {
-  ;
+  background-color: #FEFEFE;
   font-family: 'Arvo', serif;
 }
 .grid-container{
@@ -21,7 +21,6 @@ body {
 }
 #lgout{
 	color: #ffffff;
-  margin-right:20%;
 }
 
 .grid-item1{
@@ -33,17 +32,12 @@ body {
 	grid-row-end: 1;
 	color: #ffffff;
 
-
-
 }
 .grid-item2{
-
-	
 	grid-row-start: 2;
-	grid-row-end: 3;
-  margin-left: 5%;
+        grid-row-end: 3;
+         margin-left: 5%;
 	
-
 
 }
 .grid-item3{
@@ -83,7 +77,7 @@ body {
   background-color: #ffffff;
   width: 600px;
   margin: 10px;
-  text-align: left;
+  text-align: center;
   line-height: 15px;
   font-size: 15px;
   padding: 50px;
@@ -103,25 +97,34 @@ body {
   width: 20%;
   margin-right: 10%;
 }
+#nomatch{
+  width: 80%;
+  
+  align-content:center;
+}
 .preferenceFood{
   margin-bottom: 5%;
   font-size: 17px;
   margin-right: 20%;
+  font-weight: bold;
 }
 
 .foodTime {
   margin-bottom: 5%;
   font-size: 17px;
   margin-right: 45%;
+  font-weight: bold;
 }
 .cuisines {
   margin-bottom: 4%;
   font-size: 17px;
+  font-weight: bold;
 
 }
 .matches{
  margin-bottom: 4%;
- font-size: 17px; 
+ font-size: 17px;
+ font-weight: bold; 
 }
 .availability{
   .preferenceFood{
@@ -142,5 +145,4 @@ body {
 }
 .update{
   margin-left: 10%;
-
 }
