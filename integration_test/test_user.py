@@ -33,7 +33,7 @@ def test_valid_user_flow(testSession):
     assert r.status_code == 200
 
     # preference should be in the database
-    p = testSession.query(Preference).filter(Preference.require_vegan==True).last()
+    p = testSession.query(Preference).filter(Preference.require_vegan==True).order_by(Preference.id.desc()).first()
     assert p.start_time == "12:30"
     assert p.end_time == "14:00"
 
@@ -50,7 +50,7 @@ def test_valid_user_flow(testSession):
     assert r.status_code == 200
 
     # preference should be in the database
-    p = testSession.query(Preference).filter(Preference.require_vegaetarian==True).last()
+    p = testSession.query(Preference).filter(Preference.require_vegaetarian==True).order_by(Preference.id.desc()).first()
     assert p.start_time == "11:30"
     assert p.end_time == "13:30"
 
