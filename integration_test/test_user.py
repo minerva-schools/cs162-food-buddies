@@ -4,7 +4,7 @@ import requests
 from sqlalchemy import create_engine, MetaData, Table
 from sqlalchemy.orm import sessionmaker, mapper
 from sqlalchemy.ext.declarative import declarative_base
-from web.models import User
+from web.models import User, Preference
 
 @pytest.fixture
 def testSession():
