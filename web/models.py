@@ -138,3 +138,4 @@ def insert_dummy_preferences(*args, **kwargs):
             ))
             # *other 'require_' attributes default to Flase (0)
     db.session.commit()
+
