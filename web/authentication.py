@@ -39,7 +39,7 @@ def sign_up():
                 # Login the user after signup
                 logged_user = User.query.filter_by(email=email).first()
                 login_user(logged_user, remember=False)
-                return redirect(url_for('main_route.preference'))
+                return render_template("preference.html", user=current_user)
             else:
                 flash('Sorry, FoodBuddies is currently available only for Minerva students.',"inform")
                 return render_template('signUp.html')
@@ -62,7 +62,7 @@ def login():
             if check_password_hash(user.password, request.form['password']):
                 login_user(user)
                 # return redirect(url_for('index'))
-                return redirect(url_for('main_route.preference'))
+                return render_template("preference.html", user=current_user)
             else:
                 flash('Incorrect Password!', "error")
                 return redirect(url_for('authentication.login'))

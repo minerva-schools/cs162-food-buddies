@@ -17,7 +17,7 @@ def index():
 @login_required
 def preference():
     if request.method == 'GET':
-        return render_template('preference.html', firstName=current_user.first_name.capitalize())
+        return render_template('preference.html', user = current_user)
     elif request.method == 'POST':
         # check whether user preferences are already set
         preference = db.session.query(Preference).filter(Preference.user_id == current_user.id).first()
@@ -25,9 +25,11 @@ def preference():
             # determine linking to other tables
             cuisine = db.session.query(Cuisine).filter(Cuisine.cuisine_name==request.form.get('cuisine_selected')).first()
             dinetime = db.session.query(DineTime).filter(DineTime.dinetime_name==request.form.get('mealTime')).first()
+
             #update values
             preference.date_time = datetime.utcnow()
-            preference.cuisine_id = 1 # placeholder -- change to cuisine.id
+            if cuisine:
+                preference.cuisine_id = cuisine.id
             preference.dinetime_id = dinetime.id
             preference.require_vegetarian = ("vegetarian" in request.form)
             preference.require_vegan = ("vegan" in request.form)
@@ -43,7 +45,7 @@ def preference():
             cuisine = db.session.query(Cuisine).filter(Cuisine.cuisine_name==request.form.get('cuisine_selected')).first()
             dinetime = db.session.query(DineTime).filter(DineTime.dinetime_name==request.form.get('mealTime')).first()
             #placeholder cuisine - change to cuisine.id
-            preference = Preference(date_time=datetime.utcnow(), user_id=current_user.id, cuisine_id=1, dinetime_id=dinetime.id, city_id=current_user.city_id, require_vegetarian=("vegetarian" in request.form),require_vegan=("vegan" in request.form),require_halal=("halal" in request.form),require_gluten_free=("glutenFree" in request.form),require_dairy_free=("dairyFree" in request.form),start_time=request.form['ava_from'],end_time=request.form['ava_to'])
+            preference = Preference(date_time=datetime.utcnow(), user_id=current_user.id, cuisine_id=cuisine.id, dinetime_id=dinetime.id, city_id=current_user.city_id, require_vegetarian=("vegetarian" in request.form),require_vegan=("vegan" in request.form),require_halal=("halal" in request.form),require_gluten_free=("glutenFree" in request.form),require_dairy_free=("dairyFree" in request.form),start_time=request.form['ava_from'],end_time=request.form['ava_to'])
             db.session.add(preference)
             db.session.commit()
         # placeholder page to indicate form has been submitted.
@@ -98,7 +100,8 @@ def loadMatches():
         dinetime = db.session.query(DineTime).filter(DineTime.dinetime_name == request.form.get('mealTime')).first()
         # update values
         preference.date_time = datetime.utcnow()
-        preference.cuisine_id = cuisine.id
+        if cuisine:
+            preference.cuisine_id = cuisine.id
         preference.dinetime_id = dinetime.id
         preference.require_vegetarian = ("vegetarian" in request.form)
         preference.require_vegan = ("vegan" in request.form)
@@ -107,14 +110,25 @@ def loadMatches():
         preference.require_dairy_free = ("dairyFree" in request.form)
         db.session.add(preference)
         db.session.commit()
+
         return redirect(url_for('main_route.loadMatches'))
 
 @main_routes.route('/edit/<update>', methods=["POST"])
 @login_required
 def edit(update):
-
-    return redirect(url_for('main_route.preference'))
-# update value for the first name: first_name
-# update value for the last name: last_name
-# update value for the email: email
-# update value for the location: city_id
+    if update == "first_name":
+        current_user.first_name = str(request.form.get("first_name")).capitalize()
+    elif update == "last_name":
+        current_user.last_name = str(request.form.get("last_name")).capitalize()
+    elif update == "email":
+        current_user.email = str(request.form.get("email")).lower()
+    elif update == "contact_method":
+        current_user.contact_method = request.form.get('contact_method')
+        current_user.contact_info = request.form.get('contact_info')
+    elif update == "city_name":
+        city = db.session.query(City).filter(City.city_name==request.form.get('city_selected')).first()
+        preference = db.session.query(Preference).filter(Preference.user_id == current_user.id).first()
+        preference.city_id = city.id
+        current_user.city_id = city.id
+    db.session.commit()
+    return render_template("preference.html",user=current_user)

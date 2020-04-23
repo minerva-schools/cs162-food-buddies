@@ -52,7 +52,7 @@
                     </div>
 
                     <div class ="col-10 col-md-5">
-                        <p id="title">Hi {{ firstName }}!</p>
+                        <p id="title">Hi {{ user.first_name.capitalize() }}!</p>
                         <p id="subtitle">Let us know more about your next meal preference</p>
                     </div>
                 </div>
@@ -111,7 +111,7 @@
                             <div class="form-group">
                             <label class="foodTime">What is your cuisine preference for today?</label>
                             <div class="input-group">
-                                <select name='cuisine_name' class="custom-select" required>
+                                <select name='cuisine_selected' class="custom-select" required>
                                     <option  value="" disabled selected hidden>Cuisine</option>
                                     <option  value="American">American</option>
                                     <option  value="Asian">Asian</option>
@@ -186,7 +186,7 @@
                             <label>First Name</label>
                             <div class="form-row">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="first_name" placeholder="{{ firstName }}" required>
+                                    <input type="text" class="form-control" name="first_name" placeholder="{{ user.first_name.capitalize() }}" required>
                                     <div class="input-group-append">
                                       <button class="btn btn-outline-primary" type="submit">Change</button>
                                     </div>
@@ -199,7 +199,7 @@
                             <label>Last Name</label>
                             <div class="form-row">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="last_name" placeholder="{{ lastName }}" required>
+                                    <input type="text" class="form-control" name="last_name" placeholder="{{ user.last_name.capitalize() }}" required>
                                     <div class="input-group-append">
                                       <button class="btn btn-outline-primary" type="submit">Change</button>
                                     </div>
@@ -212,7 +212,7 @@
                             <label>Email</label>
                             <div class="form-row">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="email" placeholder="{{ email }}" required>
+                                    <input type="text" class="form-control" pattern="[\w.%+-]+@minerva\.kgi\.edu" name="email" title="Only Minerva domain emails are currently accepted" placeholder="{{ user.email }}" required>
                                     <div class="input-group-append">
                                       <button class="btn btn-outline-primary" type="submit">Change</button>
                                     </div>
@@ -221,10 +221,10 @@
                         </form>
                     </div>
                     <div class="row mb-3">
-                        <form action="{{ url_for('main_route.edit', update='city_id') }}" method="POST" style="width: 100%;">
+                        <form action="{{ url_for('main_route.edit', update='city_name') }}" method="POST" style="width: 100%;">
                             <label>Location</label>
                             <div class="input-group">
-                                <select name='city_id' class="custom-select" required>
+                                <select name='city_selected' class="custom-select" required>
                                     <option  value="" disabled selected hidden>Location (city)</option>
                                     <option  value="San Francisco">San Francisco</option>
                                     <option  value="Seoul">Seoul</option>
@@ -246,13 +246,13 @@
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <select class="custom-select" name ="contact_method" required>
-                                      <option value="" disabled selected hidden>Method</option>
-                                      <option value="Messenger">Messenger</option>
-                                      <option value="WhatsApp">WhatsApp</option>
-                                      <option value="Phone">Phone</option>
+                                      <option value="" disabled  hidden>Method</option>
+                                      <option value="Messenger" {% if user.contact_method == "Messenger" %} selected {% endif %}>Messenger</option>
+                                      <option value="WhatsApp" {% if user.contact_method == "WhatsApp" %} selected {% endif %}>WhatsApp</option>
+                                      <option value="Phone" {% if user.contact_method == "Phone" %} selected {% endif %}>Phone</option>
                                     </select>
                                   </div>
-                                <input type="text" class="form-control" name="contact_info" placeholder="{{ contactInfo }}" required>
+                                <input type="text" class="form-control" name="contact_info" placeholder="{{ user.contact_info }}" required>
                                 <div class="input-group-append">
                                   <button class="btn btn-outline-primary" type="submit">Change</button>
                                 </div>
