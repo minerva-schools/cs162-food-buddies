@@ -118,8 +118,11 @@
                                 <p id="subtitle">This helps us improve your experience</p>
                             </div>
 
-                            <div class="row d-flex justify-content-end">
-                                <button type="submit" class="btn btn-primary mb-4" id="nextButton">All done!  <i class="fas fa-arrow-right"></i></button>
+                            <div>
+                            <form action="{{ url_for('main_route.followup') }}" method="POST">
+                                <div class="row d-flex justify-content-end" data-toggle="buttons">
+                                    <form class="form-inline" action="{{ url_for('main_route.followup') }}"></form>
+                                    <button type="submit" class="btn btn-primary mb-4" id="nextButton">Look for another Foodbuddy!<i class="fas fa-arrow-right"></i></button>
                             </div>
                             
                         </form>
