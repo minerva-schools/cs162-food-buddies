@@ -17,7 +17,8 @@ def index():
 @login_required
 def preference():
     if request.method == 'GET':
-        return render_template('preference.html', firstName=current_user.first_name.capitalize())
+        return render_template('preference.html', firstName=current_user.first_name.capitalize(),
+        lastName=current_user.last_name.capitalize(),email=current_user.email,contactInfo=current_user.contact_info)
     elif request.method == 'POST':
         # check whether user preferences are already set
         preference = db.session.query(Preference).filter(Preference.user_id == current_user.id).first()
@@ -49,3 +50,15 @@ def preference():
         # placeholder page to indicate form has been submitted.
         return render_template('404.html')
         # return redirect(url_for('main_route.results'))
+
+
+@main_routes.route('/edit/<update>', methods=["POST"])
+@login_required
+def edit(update):
+
+    return redirect(url_for('main_route.preference'))
+# update value for the first name: first_name
+# update value for the last name: last_name
+# update value for the email: email
+# update value for the location: city_id
+

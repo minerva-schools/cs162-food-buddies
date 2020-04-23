@@ -1,4 +1,21 @@
-# Welcome to CS162 Final Project
+# Foodbuddies 
+
+#### Foodbuddies is a web application for Minervans to find a meal companion - a Foodbuddy! The web app has the following main pages, each a corresponding .css file of the same name: 
+* login.html - a Login page that asks the user for their email and password, authentication is run in the back-end to determine if the user input does correspond to an existing user stored in the DB, and either load the Preferences page, warn that the user does not exist, or the user can choose to sign up;
+resetPassword.html - to reset their password;
+* signUp.html - a sign up page where the user has to input a Minerva email (@minerva.kgi.edu), their current Rotation city, a chosen password and repeat it, and their preferred method of contact since the app does not have a chat function, and it is up to the user to reach out to the Foodbuddies we match them with;
+* preference.html - where the user can select their dietary restrictions, the meal (breakfast, lunch, or dinner), the cuisine, and can input a window of availability for the meal;
+* The matching page;
+* followup.html - a follow up survey page where we ask the user to provide us with details of what happened after the matching page (did they contact a match, were they contacted, how, how accurate was the matching, etc.). At the end, the user can choose to go back to the preferences pages or log out;
+* 404.html - the error page for requesting an invalid page or no access to the requested page.
+
+#### This version of the Foodbuddies web app has the following notable features:
+* The Sign Up page checks if the email is a Minerva email (@minerva.kgi.edu), if the passwords match, and if they fulfill the minimal password requirements;
+* We display a user profile picture that can be edited and supports a .png file;
+* The Matching page was designed with flexibility in mind, so that the user could still change their preferences an watch their matches changes;
+
+
+
 
 ## Run Virtual Environment
 
@@ -20,44 +37,22 @@ To install virtualenv via pip run:
 $ pip3 install virtualenv
 ```
 
-##### Usage
-Creation of virtualenv:
+## Deployment with Heroku
+We deployed the app with Heroku for most of the development phase since it was more convenient than using Docker:
+https://foodbuddies-cs162.herokuapp.com/
 
-    $ virtualenv -p python3 venv
-
-If the above code does not work, you could also do
-
-    $ python3 -m venv venv
-
-To activate the virtualenv:
-
-    $ source venv/bin/activate
-
-Or, if you are **using Windows** - [reference source:](https://stackoverflow.com/questions/8921188/issue-with-virtualenv-cannot-activate)
-
-    $ venv\Scripts\activate
-
-To deactivate the virtualenv (after you finished working):
-
-    $ deactivate
-
-Install dependencies in virtual environment:
-
-    $ pip3 install -r requirements.txt
 
 ## Environment Variables
 
 All environment variables are stored within the `.env` file and loaded with dotenv package.
 
-**Never** commit your local settings to the Github repository!
-
 
 ## Run the Application
     $ python -m venv venv
     $ source venv/bin/activate
-    # Activate virtual environment if MAC/UNIX
+    # Activate virtual environment for MAC/UNIX
     $ venv\Scripts\activate
-    # Activate virtual environment in WINDOWS
+    # Activate virtual environment for WINDOWS
     $ pip install -r requirements.txt
     $ export FLASK_ENV=development
     $ export FLASK_CONFIG=dev
@@ -70,12 +65,18 @@ To run the unit tests use the following commands:
 
     $ python3 -m venv venv_unit
     $ source venv_unit/bin/activate
+    # Activate the virtual environment for MAC/UNIX
+    $ venv\Scripts\activate
+    # Activate virtual environment for WINDOWS
     $ pip install -r requirements-unit.txt
-    $ export SQLALCHEMY_DATABASE_URI='sqlite:///web.db'
-    $ pytest unit_test
+    $ export TEST_SQLALCHEMY_DATABASE_URI='sqlite:///test.db'
+    $ export FLASK_CONFIG=test
+    $ python3 -m pytest unit_test
+
 
 ## Integration Tests
-Start by running the web server in a separate terminal.
+We used Travis CI to run continuous integration tests as we merged and added code in the Github repo. 
+
 
 Now run the integration tests using the following commands:
 
