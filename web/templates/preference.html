@@ -108,6 +108,21 @@
                             </div>
                             </div>
 
+                            <div class="form-group">
+                            <label class="foodTime">What is your cuisine preference for today?</label>
+                            <div class="input-group">
+                                <select name='cuisine_name' class="custom-select" required>
+                                    <option  value="" disabled selected hidden>Cuisine</option>
+                                    <option  value="American">American</option>
+                                    <option  value="Asian">Asian</option>
+                                    <option  value="European">European</option>
+                                    <option  value="Latin American">Latin American</option>
+                                    <option  value="Middle Eastern">Middle Eastern</option>
+                                    <option  value="Subcontinental">Subcontinental</option>
+                                </select>
+                            </div>
+                            </div>
+
 
                             <label class="preferenceFood">Availability</label>
                             <div class= "foodTime d-flex justify-content-around">
@@ -138,6 +153,8 @@
         </div>
 
     </div>
+
+    <!-- Edit Modal -->
 
     <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
