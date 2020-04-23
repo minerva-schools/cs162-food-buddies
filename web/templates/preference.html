@@ -48,7 +48,7 @@
                 <div class="row d-flex align-items-center" style="margin-top:10%;">
                     <div class="col-2 justify-content-center d-none d-md-block">
                         <p><img src="../static/profilePicPlaceholder.png" alt="Profile Picture" class="rounded-circle"  id="profilePic"></p>
-                        <p id="edit"> <a href="edit">Edit Profile</a></p>
+                        <p id="edit"> <a href=""  data-toggle="modal" data-target="#editProfile">Edit Profile</a></p>
                     </div>
 
                     <div class ="col-10 col-md-5">
@@ -137,6 +137,114 @@
             </div>
         </div>
 
+    </div>
+
+    <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Edit Profile</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div class="row justify-content-center mb-3">
+                                <img src="../static/profilePicPlaceholder.png" alt="Profile Picture" class="rounded-circle"  id="pictureEdit">
+                            </div>
+                            <div class="row justify-content-center">
+                                <p id="edit"> <a href="edit">Upload Picture</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <form action="/" method="POST" style="width: 100%;">
+                            <label>First Name</label>
+                            <div class="form-row">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="newFirstName" placeholder="{{ firstName }}">
+                                    <div class="input-group-append">
+                                      <button class="btn btn-outline-primary" type="submit">Change</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <form action="/" method="POST" style="width: 100%;">
+                            <label>Last Name</label>
+                            <div class="form-row">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="newFirstName" placeholder="{{ firstName }}">
+                                    <div class="input-group-append">
+                                      <button class="btn btn-outline-primary" type="submit">Change</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <form action="/" method="POST" style="width: 100%;">
+                            <label>Email</label>
+                            <div class="form-row">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="newFirstName" placeholder="{{ firstName }}">
+                                    <div class="input-group-append">
+                                      <button class="btn btn-outline-primary" type="submit">Change</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row mb-3">
+                        <form action="/" method="POST" style="width: 100%;">
+                            <label>Location</label>
+                            <div class="input-group">
+                                <select name='city_selected' class="custom-select">
+                                    <option  value="" disabled selected hidden>Location (city)</option>
+                                    <option  value="San Francisco">San Francisco</option>
+                                    <option  value="Seoul">Seoul</option>
+                                    <option  value="Hyderabad">Hyderabad</option>
+                                    <option  value="Berlin">Berlin</option>
+                                    <option  value="Buenos Aires">Buenos Aires</option>
+                                    <option  value="London">London</option>
+                                    <option  value="Taipei">Taipei</option>
+                                </select>
+                                <div class="input-group-append">
+                                  <button class="btn btn-outline-primary" type="submit">Change</button>
+                                </div>
+                              </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <form action="/" method="POST" style="width: 100%;">
+                            <label>Contact Info</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <select class="custom-select" name ="contact_method" required>
+                                      <option value="" disabled selected hidden>Method</option>
+                                      <option value="Messenger">Messenger</option>
+                                      <option value="WhatsApp">WhatsApp</option>
+                                      <option value="Phone">Phone</option>
+                                    </select>
+                                  </div>
+                                <input type="text" class="form-control" name="contact_info" placeholder="Contact Info." required>
+                                <div class="input-group-append">
+                                  <button class="btn btn-outline-primary" type="submit">Change</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
     </div>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
