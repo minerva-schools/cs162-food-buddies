@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models import db,User
+from .models import db, User, City
 from . import login_manager
 from flask import current_app as app
 from itsdangerous import URLSafeTimedSerializer
@@ -23,21 +23,28 @@ def sign_up():
         # check that email is not already registered
         email = str(request.form['email']).lower()
         user = db.session.query(User).filter(User.email==email).first()
-        city_selected = request.form.get('city_selected')
-        if not user: # create a new user profile
-            hashed_pwd = generate_password_hash(request.form['password'], method='sha256')
-            #request.form['contact_info'] -- For getting the contact info!
-            #request.form['contact_method'] -- For getting the contact method
-            user = User(first_name=request.form['first_name'],last_name=request.form['last_name'], email=email,password=hashed_pwd, city=str(city_selected))
-            db.session.add(user)
-            db.session.commit()
+        if not user:
+            # Check that the user has indeed a Minerva e-mail
+            if email.split("@")[1] == "minerva.kgi.edu":
+                # create a new user profile
+                # hash user password
+                hashed_pwd = generate_password_hash(request.form['password'], method='sha256')
+                # determine city
+                city = db.session.query(City).filter(City.city_name==request.form.get('city_selected')).first()
+                # add new user
+                user = User(city_id=city.id, first_name=request.form['first_name'],last_name=request.form['last_name'], email=email,password=hashed_pwd, contact_method=request.form.get('contact_method'), contact_info=request.form['contact_info'])
+                db.session.add(user)
+                db.session.commit()
 
-            #Login the user after signup
-            logged_user = User.query.filter_by(email=email).first()
-            login_user(logged_user, remember=False)
-            return redirect(url_for('main_route.preference'))
+                # Login the user after signup
+                logged_user = User.query.filter_by(email=email).first()
+                login_user(logged_user, remember=False)
+                return redirect(url_for('main_route.preference'))
+            else:
+                flash('Sorry, FoodBuddies is currently available only for Minerva students.',"inform")
+                return render_template('signUp.html')
         else:
-            flash('This email already has an account.')
+            flash('This email already has an account.',"error")
             return render_template('signUp.html')
 
 # route will depend on whether how we structure pages
@@ -46,6 +53,7 @@ def sign_up():
 def login():
     if request.method == 'GET':
         return render_template('login.html')
+
     elif request.method == 'POST':
         email = str(request.form['email']).lower()
         user = db.session.query(User).filter(User.email == email).first()
@@ -71,7 +79,10 @@ def log_out():
 
 @authentication.route('/verifyEmail', methods=['POST'])
 def verifyEmail():
-    email = str(request.form['verEmail']).lower()
+    if ('verEmail' in request.form):
+        email = str(request.form['verEmail']).lower()
+    else:
+        email = current_user.email
     user = db.session.query(User).filter(User.email == email).first()
     # check that the user is in the database
     if user:

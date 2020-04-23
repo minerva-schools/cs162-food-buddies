@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Tab icon -->
+  <link rel="icon" href="{{ url_for('static', filename='icons/mainIcon.ico') }}">
+
+    <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- FontAwesome file -->
+  <script src="https://kit.fontawesome.com/e7a847d88f.js" crossorigin="anonymous"></script>
+
+   <!-- Google fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../static/matches.css">
+	<title> Matches</title>
+</head>
+<body>
+  <div id="wrapper"></div>
+
+	<div class="grid-container">
+		<div class="grid-item1">
+			<div class="row d-flex justify-content-end">
+				<form class="form-inline" action="{{ url_for('authentication.log_out') }}">
+           <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" id="lgout"> Log Out</button>
+			</div>
+       
+			
+      <div class="col informativeHalf d-none d-md-flex align-items-center justify-content-center" >
+            <div id="informativeText">
+                <h1><i class="fas fa-utensils"></i> FoodBuddies</h1>
+                <p>Looking for a companion for your next meal?</p>
+            </div>
+        </div>
+
+   		</div>
+
+   		<div class="grid-item2">
+   			<form action="{{ url_for('main_route.preferences') }}" method="POST">
+          <div class= "form-group">
+   				<label class="preferenceFood"> Your Preferences </label>
+   				<div class="btn-group-toggle d-flex justify-content-around preferenceFood" data-toggle="buttons">
+   					<label class="btn btn-outline-info checkButton">
+   						<input class="form-check-input" type="checkbox" name="dietary" value ="vegetarian"> Vegetarian 
+            </label>
+   					<label class="btn btn-outline-info checkButton"> 
+              <input class="form-check-input " type="checkbox" name="dietary" value ="glutenFree"> Gluten-Free
+        		</label>
+            <label class="btn btn-outline-info checkButton">
+         				<input class="form-check-input " type="checkbox" name="dietary" value ="dairyFree"> Dairy Free
+       			</label>
+            <label class="btn btn-outline-info checkButton">
+              <input class="form-check-input " type="checkbox" name="dietary" value ="halal"> Halal
+            </label>
+            <label class="btn btn-outline-info checkButton">
+              <input class="form-check-input " type="checkbox" name="dietary" value ="vegan"> Vegan
+            </label>
+       			</div>
+       			<br>
+
+          </div>
+
+       			<br>
+            <div class="form-group">
+       			<label class="cuisines"> Cuisines </label>
+            <div class="btn-group-toggle d-flex justify-content-around cuisines" data-toggle="buttons">
+              <label class="btn btn-outline-info checkButton">
+                <input class="form-check-input" type="radio" name="cuisines" value ="Subcontinental"> Subcontinental
+       				</label>
+       				<label class="btn btn-outline-info checkButton">
+       					<input class="form-check-input " type="radio" name="cuisines" value ="Asian">Asian
+       				</label>
+       				<label class="btn btn-outline-info checkButton">
+       					<input class="form-check-input " type="radio" name="cuisines" value ="Latin American"> Latin American
+       				</label>
+              <label class="btn btn-outline-info checkButton">
+                <input class="form-check-input" type="radio" name="cuisines" value ="European"> European
+             </label>
+             <label class="btn btn-outline-info checkButton">
+              <input class="form-check-input" type="radio" name="cuisines" value ="Middle Eastern"> Middle Eastern
+             </label>
+            <label class="btn btn-outline-info checkButton">
+              <input class="form-check-input" type="radio" name="cuisines" value ="American"> American
+            </label>
+       			</div>
+       			<br>
+          </div>
+       			<br>
+       			<br>
+            <div class="form-group">
+       			<label class="foodTime"> Time of the day</label>
+       			<div class="btn-group-toggle d-flex justify-content-around foodTime" data-toggle="buttons">
+       				<label class="btn btn-outline-info checkButton">
+       					<input class="form-check-input" type="radio" name="time" value ="breakfast"> Breakfast
+       				</label>
+       				<label class="btn btn-outline-info checkButton">
+       					<input class="form-check-input " type="radio" name="time" value ="lunch"> Lunch
+       				</label>
+       				<label class="btn btn-outline-info checkButton">
+       					<input class="form-check-input " type="radio" name="time" value ="dinner"> Dinner
+       				</label>
+       			</div>
+          </div>
+            <br>
+            <br>
+          <br>
+            <div class="btn-group-toggle d-flex justify-content-around update" data-toggle="buttons">
+            <form class="form-inline" action="{{ url_for('main_route.results') }}">
+              <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" > Update Preferences</button>
+            </div>
+
+                                    
+   		</div>
+
+   		 <div class="grid-item3">
+        <!-- <form action="{{ url_for('main_route.results) }}" method="POST"> -->
+   		 	<label class="matches" > Your Matches!</label>
+   		 	<div class="flex-container">
+          			{% for users in Preference %}
+   		 		<div id="firstmatch">
+   		 		 <div class="container">
+   		 		 	<p><img src="../static/profilePicPlaceholder.png" alt="Profile Picture" class="rounded-circle"  id="profilePic"></p>
+            <p> Name: {{ user.first_name }} {{ user.last_name }}</p>
+	    Dietary Preference(s):
+	    {% if user.require_vegetarian %}
+	    <li> Vegetarian</li>
+	    {% end if %}
+	    {% if user.require_halal %}
+	    <li> Halal</li>
+	    {% end if %}
+	    {% if user.require_vegan %}
+	    <li>Vegan</li>
+	    {% end if %}
+	    {% if user.require_dairy_free %}
+	    <li>Dairy-Free</li>
+	    {% end if %}
+            {% if user.require_gluten_free %}
+	    <li> Gluten-Free</li>
+	    {% end if %}
+            <p> Cuisine: {{ user.cuisine_id }}</p>
+            <p> Meal: {{ user.dinetime_id }} </p>
+	    <p> Preferred Contact: {{ user.contact_info }} </p>
+	    <p> Email Contact: {{ user.email }} </p>
+   		 		 </div>
+	                       
+   		 		</div>
+				{%end for%}
+          <!--
+   		 		<div id="secondmatch">
+   		 			<div class="container">
+   		 		 	<p><img src="../static/profilePicPlaceholder.png" alt="Profile Picture" class="rounded-circle"  id="profilePic"></p>
+            <p> Name: {{ first_name }} {{ last_name }}</p>
+            <p> Cuisine: {{ cuisine_name }}</p>
+            <p> Meal: {{ dinetime_name }}</p>
+            <p> Contact: {{ email }} </p>
+   		 		 </div>
+   		 		</div>
+          
+   		 		<div id= "thirdmatch">
+   		 		<p><img src="p../static/profilePicPlaceholder.png" alt="Profile Picture" class="rounded-circle"  id="profilePic"></p>
+            <p> Name: {{ first_name }} {{ last_name }}</p>
+            <p> Cuisine: {{ cuisine_name }}</p>
+            <p> Meal: {{ dinetime_name }}</p>
+            <p> Contact: {{ email }} </p>
+   		 		 </div>
+   		 		</div> -->
+          <form action="{{ url_for('main_route.followup') }}" method="POST">
+            <div class="btn-group-toggle d-flex justify-content-end foodTime" data-toggle="buttons">
+              <form class="form-inline" action="{{ url_for('main_route.followup') }}">
+                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" > Follow up with us! </button>
+              </div>
+			</div>
+
+   		 </div>
+      <br> 
+
+
+		
+	</div>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</body>
+</html>

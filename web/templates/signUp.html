@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    
+
     <!-- Tab icon -->
     <link rel="icon" href="{{ url_for('static', filename='icons/mainIcon.ico') }}">
 
@@ -55,13 +55,22 @@
             <div class="signupForm">
               <h3 id="signupTitle">Sign Up</h3>
               <p id="signupSubTitle">Join our community and enjoy company for any meal, whenever you want.</p>
-              {% with messages = get_flashed_messages() %}
+              {% with messages = get_flashed_messages(category_filter=["error"]) %}
               {% if messages %}
               <div class="alert alert-danger" role="alert" style="text-align: center;">
                 {{ messages[0] }} Go to <a href="{{ url_for('authentication.login') }}">login page</a>.
               </div>
               {% endif %}
               {% endwith %}
+
+              {% with inform = get_flashed_messages(category_filter=["inform"]) %}
+              {% if inform %}
+              <div class="alert alert-danger" role="alert" style="text-align: center;">
+                {{ inform[0] }}
+              </div>
+              {% endif %}
+              {% endwith %}
+
                 <form action="{{ url_for('authentication.sign_up') }}" method="POST" onsubmit="return checkForm(this);">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -107,8 +116,8 @@
                         </div>
                       <input type="text" class="form-control" name="contact_info" placeholder="Contact Info." required>
                       <small class="form-text text-muted">
-                        Please select your preferred method of contact. If you are choosing Facebook, please enter your profile URL .
-                        Otherwise, please enter your Phone number, including the international code.
+                        Please select your preferred method of contact. If you use Facebook, please enter your profile URL .
+                        Otherwise, please enter your phone number (including the international code).
                       </small>
                     </div>
 

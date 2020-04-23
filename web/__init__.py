@@ -5,6 +5,7 @@ from .config import config_by_name
 from web.models import db
 from web.utils import mail
 
+
 login_manager = LoginManager()
 
 def page_not_found(e):
@@ -15,6 +16,8 @@ def custom_401(e):
      return redirect(url_for('authentication.login'))
 
 def create_app(config_name='dev'):
+    global DEFAULTS_INSERTED
+
     app = Flask(__name__)
 
     config_name = os.environ.get('FLASK_CONFIG', config_name)
@@ -29,6 +32,7 @@ def create_app(config_name='dev'):
     app.register_error_handler(401, custom_401)
 
     with app.app_context():
+
         from web.authentication import authentication
         app.register_blueprint(authentication, url_prefix="/")
         from web.app import main_routes
@@ -36,5 +40,6 @@ def create_app(config_name='dev'):
 
         # Create DB Models
         db.create_all()
-        
+
+
     return app
