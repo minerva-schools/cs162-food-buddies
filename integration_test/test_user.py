@@ -37,29 +37,29 @@ def test_valid_user_flow(testSession):
     # assert p.start_time == "12:30"
     # assert p.end_time == "14:00"
 
-    # check perfect matches returned -- are we limiting results?
-    r = requests.get('http://127.0.0.1:5000/matches')
-    assert "James" in r.text
-    assert "Kia" in r.text
-    assert "Bea" in r.text
-    assert "Charles" in r.text
-
-    # edit user preferences
-    r = requests.post('http://127.0.0.1:5000/preference', data=dict(vegetarian=True,
-        mealTime='Dinner', cuisine_selected="European", ava_from="11:30", ava_to="13:30"), allow_redirects=True)
-    assert r.status_code == 200
-
-    # preference should be in the database
-    p = testSession.query(Preference).filter(Preference.require_vegaetarian==True).order_by(Preference.id.desc()).first()
-    assert p.start_time == "11:30"
-    assert p.end_time == "13:30"
-
-    # check no matches now
-    r = requests.get('http://127.0.0.1:5000/matches')
-    assert "James" not in r.text
-    assert "Kia" not in r.text
-    assert "Bea" not in r.text
-    assert "Charles" not in r.text
+    # # check perfect matches returned -- are we limiting results?
+    # r = requests.get('http://127.0.0.1:5000/matches')
+    # assert "James" in r.text
+    # assert "Kia" in r.text
+    # assert "Bea" in r.text
+    # assert "Charles" in r.text
+    #
+    # # edit user preferences
+    # r = requests.post('http://127.0.0.1:5000/preference', data=dict(vegetarian=True,
+    #     mealTime='Dinner', cuisine_selected="European", ava_from="11:30", ava_to="13:30"), allow_redirects=True)
+    # assert r.status_code == 200
+    #
+    # # preference should be in the database
+    # p = testSession.query(Preference).filter(Preference.require_vegaetarian==True).order_by(Preference.id.desc()).first()
+    # assert p.start_time == "11:30"
+    # assert p.end_time == "13:30"
+    #
+    # # check no matches now
+    # r = requests.get('http://127.0.0.1:5000/matches')
+    # assert "James" not in r.text
+    # assert "Kia" not in r.text
+    # assert "Bea" not in r.text
+    # assert "Charles" not in r.text
 
     # change preferences on matches page
 
