@@ -37,6 +37,9 @@ To install virtualenv via pip run:
 $ pip3 install virtualenv
 ```
 
+## Deployment with Heroku
+We deployed the app with Heroku for most of the development phase since it was more convenient than using Docker:
+https://foodbuddies-cs162.herokuapp.com/
 
 
 ## Environment Variables
