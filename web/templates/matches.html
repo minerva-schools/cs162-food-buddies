@@ -69,22 +69,22 @@
        			<label class="cuisines"> Cuisines </label>
             <div class="btn-group-toggle d-flex justify-content-around cuisines" data-toggle="buttons">
               <label class="btn btn-outline-info checkButton">
-                <input class="form-check-input" type="radio" name="cuisines" value ="subcontinental"> Subcontinental
+                <input class="form-check-input" type="radio" name="cuisines" value ="Subcontinental"> Subcontinental
        				</label>
        				<label class="btn btn-outline-info checkButton">
-       					<input class="form-check-input " type="radio" name="cuisines" value ="asian">Asian
+       					<input class="form-check-input " type="radio" name="cuisines" value ="Asian">Asian
        				</label>
        				<label class="btn btn-outline-info checkButton">
-       					<input class="form-check-input " type="radio" name="cuisines" value ="latam"> Latin American
+       					<input class="form-check-input " type="radio" name="cuisines" value ="Latin American"> Latin American
        				</label>
               <label class="btn btn-outline-info checkButton">
-                <input class="form-check-input" type="radio" name="cuisines" value ="european"> European
+                <input class="form-check-input" type="radio" name="cuisines" value ="European"> European
              </label>
              <label class="btn btn-outline-info checkButton">
-              <input class="form-check-input" type="radio" name="cuisines" value ="middleEast"> Middle Eastern
+              <input class="form-check-input" type="radio" name="cuisines" value ="Middle Eastern"> Middle Eastern
              </label>
             <label class="btn btn-outline-info checkButton">
-              <input class="form-check-input" type="radio" name="cuisines" value ="american"> American
+              <input class="form-check-input" type="radio" name="cuisines" value ="American"> American
             </label>
        			</div>
        			<br>
@@ -107,21 +107,6 @@
           </div>
             <br>
             <br>
-            <label class="avaialibilty">Availability</label>
-             <div class= "foodTime d-flex justify-content-around">
-              <div class="input-group col-6">
-               <div class="input-group-prepend">
-                <span class="input-group-text">From</span>
-              </div>
-              <input class="form-control" type="time" name="ava_from" value="13:00:00" required>
-            </div>
-            <div class="input-group col-6">
-             <div class="input-group-prepend">
-              <span class="input-group-text">To</span>
-            </div>
-            <input class="form-control" type="time" name="ava_to" value="14:00:00" required>
-            </div>
-          </div>
           <br>
             <div class="btn-group-toggle d-flex justify-content-around update" data-toggle="buttons">
             <form class="form-inline" action="{{ url_for('main_route.results') }}">
@@ -139,14 +124,31 @@
    		 		<div id="firstmatch">
    		 		 <div class="container">
    		 		 	<p><img src="../static/profilePicPlaceholder.png" alt="Profile Picture" class="rounded-circle"  id="profilePic"></p>
-            <p> Name: {{ user.user_id }} {{ user.last_name }}</p>
-            <p> Dietary Preference:</p>
+            <p> Name: {{ user.first_name }} {{ user.last_name }}</p>
+	    Dietary Preference(s):
+	    {% if user.require_vegetarian %}
+	    <li> Vegetarian</li>
+	    {% end if %}
+	    {% if user.require_halal %}
+	    <li> Halal</li>
+	    {% end if %}
+	    {% if user.require_vegan %}
+	    <li>Vegan</li>
+	    {% end if %}
+	    {% if user.require_dairy_free %}
+	    <li>Dairy-Free</li>
+	    {% end if %}
+            {% if user.require_gluten_free %}
+	    <li> Gluten-Free</li>
+	    {% end if %}
             <p> Cuisine: {{ user.cuisine_id }}</p>
             <p> Meal: {{ user.dinetime_id }} </p>
-	    <p> Contact: {{ user.email }} </p>
+	    <p> Preferred Contact: {{ user.contact_info }} </p>
+	    <p> Email Contact: {{ user.email }} </p>
    		 		 </div>
-
+	                       
    		 		</div>
+				{%end for%}
           <!--
    		 		<div id="secondmatch">
    		 			<div class="container">
