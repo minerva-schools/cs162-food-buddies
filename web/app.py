@@ -109,3 +109,12 @@ def loadMatches():
         db.session.commit()
         return redirect(url_for('main_route.loadMatches'))
 
+@main_routes.route('/edit/<update>', methods=["POST"])
+@login_required
+def edit(update):
+
+    return redirect(url_for('main_route.preference'))
+# update value for the first name: first_name
+# update value for the last name: last_name
+# update value for the email: email
+# update value for the location: city_id
