@@ -62,3 +62,10 @@ def edit(update):
 # update value for the email: email
 # update value for the location: city_id
 
+
+@@main_routes.route('/followup', methods=['GET','POST'])
+@login_required
+def followup():
+    return render_template('followup.html', firstName=current_user.first_name.capitalize())
+
+
