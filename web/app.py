@@ -32,8 +32,6 @@ def get_img_path():
 @login_required
 def preference():
     if request.method == 'GET' :
-        print('request.method == GET')
-        print(f'image_path = {get_img_path()}')
         return render_template('preference.html',
             firstName=current_user.first_name.capitalize(),
             lastName=current_user.last_name.capitalize(),
@@ -57,8 +55,6 @@ def preference():
                  db.session.query(User).filter(User.id==current_user.id).update({'profile_img_name': filename_db})
                  db.session.commit() # commit any changes
             
-            print('request.method == POST')
-            print(f'image_path = {get_img_path()}')
             return render_template('preference.html',
                         firstName=current_user.first_name.capitalize(),
                         lastName=current_user.last_name.capitalize(),
