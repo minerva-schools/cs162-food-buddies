@@ -61,3 +61,4 @@ def edit(update):
 # update value for the last name: last_name
 # update value for the email: email
 # update value for the location: city_id
+
