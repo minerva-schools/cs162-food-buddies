@@ -132,5 +132,4 @@ def edit(update):
         preference.city_id = city.id
         current_user.city_id = city.id
     db.session.commit()
-    city = db.session.query(City).filter(City.id == current_user.city_id).first()
-    return render_template("preference.html",user=current_user, city=city)
+    return redirect(url_for('main_route.preference'))
