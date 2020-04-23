@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import db, User, City
 from . import login_manager
@@ -79,7 +79,10 @@ def log_out():
 
 @authentication.route('/verifyEmail', methods=['POST'])
 def verifyEmail():
-    email = str(request.form['verEmail']).lower()
+    if ('verEmail' in request.form):
+        email = str(request.form['verEmail']).lower()
+    else:
+        email = current_user.email
     user = db.session.query(User).filter(User.email == email).first()
     # check that the user is in the database
     if user:

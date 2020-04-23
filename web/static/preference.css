@@ -82,6 +82,11 @@ width: 80%;
   font-size: 17px;
 }
 
+#pictureEdit{
+  width: 17%;
+}
+
+
 @media (min-width:760px){
   .checkButton{
     width: 200px;
