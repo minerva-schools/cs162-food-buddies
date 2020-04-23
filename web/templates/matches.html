@@ -16,20 +16,22 @@
 
    <!-- Google fonts -->
   <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="../static/matches.css">
-	<title> Matches</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="../static/matches.css">
+  <title> Matches</title>
 </head>
 <body>
   <div id="wrapper"></div>
 
-	<div class="grid-container">
-		<div class="grid-item1">
-			<div class="row d-flex justify-content-end">
-				<form class="form-inline" action="{{ url_for('authentication.log_out') }}">
-           <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" id="lgout"> Log Out</button>
-			</div>
+  <div class="grid-container">
+    <div class="grid-item1">
+      <div class="row d-flex justify-content-end">
+        <form class="form-inline" action="{{ url_for('authentication.log_out') }}">
+           <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" id="lgout" > Log Out  </button>
+      </div>
        
-			
+      
       <div class="col informativeHalf d-none d-md-flex align-items-center justify-content-center" >
             <div id="informativeText">
                 <h1><i class="fas fa-utensils"></i> FoodBuddies</h1>
@@ -37,73 +39,66 @@
             </div>
         </div>
 
-   		</div>
+      </div>
 
-   		<div class="grid-item2">
-   			<form action="{{ url_for('main_route.preferences') }}" method="POST">
+      <div class="grid-item2">
+        <form action="{{ url_for('main_route.preferences') }}" method="POST">
           <div class= "form-group">
-   				<label class="preferenceFood"> Your Preferences </label>
-   				<div class="btn-group-toggle d-flex justify-content-around preferenceFood" data-toggle="buttons">
-   					<label class="btn btn-outline-info checkButton">
-   						<input class="form-check-input" type="checkbox" name="dietary" value ="vegetarian"> Vegetarian 
-            </label>
-   					<label class="btn btn-outline-info checkButton"> 
-              <input class="form-check-input " type="checkbox" name="dietary" value ="glutenFree"> Gluten-Free
-        		</label>
+          <label class="preferenceFood"> Your Preferences </label>
+          <div class="btn-group-toggle d-flex justify-content-around preferenceFood" data-toggle="buttons">
             <label class="btn btn-outline-info checkButton">
-         				<input class="form-check-input " type="checkbox" name="dietary" value ="dairyFree"> Dairy Free
-       			</label>
+              <input class="form-check-input" type="checkbox" name="dietary" value ="vegetarian"> Vegetarian 
+            </label>
+            <label class="btn btn-outline-info checkButton"> 
+              <input class="form-check-input " type="checkbox" name="dietary" value ="glutenFree"> Gluten-Free
+            </label>
+            <label class="btn btn-outline-info checkButton">
+                <input class="form-check-input " type="checkbox" name="dietary" value ="dairyFree"> Dairy Free
+            </label>
             <label class="btn btn-outline-info checkButton">
               <input class="form-check-input " type="checkbox" name="dietary" value ="halal"> Halal
             </label>
             <label class="btn btn-outline-info checkButton">
               <input class="form-check-input " type="checkbox" name="dietary" value ="vegan"> Vegan
             </label>
-       			</div>
-       			<br>
+            </div>
+            <br>
 
           </div>
 
-       			<br>
+            <br>
+
             <div class="form-group">
-       			<label class="cuisines"> Cuisines </label>
-            <div class="btn-group-toggle d-flex justify-content-around cuisines" data-toggle="buttons">
-              <label class="btn btn-outline-info checkButton">
-                <input class="form-check-input" type="radio" name="cuisines" value ="Subcontinental"> Subcontinental
-       				</label>
-       				<label class="btn btn-outline-info checkButton">
-       					<input class="form-check-input " type="radio" name="cuisines" value ="Asian">Asian
-       				</label>
-       				<label class="btn btn-outline-info checkButton">
-       					<input class="form-check-input " type="radio" name="cuisines" value ="Latin American"> Latin American
-       				</label>
-              <label class="btn btn-outline-info checkButton">
-                <input class="form-check-input" type="radio" name="cuisines" value ="European"> European
-             </label>
-             <label class="btn btn-outline-info checkButton">
-              <input class="form-check-input" type="radio" name="cuisines" value ="Middle Eastern"> Middle Eastern
-             </label>
-            <label class="btn btn-outline-info checkButton">
-              <input class="form-check-input" type="radio" name="cuisines" value ="American"> American
-            </label>
-       			</div>
-       			<br>
-          </div>
-       			<br>
-       			<br>
+              <label class="foodTime">What is your cuisine preference for today?</label>
+               <div class="input-group">
+                <select name='cuisine_name' class="custom-select" required>
+                  <option  value="" disabled selected hidden>Cuisine</option>
+                  <option  value="American">American</option>
+                  <option  value="Asian">Asian</option>
+                  <option  value="European">European</option>
+                  <option  value="Latin American">Latin American</option>
+                  <option  value="Middle Eastern">Middle Eastern</option>
+                  <option  value="Subcontinental">Subcontinental</option>
+                 </select>
+               </div>
+             </div>
+            <br>
+          
+            <br>
+            <br>
             <div class="form-group">
-       			<label class="foodTime"> Time of the day</label>
-       			<div class="btn-group-toggle d-flex justify-content-around foodTime" data-toggle="buttons">
-       				<label class="btn btn-outline-info checkButton">
-       					<input class="form-check-input" type="radio" name="time" value ="breakfast"> Breakfast
-       				</label>
-       				<label class="btn btn-outline-info checkButton">
-       					<input class="form-check-input " type="radio" name="time" value ="lunch"> Lunch
-       				</label>
-       				<label class="btn btn-outline-info checkButton">
-       					<input class="form-check-input " type="radio" name="time" value ="dinner"> Dinner
-       				</label>
-       			</div>
+            <label class="foodTime"> Time of the day</label>
+            <div class="btn-group-toggle d-flex justify-content-around foodTime" data-toggle="buttons">
+              <label class="btn btn-outline-info checkButton">
+                <input class="form-check-input" type="radio" name="time" value ="breakfast"> Breakfast
+              </label>
+              <label class="btn btn-outline-info checkButton">
+                <input class="form-check-input " type="radio" name="time" value ="lunch"> Lunch
+              </label>
+              <label class="btn btn-outline-info checkButton">
+                <input class="form-check-input " type="radio" name="time" value ="dinner"> Dinner
+              </label>
+            </div>
           </div>
             <br>
             <br>
@@ -114,73 +109,64 @@
             </div>
 
                                     
-   		</div>
+      </div>
 
-   		 <div class="grid-item3">
+       <div class="grid-item3">
         <!-- <form action="{{ url_for('main_route.results) }}" method="POST"> -->
-   		 	<label class="matches" > Your Matches!</label>
-   		 	<div class="flex-container">
-          			{% for users in Preference %}
-   		 		<div id="firstmatch">
-   		 		 <div class="container">
-   		 		 	<p><img src="../static/profilePicPlaceholder.png" alt="Profile Picture" class="rounded-circle"  id="profilePic"></p>
+        <label class="matches" > Your Matches!</label>
+        <div class="flex-container">
+        {% if users in Preference %}
+        {% for users in Preference %}
+          <div id="firstmatch">
+           <div class="container">
+            <p><img src="../static/profilePicPlaceholder.png" alt="Profile Picture" class="rounded-circle"  id="profilePic"></p>
             <p> Name: {{ user.first_name }} {{ user.last_name }}</p>
-	    Dietary Preference(s):
-	    {% if user.require_vegetarian %}
-	    <li> Vegetarian</li>
-	    {% end if %}
-	    {% if user.require_halal %}
-	    <li> Halal</li>
-	    {% end if %}
-	    {% if user.require_vegan %}
-	    <li>Vegan</li>
-	    {% end if %}
-	    {% if user.require_dairy_free %}
-	    <li>Dairy-Free</li>
-	    {% end if %}
+      Dietary Preference(s):
+      {% if user.require_vegetarian %}
+      <li> Vegetarian</li>
+      {% end if %}
+      {% if user.require_halal %}
+      <li> Halal</li>
+      {% end if %}
+      {% if user.require_vegan %}
+      <li>Vegan</li>
+      {% end if %}
+      {% if user.require_dairy_free %}
+      <li>Dairy-Free</li>
+      {% end if %}
             {% if user.require_gluten_free %}
-	    <li> Gluten-Free</li>
-	    {% end if %}
+      <li> Gluten-Free</li>
+      {% end if %}
             <p> Cuisine: {{ user.cuisine_id }}</p>
             <p> Meal: {{ user.dinetime_id }} </p>
-	    <p> Preferred Contact: {{ user.contact_info }} </p>
-	    <p> Email Contact: {{ user.email }} </p>
-   		 		 </div>
-	                       
-   		 		</div>
-				{%end for%}
-          <!--
-   		 		<div id="secondmatch">
-   		 			<div class="container">
-   		 		 	<p><img src="../static/profilePicPlaceholder.png" alt="Profile Picture" class="rounded-circle"  id="profilePic"></p>
-            <p> Name: {{ first_name }} {{ last_name }}</p>
-            <p> Cuisine: {{ cuisine_name }}</p>
-            <p> Meal: {{ dinetime_name }}</p>
-            <p> Contact: {{ email }} </p>
-   		 		 </div>
-   		 		</div>
+      <p> Preferred Contact: {{ user.contact_info }} </p>
+      <p> Email Contact: {{ user.email }} </p>
+           </div>
+                         
+          </div>
+        {%end for%}
+        {%else%}
           
-   		 		<div id= "thirdmatch">
-   		 		<p><img src="p../static/profilePicPlaceholder.png" alt="Profile Picture" class="rounded-circle"  id="profilePic"></p>
-            <p> Name: {{ first_name }} {{ last_name }}</p>
-            <p> Cuisine: {{ cuisine_name }}</p>
-            <p> Meal: {{ dinetime_name }}</p>
-            <p> Contact: {{ email }} </p>
-   		 		 </div>
-   		 		</div> -->
+          <div id="secondmatch">
+            <div class="container">
+            <p><img src="../static/nomatching.png" alt=""   id="nomatch"></p>
+           </div>
+          </div>
+            {%end if%}
+
           <form action="{{ url_for('main_route.followup') }}" method="POST">
             <div class="btn-group-toggle d-flex justify-content-end foodTime" data-toggle="buttons">
               <form class="form-inline" action="{{ url_for('main_route.followup') }}">
                 <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" > Follow up with us! </button>
               </div>
-			</div>
+      </div>
 
-   		 </div>
+       </div>
       <br> 
 
 
-		
-	</div>
+    
+  </div>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
