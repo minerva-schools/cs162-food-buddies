@@ -111,7 +111,7 @@ def insert_dummy_users(*args, **kwargs):
         
     DummyUsers = [
             [2,'Jingren', 'Wang', 'jingren.wang@minerva.kgi.edu',
-        hashedPW[88888888], 'Phone', '+82 105-557-7494', 'user_1.jpeg'], # Seoul
+        hashedPW[88888888], 'Phone', '+82 105-557-7494', 'user_1.jpg'], # Seoul
             [5,'Mary', 'Burns', 'mary.burns@minerva.kgi.edu',
         hashedPW[77777777], 'Phone', '+54 155-5516-605', 'user_2.jpg'], # Buenos Aires
             [1,'James', 'Gordon', 'james.gordon@minerva.kgi.edu',
