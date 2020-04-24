@@ -127,5 +127,9 @@ def test_edit_contact_information(Session):
         u = testSession.query(User).filter(User.email == "tony.stark@minerva.kgi.edu").first()
         assert u.contact_method == "WhatsApp"
         assert u.contact_info == "+1 628-987-5432"
+
+        # Lastly, let's delete the test user
+        testSession.delete(u)
+        testSession.commit()
         testSession.close()
 
