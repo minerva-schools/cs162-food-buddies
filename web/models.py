@@ -164,7 +164,7 @@ def insert_dummy_preferences(*args, **kwargs):
             [6, 1, 1, 1, "12:30", "13:00"], # san francisco, american, lunch, vegan
             [7, 1, 1, 1, "12:00", "13:00"], # san francisco, american, lunch, vegan
             [8, 1, 1, 1, "12:00", "14:00"], # san francisco, american, lunch, vegan
-            [9, 1, 1, 1, "11:00", "13:30"], # san francisco, american, lunch, vegan
+            [9, 1, 5, 1, "11:00", "13:30"], # san francisco, latin american, lunch, vegan
             ]
 
     for preference in dairyPreferences:
@@ -191,11 +191,7 @@ def insert_dummy_preferences(*args, **kwargs):
                 end_time=preference[5]))
             # *other 'require_' attributes default to False (0)
     db.session.commit()
-
-
-
-
-
+    
 class Followup(db.Model):
     '''single-choice: followup survey answers'''
     __tablename__ = 'Followup'
