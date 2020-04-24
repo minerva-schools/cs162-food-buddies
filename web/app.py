@@ -97,7 +97,7 @@ def loadMatches():
     elif request.method == 'POST':
         # If the User updates their preferences on the page
         preference = db.session.query(Preference).filter(Preference.user_id == current_user.id).first()
-        cuisine = db.session.query(Cuisine).filter(Cuisine.cuisine_name == request.form.get('cuisines')).first()
+        cuisine = db.session.query(Cuisine).filter(Cuisine.cuisine_name == request.form.get('cuisine_selected')).first()
         dinetime = db.session.query(DineTime).filter(DineTime.dinetime_name == request.form.get('mealTime')).first()
         # update values
         preference.date_time = datetime.utcnow()
