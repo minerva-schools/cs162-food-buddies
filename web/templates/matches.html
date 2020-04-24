@@ -1,179 +1,187 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- Tab icon -->
-  <link rel="icon" href="{{ url_for('static', filename='icons/mainIcon.ico') }}">
+    <link rel="icon" href="{{ url_for('static', filename='icons/mainIcon.ico') }}">
 
     <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- FontAwesome file -->
-  <script src="https://kit.fontawesome.com/e7a847d88f.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/e7a847d88f.js" crossorigin="anonymous"></script>
 
-   <!-- Google fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
 
-  <!-- CSS files -->
-  <link rel="stylesheet" href="../static/matches.css">
-  <title> Matches</title>
+    <!-- CSS files -->
+    <link rel="stylesheet" href="../static/matches.css">
+    <title> Matches</title>
 </head>
 <body>
-  <div id="wrapper"></div>
+<div id="wrapper"></div>
 
-  <div class="grid-container">
+<div class="grid-container">
     <div class="grid-item1">
-      <div class="row d-flex justify-content-end">
-        <form class="form-inline" action="{{ url_for('authentication.log_out') }}" id="lgout">
-           <button class="btn btn-outline-light my-2 my-sm-0" type="submit" > Log Out  </button>
-        </form>
-      </div>
+        <div class="row d-flex justify-content-end">
+            <form class="form-inline" action="{{ url_for('authentication.log_out') }}" id="lgout">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit"> Log Out</button>
+            </form>
+        </div>
 
 
-      <div class="col informativeHalf d-none d-md-flex align-items-center justify-content-center" >
+        <div class="col informativeHalf d-none d-md-flex align-items-center justify-content-center">
             <div id="informativeText">
                 <h1><i class="fas fa-utensils"></i> FoodBuddies</h1>
                 <p>Looking for a companion for your next meal?</p>
             </div>
         </div>
 
-      </div>
+    </div>
 
-      <div class="grid-item2">
+    <div class="grid-item2">
         <form action="{{ url_for('main_route.loadMatches') }}" method="POST">
-          <div class= "form-group">
-          <label class="preferenceFood"> Your Preferences </label>
-          <div class="btn-group-toggle d-flex justify-content-around preferenceFood" data-toggle="buttons">
-            <label class="btn btn-outline-info checkButton">
-              <input class="form-check-input" type="checkbox" name ="vegetarian"> Vegetarian
-            </label>
-            <label class="btn btn-outline-info checkButton">
-              <input class="form-check-input " type="checkbox"  name ="glutenFree"> Gluten-Free
-            </label>
-            <label class="btn btn-outline-info checkButton">
-                <input class="form-check-input " type="checkbox" name ="dairyFree"> Dairy Free
-            </label>
-            <label class="btn btn-outline-info checkButton">
-              <input class="form-check-input " type="checkbox"  name ="halal"> Halal
-            </label>
-            <label class="btn btn-outline-info checkButton">
-              <input class="form-check-input " type="checkbox" name ="vegan"> Vegan
-            </label>
-            </div>
-            <br>
+            <div class="form-group">
+                <label class="preferenceFood"> Your Preferences </label>
+                <div class="btn-group-toggle d-flex justify-content-around preferenceFood" data-toggle="buttons">
+                    <label class="btn btn-outline-info checkButton">
+                        <input class="form-check-input" type="checkbox" name="vegetarian"> Vegetarian
+                    </label>
+                    <label class="btn btn-outline-info checkButton">
+                        <input class="form-check-input " type="checkbox" name="glutenFree"> Gluten-Free
+                    </label>
+                    <label class="btn btn-outline-info checkButton">
+                        <input class="form-check-input " type="checkbox" name="dairyFree"> Dairy Free
+                    </label>
+                    <label class="btn btn-outline-info checkButton">
+                        <input class="form-check-input " type="checkbox" name="halal"> Halal
+                    </label>
+                    <label class="btn btn-outline-info checkButton">
+                        <input class="form-check-input " type="checkbox" name="vegan"> Vegan
+                    </label>
+                </div>
+                <br>
 
-          </div>
+            </div>
 
             <br>
 
             <div class="form-group">
-              <label class="foodTime">What is your cuisine preference for today?</label>
-               <div class="input-group">
-                <select name='cuisine_name' class="custom-select" required>
-                  <option  value="" disabled selected hidden>Cuisine</option>
-                  <option  value="American">American</option>
-                  <option  value="Asian">Asian</option>
-                  <option  value="European">European</option>
-                  <option  value="Latin American">Latin American</option>
-                  <option  value="Middle Eastern">Middle Eastern</option>
-                  <option  value="Subcontinental">Subcontinental</option>
-                 </select>
-               </div>
-             </div>
+                <label class="foodTime">What is your cuisine preference for today?</label>
+                <div class="input-group">
+                    <select name='cuisine_name' class="custom-select" required>
+                        <option value="" disabled selected hidden>Cuisine</option>
+                        <option value="American">American</option>
+                        <option value="Asian">Asian</option>
+                        <option value="European">European</option>
+                        <option value="Latin American">Latin American</option>
+                        <option value="Middle Eastern">Middle Eastern</option>
+                        <option value="Subcontinental">Subcontinental</option>
+                    </select>
+                </div>
+            </div>
             <br>
 
             <br>
             <br>
             <div class="form-group">
-            <label class="foodTime"> Time of the day</label>
-            <div class="btn-group-toggle d-flex justify-content-around foodTime" data-toggle="buttons">
-              <label class="btn btn-outline-info checkButton">
-                <input class="form-check-input" type="radio" name="mealTime" value ="Breakfast"> Breakfast
-              </label>
-              <label class="btn btn-outline-info checkButton">
-                <input class="form-check-input " type="radio" name="mealTime" value ="Lunch"> Lunch
-              </label>
-              <label class="btn btn-outline-info checkButton">
-                <input class="form-check-input " type="radio" name="mealTime" value ="Dinner"> Dinner
-              </label>
+                <label class="foodTime"> Time of the day</label>
+                <div class="btn-group-toggle d-flex justify-content-around foodTime" data-toggle="buttons">
+                    <label class="btn btn-outline-info checkButton">
+                        <input class="form-check-input" type="radio" name="mealTime" value="Breakfast"> Breakfast
+                    </label>
+                    <label class="btn btn-outline-info checkButton">
+                        <input class="form-check-input " type="radio" name="mealTime" value="Lunch"> Lunch
+                    </label>
+                    <label class="btn btn-outline-info checkButton">
+                        <input class="form-check-input " type="radio" name="mealTime" value="Dinner"> Dinner
+                    </label>
+                </div>
             </div>
-          </div>
             <br>
             <br>
-          <br>
+            <br>
             <div class="btn-group-toggle d-flex justify-content-around update" data-toggle="buttons">
 
-              <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" > Update Preferences</button>
+                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit"> Update Preferences</button>
             </div>
         </form>
 
 
-      </div>
+    </div>
 
-       <div class="grid-item3">
-        <label class="matches" > Your Matches!</label>
+    <div class="grid-item3">
+        <label class="matches"> Your Matches!</label>
         <div class="flex-container">
-        {% if users in matchedUsers %}
-        {% for users in matchedUsers %}
-          <div id="firstmatch">
-           <div class="container">
-            <p><img src="../static/profilePicPlaceholder.png" alt="Profile Picture" class="rounded-circle"  id="profilePic"></p>
-            <p> Name: {{ user.first_name }} {{ user.last_name }}</p>
-      Dietary Preference(s):
-    <ul>
-      {% if user.require_vegetarian %}
-      <li> Vegetarian</li>
-      {% endif %}
-      {% if user.require_halal %}
-      <li> Halal</li>
-      {% endif %}
-      {% if user.require_vegan %}
-      <li>Vegan</li>
-      {% endif %}
-      {% if user.require_dairy_free %}
-      <li>Dairy-Free</li>
-      {% endif %}
-      {% if user.require_gluten_free %}
-      <li> Gluten-Free</li>
-      {% endif %}
-      </ul>
-     <p> Cuisine: {{ user.cuisine_name }}</p>
-     <p> Meal: {{ user.dinetime_name }} </p>
-	    <p> Preferred Contact Method: {{ user.contact_method }} </p>
-	    <p> Contact Info: {{ user.contact_info }} </p>
-           </div>
+            {% if matchedUsers %}
+                {% for user in matchedUsers %}
+                    <div id="firstmatch">
+                        <div class="container">
+                            <p><img src="../static/profilePicPlaceholder.png" alt="Profile Picture"
+                                    class="rounded-circle" id="profilePic"></p>
+                            <p> Name: {{ user.first_name }} {{ user.last_name }}</p>
+                            <p>Dietary Preference(s):</p>
+                            <ul>
+                                {% if user.require_vegetarian %}
+                                    <li> Vegetarian</li>
+                                {% endif %}
+                                {% if user.require_halal %}
+                                    <li> Halal</li>
+                                {% endif %}
+                                {% if user.require_vegan %}
+                                    <li>Vegan</li>
+                                {% endif %}
+                                {% if user.require_dairy_free %}
+                                    <li>Dairy-Free</li>
+                                {% endif %}
+                                {% if user.require_gluten_free %}
+                                    <li> Gluten-Free</li>
+                                {% endif %}
+                            </ul>
+                            <p> Cuisine: {{ user.cuisine_name }}</p>
+                            <p> Meal: {{ user.dinetime_name }} </p>
+                            <p> Preferred Contact Method: {{ user.contact_method }} </p>
+                            <p> Contact Info: {{ user.contact_info }} </p>
+                        </div>
 
-          </div>
-        {% endfor %}
-        {% else %}
+                    </div>
+                {% endfor %}
+            {% else %}
 
-          <div id="secondmatch">
-            <div class="container">
-            <p><img src="../static/nomatching.png" alt=""   id="nomatch"></p>
-           </div>
-          </div>
-            {%endif%}
-
-          <form action="{{ url_for('main_route.followup') }}" method="POST">
-            <div class="btn-group-toggle d-flex justify-content-end foodTime" data-toggle="buttons">
-                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" > Follow up with us! </button>
-              </div>
-          </form>
-      </div>
-
-       </div>
-      <br>
+                <div id="secondmatch">
+                    <div class="container">
+                        <p><img src="../static/nomatching.png" alt="" id="nomatch"></p>
+                    </div>
+                </div>
+            {% endif %}
 
 
+            {#          <form action="{{ url_for('main_route.followup') }}" method="POST">#}
+            <form action="" method="POST">
+                <div class="btn-group-toggle d-flex justify-content-end foodTime" data-toggle="buttons">
+                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit"> Follow up with us!</button>
+                </div>
+            </form>
+        </div>
 
-  </div>
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </div>
+    <br>
+
+
+</div>
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>

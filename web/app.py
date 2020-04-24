@@ -21,8 +21,10 @@ def preference():
         return render_template('preference.html', user=current_user, city=city)
     elif request.method == 'POST':
         # check whether user preferences are already set
+        app.logger.info("Post preference request")
         preference = db.session.query(Preference).filter(Preference.user_id == current_user.id).first()
         if preference: # update preferences
+
             # determine linking to other tables
             cuisine = db.session.query(Cuisine).filter(Cuisine.cuisine_name==request.form.get('cuisine_selected')).first()
             dinetime = db.session.query(DineTime).filter(DineTime.dinetime_name==request.form.get('mealTime')).first()
@@ -39,13 +41,14 @@ def preference():
             preference.require_dairy_free = ("dairyFree" in request.form)
             preference.start_time = request.form['ava_from']
             preference.end_time = request.form['ava_to']
+            #db.session.add(preference)
             db.session.commit()
 
         else: # set user preferences
             # determine linking to other tables
             cuisine = db.session.query(Cuisine).filter(Cuisine.cuisine_name==request.form.get('cuisine_selected')).first()
             dinetime = db.session.query(DineTime).filter(DineTime.dinetime_name==request.form.get('mealTime')).first()
-            #placeholder cuisine - change to cuisine.id
+
             preference = Preference(date_time=datetime.utcnow(), user_id=current_user.id, cuisine_id=cuisine.id, dinetime_id=dinetime.id, city_id=current_user.city_id, require_vegetarian=("vegetarian" in request.form),require_vegan=("vegan" in request.form),require_halal=("halal" in request.form),require_gluten_free=("glutenFree" in request.form),require_dairy_free=("dairyFree" in request.form),start_time=request.form['ava_from'],end_time=request.form['ava_to'])
             db.session.add(preference)
             db.session.commit()
@@ -92,12 +95,13 @@ def loadMatches():
                                 join(Cuisine, Cuisine.id == Preference.cuisine_id).join(City,Preference.city_id == City.id). \
                                 filter(Preference.dinetime_id == user_pref.dinetime_id, Preference.city_id == current_user.city_id,\
                                 User.id != current_user.id).all()
+
         return render_template("matches.html", matchedUsers=matchedUsers)
 
     elif request.method == 'POST':
         # If the User updates their preferences on the page
         preference = db.session.query(Preference).filter(Preference.user_id == current_user.id).first()
-        cuisine = db.session.query(Cuisine).filter(Cuisine.cuisine_name == request.form.get('cuisines')).first()
+        cuisine = db.session.query(Cuisine).filter(Cuisine.cuisine_name == request.form.get('cuisine_selected')).first()
         dinetime = db.session.query(DineTime).filter(DineTime.dinetime_name == request.form.get('mealTime')).first()
         # update values
         preference.date_time = datetime.utcnow()
