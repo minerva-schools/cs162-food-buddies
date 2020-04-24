@@ -116,7 +116,7 @@
        <div class="grid-item3">
         <label class="matches" > Your Matches!</label>
         <div class="flex-container">
-        {% if users in matchedUsers %}
+        {% if matchedUsers %}
         {% for users in matchedUsers %}
           <div id="firstmatch">
            <div class="container">
@@ -157,7 +157,7 @@
           </div>
             {%endif%}
 
-          <form action="{{ url_for('main_route.followup') }}" method="POST">
+          <form action="{{ url_for('main_route.followup') }}" method="GET">
             <div class="btn-group-toggle d-flex justify-content-end foodTime" data-toggle="buttons">
                 <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" > Follow up with us! </button>
               </div>

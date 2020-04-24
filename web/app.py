@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from flask import Blueprint
 from flask import current_app as app
 from datetime import datetime
-from .models import db, User, City, Cuisine, Preference, DineTime
+from .models import db, User, City, Cuisine, Preference, DineTime, Followup
 
 # create an app factory
 main_routes = Blueprint('main_route',__name__,template_folder='templates')
@@ -133,3 +133,19 @@ def edit(update):
         current_user.city_id = city.id
     db.session.commit()
     return redirect(url_for('main_route.preference'))
+
+
+@main_routes.route('/followup', methods=['GET','POST'])
+@login_required
+def followup():
+    if request.method == "GET":
+        return render_template('followup.html', firstName=current_user.first_name.capitalize())
+    elif request.method == "POST":
+        # determine linking to other tables
+        preference = db.session.query(Preference).filter(Preference.user_id == current_user.id).first()
+        # add survey results to database
+        survey = Followup(date_time=datetime.utcnow(), user_id=current_user.id, city_id=preference.city_id, cuisine_id=preference.cuisine_id, dinetime_id=preference.dinetime_id, did_contact=("I did" in request.form), was_contacted=("other person" in request.form),contact_method=("prefmethod" in request.form), matching_accuracy=request.form.get('mealTime'))
+        db.session.add(survey)
+        db.session.commit()
+
+        return redirect(url_for('main_route.preference'))

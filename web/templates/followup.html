@@ -36,19 +36,18 @@
                     <p>Let us know how it went!</p>
                 </div>
             </div>
-            
+
             <div class="col followupHalf" >
             <div class="container">
                 <div class="row d-flex justify-content-end">
                     <form class="form-inline" action="{{ url_for('authentication.log_out') }}">
                         <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Log Out</button>
-                    </form> 
+                    </form>
                 </div>
-                
+
                 <div class="row d-flex align-items-center" style="margin-top:10%;">
                     <div class="col-2 justify-content-center d-none d-md-block">
                         <p><img src="../static/profilePicPlaceholder.png" alt="Profile Picture" class="rounded-circle"  id="profilePic"></p>
-                        <p id="edit"> <a href="edit">Edit Profile</a></p>
                     </div>
 
                     <div class ="col-10 col-md-5">
@@ -94,13 +93,13 @@
                             <label class="foodTime">How accurate did you find our matching?</label>
                             <div class="btn-group-toggle foodTime d-flex justify-content-around" data-toggle="buttons">
                                 <label class="btn btn-outline-info radioButton active">
-                                <input type="radio" name="mealTime" value="1" autocomplete="off" checked> 1 (way off)
+                                <input type="radio" name="accuracy" value="1" autocomplete="off"> 1 (way off)
                                 </label>
                                 <label class="btn btn-outline-info radioButton">
                                 <input type="radio" name="mealTime" value="2" autocomplete="off"> 2
                                 </label>
                                 <label class="btn btn-outline-info radioButton">
-                                <input type="radio" name="mealTime" value="3" autocomplete="off"> 3
+                                <input type="radio" name="mealTime" value="3" autocomplete="off" checked> 3
                                 </label>
                                 <label class="btn btn-outline-info radioButton">
                                 <input type="radio" name="mealTime" value="4" autocomplete="off"> 4
@@ -118,17 +117,17 @@
                                 <p id="subtitle">This helps us improve your experience</p>
                             </div>
 
-                            <div class="row d-flex justify-content-end">
-                                <button type="submit" class="btn btn-primary mb-4" id="nextButton">All done!  <i class="fas fa-arrow-right"></i></button>
+                            <div class="row d-flex justify-content-end" data-toggle="buttons">
+                                <button type="submit" class="btn btn-primary mb-4" id="nextButton">Look for another Foodbuddy!<i class="fas fa-arrow-right"></i></button>
                             </div>
-                            
+
                         </form>
 
                 </div>
                 </div>
             </div>
-            </div>  
-        </div>          
+            </div>
+        </div>
 
     </div>
 
