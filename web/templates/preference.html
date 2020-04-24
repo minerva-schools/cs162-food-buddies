@@ -25,7 +25,13 @@
 </head>
 
 <body>
-
+    {% with messages = get_flashed_messages(category_filter=["error"]) %}
+    {% if messages %}
+    <div class="alert alert-danger" role="alert" style="text-align: center; margin-bottom: 0%; width: 100%;">
+      {{ messages[0] }}
+    </div>
+    {% endif %}
+    {% endwith %}
     <div class="container-fluid" id="mainContainer">
 
         <div class="row" id ="mainRow">
@@ -45,15 +51,8 @@
                     </form>
                 </div>
 
-                {% with messages = get_flashed_messages(category_filter=["error"]) %}
-                {% if messages %}
-                <div class="alert alert-danger" role="alert" style="text-align: center;">
-                  {{ messages[0] }}
-                </div>
-                {% endif %}
-                {% endwith %}
 
-                <div class="row d-flex align-items-center" style="margin-top:10%;">
+                <div class="row d-flex align-items-center" style="margin-top:7%;">
                     <div class="col-2 justify-content-center d-none d-md-block">
                         <p><img src={{ image_path }} alt="Profile Picture" class="rounded-circle"  id="profilePic"></p>
                         <p id="edit"> <a href=""  data-toggle="modal" data-target="#editProfile">Edit Profile</a></p>
