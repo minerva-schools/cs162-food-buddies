@@ -47,12 +47,12 @@
 
                 <div class="row d-flex align-items-center" style="margin-top:10%;">
                     <div class="col-2 justify-content-center d-none d-md-block">
-                        <p><img src="../static/profilePicPlaceholder.png" alt="Profile Picture" class="rounded-circle"  id="profilePic"></p>
+                        <p><img src={{ image_path }} alt="Profile Picture" class="rounded-circle"  id="profilePic"></p>
                         <p id="edit"> <a href=""  data-toggle="modal" data-target="#editProfile">Edit Profile</a></p>
                     </div>
 
                     <div class ="col-10 col-md-5">
-                        <p id="title">Hi {{ firstName }}!</p>
+                        <p id="title">Hi {{ user.first_name.capitalize() }}!</p>
                         <p id="subtitle">Let us know more about your next meal preference</p>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
 
                                 <div class="btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
                                     <label class="btn btn-outline-info checkButton">
-                                        <input class="form-check-input" type="checkbox" name="dairyFree"> Dairy-Free
+                                        <input class="form-check-input" type="checkbox" name="dairyFree" value={{ dairyFree }}> Dairy-Free
                                     </label>
                                 </div>
 
@@ -111,7 +111,7 @@
                             <div class="form-group">
                             <label class="foodTime">What is your cuisine preference for today?</label>
                             <div class="input-group">
-                                <select name='cuisine_name' class="custom-select" required>
+                                <select name='cuisine_selected' class="custom-select" required>
                                     <option  value="" disabled selected hidden>Cuisine</option>
                                     <option  value="American">American</option>
                                     <option  value="Asian">Asian</option>
@@ -154,65 +154,91 @@
 
     </div>
 
+
+
     <!-- Edit Modal -->
 
     <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
+
               <h5 class="modal-title">Edit Profile</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
+
             <div class="modal-body">
                 <div class="container">
                     <div class="row mb-3">
+
                         <div class="col">
                             <div class="row justify-content-center mb-3">
-                                <img src="../static/profilePicPlaceholder.png" alt="Profile Picture" class="rounded-circle"  id="pictureEdit">
+                                <img
+                                    src='{{ image_path }}' alt="User Profile Picture" class="rounded-circle"  id="pictureEdit">
                             </div>
                             <div class="row justify-content-center">
-                                <label>Upload/Change Picture</label>
-                                <div class="custom-file" style="width: 70%;">
-                                    <input type="file" class="custom-file-input" id="inputGroupFile01">
-                                    <label class="custom-file-label" for="inputGroupFile01">Choose picture</label>
-                                </div>
+                                <form action="{{ url_for('main_route.edit', update='profile_image') }}" method="POST" enctype='multipart/form-data' style="width: 100%;">
+
+                                    <label>Upload/Change Picture</label>
+                                    <div class="custom-file" style="width: 70%;">
+
+                                             <input name="new_img" type="file"  class="custom-file-input" id="inputGroupFile01">
+
+                                             <label class="custom-file-label" for="inputGroupFile01">Choose picture</label>
+
+<!--                                             <input type=submit value=Upload>-->
+
+
+
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-primary" type="submit">Change</button>
+                                            </div>
+                                    </div>
+
+                                </form>
                             </div>
+
                         </div>
                     </div>
+
                     <div class="row">
                         <form action="{{ url_for('main_route.edit', update='first_name') }}" method="POST" style="width: 100%;">
+
                             <label>First Name</label>
                             <div class="form-row">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="first_name" placeholder="{{ firstName }}" required>
+                                    <input type="text" class="form-control" name="first_name" placeholder="{{ user.first_name.capitalize() }}" required>
                                     <div class="input-group-append">
-                                      <button class="btn btn-outline-primary" type="submit">Change</button>
+                                    <button class="btn btn-outline-primary" type="submit">Change</button>
                                     </div>
                                 </div>
                             </div>
                         </form>
                     </div>
+
                     <div class="row">
                         <form action="{{ url_for('main_route.edit', update='last_name') }}" method="POST" style="width: 100%;">
                             <label>Last Name</label>
                             <div class="form-row">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="last_name" placeholder="{{ lastName }}" required>
+                                    <input type="text" class="form-control" name="last_name" placeholder="{{ user.last_name.capitalize() }}" required>
                                     <div class="input-group-append">
                                       <button class="btn btn-outline-primary" type="submit">Change</button>
                                     </div>
                                 </div>
                             </div>
+
                         </form>
                     </div>
+
                     <div class="row">
                         <form action="{{ url_for('main_route.edit', update='email') }}" method="POST" style="width: 100%;">
                             <label>Email</label>
                             <div class="form-row">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="email" placeholder="{{ email }}" required>
+                                    <input type="text" class="form-control" pattern="[\w.%+-]+@minerva\.kgi\.edu" name="email" title="Only Minerva domain emails are currently accepted" placeholder="{{ user.email }}" required>
                                     <div class="input-group-append">
                                       <button class="btn btn-outline-primary" type="submit">Change</button>
                                     </div>
@@ -221,18 +247,18 @@
                         </form>
                     </div>
                     <div class="row mb-3">
-                        <form action="{{ url_for('main_route.edit', update='city_id') }}" method="POST" style="width: 100%;">
+                        <form action="{{ url_for('main_route.edit', update='city_name') }}" method="POST" style="width: 100%;">
                             <label>Location</label>
                             <div class="input-group">
-                                <select name='city_id' class="custom-select" required>
-                                    <option  value="" disabled selected hidden>Location (city)</option>
-                                    <option  value="San Francisco">San Francisco</option>
-                                    <option  value="Seoul">Seoul</option>
-                                    <option  value="Hyderabad">Hyderabad</option>
-                                    <option  value="Berlin">Berlin</option>
-                                    <option  value="Buenos Aires">Buenos Aires</option>
-                                    <option  value="London">London</option>
-                                    <option  value="Taipei">Taipei</option>
+                                <select name='city_selected' class="custom-select" required>
+                                    <option  value="" disabled hidden>Location (city)</option>
+                                    <option  value="San Francisco" {% if city.city_name == "San Francisco" %} selected {% endif %}>San Francisco</option>
+                                    <option  value="Seoul" {% if city.city_name == "Seoul" %} selected {% endif %}>Seoul</option>
+                                    <option  value="Hyderabad" {% if city.city_name == "Hyderabad" %} selected {% endif %}>Hyderabad</option>
+                                    <option  value="Berlin" {% if city.city_name == "Berlin" %} selected {% endif %}>Berlin</option>
+                                    <option  value="Buenos Aires" {% if city.city_name == "Buenos Aires" %} selected {% endif %}>Buenos Aires</option>
+                                    <option  value="London" {% if city.city_name == "London" %} selected {% endif %}>London</option>
+                                    <option  value="Taipei"{% if city.city_name == "Taipei" %} selected {% endif %}>Taipei</option>
                                 </select>
                                 <div class="input-group-append">
                                   <button class="btn btn-outline-primary" type="submit">Change</button>
@@ -242,37 +268,40 @@
                     </div>
                     <div class="row mb-4">
                         <form action="{{ url_for('main_route.edit', update='contact_method') }}" method="POST" style="width: 100%;">
-                            <label>Contact Info</label>
+                          <label>Contact Info</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <select class="custom-select" name ="contact_method" required>
-                                      <option value="" disabled selected hidden>Method</option>
-                                      <option value="Messenger">Messenger</option>
-                                      <option value="WhatsApp">WhatsApp</option>
-                                      <option value="Phone">Phone</option>
+                                      <option value="" disabled  hidden>Method</option>
+                                      <option value="Messenger" {% if user.contact_method == "Messenger" %} selected {% endif %}>Messenger</option>
+                                      <option value="WhatsApp" {% if user.contact_method == "WhatsApp" %} selected {% endif %}>WhatsApp</option>
+                                      <option value="Phone" {% if user.contact_method == "Phone" %} selected {% endif %}>Phone</option>
                                     </select>
                                   </div>
-                                <input type="text" class="form-control" name="contact_info" placeholder="{{ contactInfo }}" required>
+                                <input type="text" class="form-control" name="contact_info" placeholder="{{ user.contact_info }}" required>
                                 <div class="input-group-append">
                                   <button class="btn btn-outline-primary" type="submit">Change</button>
                                 </div>
                             </div>
                         </form>
                     </div>
+
                     <div class="row">
                         <form action="{{ url_for('authentication.verifyEmail') }}" method="POST">
-
                         </form>
                         <div class="row justify-content-center" style="width: 100%;">
                             <form action="{{ url_for('authentication.verifyEmail') }}" method="POST">
+                                <br>
                                 <button type="submit"  class="btn btn-outline-warning">Request password change</button>
                             </form>
                         </div>
                     </div>
+
                 </div>
             </div>
+
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Done</button>
+<!--              <button type="button" class="btn btn-secondary" data-dismiss="modal">Done</button>-->
             </div>
           </div>
         </div>

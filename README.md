@@ -1,6 +1,6 @@
-# Foodbuddies 
+# Foodbuddies
 
-#### Foodbuddies is a web application for Minervans to find a meal companion - a Foodbuddy! The web app has the following main pages, each a corresponding .css file of the same name: 
+#### Foodbuddies is a web application for Minervans to find a meal companion - a Foodbuddy! The web app has the following main pages, each a corresponding .css file of the same name:
 * login.html - a Login page that asks the user for their email and password, authentication is run in the back-end to determine if the user input does correspond to an existing user stored in the DB, and either load the Preferences page, warn that the user does not exist, or the user can choose to sign up;
 resetPassword.html - to reset their password;
 * signUp.html - a sign up page where the user has to input a Minerva email (@minerva.kgi.edu), their current Rotation city, a chosen password and repeat it, and their preferred method of contact since the app does not have a chat function, and it is up to the user to reach out to the Foodbuddies we match them with;
@@ -62,15 +62,15 @@ All environment variables are stored within the `.env` file and loaded with dote
     $ export FLASK_CONFIG=dev
     $ export FLASK_APP=web
     $ python3 -m flask run
-    
-    
+
+
 ## Unit Tests
 To run the unit tests use the following commands:
 
     $ python3 -m venv venv_unit
     $ source venv_unit/bin/activate
     # Activate the virtual environment for MAC/UNIX
-    $ venv\Scripts\activate
+    $ venv_unit\Scripts\activate
     # Activate virtual environment for WINDOWS
     $ pip install -r requirements-unit.txt
     $ export TEST_SQLALCHEMY_DATABASE_URI='sqlite:///test.db'
@@ -79,7 +79,7 @@ To run the unit tests use the following commands:
 
 
 ## Integration Tests
-We used Travis CI to run continuous integration tests as we merged and added code in the Github repo. 
+We used Travis CI to run continuous integration tests as we merged and added code in the Github repo.
 
 
 Now run the integration tests using the following commands:
