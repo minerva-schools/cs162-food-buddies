@@ -20,7 +20,7 @@ class User(db.Model, UserMixin):
     city_id = db.Column(db.Integer, db.ForeignKey('City.id'))
     first_name = db.Column(db.String(100))
     last_name = db.Column(db.String(100))
-    email = db.Column(db.String(100),unique=True)
+    email = db.Column(db.String(100), unique=True) 
     password = db.Column(db.String(200))
     contact_method = db.Column(db.String(100))
     contact_info = db.Column(db.String(300))
