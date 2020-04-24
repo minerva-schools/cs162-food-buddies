@@ -15,6 +15,7 @@ def app():
         yield app
         # Remove only the users crated here. Dummy users will be left intact
         User.query.filter(User.email == "testemail@minerva.kgi.edu").delete()
+        db.session.commit()
 
     return app
 
