@@ -162,7 +162,7 @@ class Followup(db.Model):
     # was the preffered contact method used
     contact_method = db.Column(db.Boolean, default=True)
     # matching speed rating
-    matching_speed = db.Column(db.Integer(100))
+    matching_speed = db.Column(db.Integer)
     # matching accuracy rating
-    matching_accuracy = db.Column(db.Integer(100))
+    matching_accuracy = db.Column(db.Integer)
 
