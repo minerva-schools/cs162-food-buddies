@@ -63,37 +63,8 @@ body {
     font-weight: bold;
 }
 
-
-.tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted #364F6B; /* If you want dots under the hoverable text */
-}
-
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: #364F6B;
-  color: #F5F5F5;
+#TermnCond{
   text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
-  position: absolute;
-  z-index: 1;
-}
-
-.tooltip .tooltiptext::after {
-  content: " ";
-  position: absolute;
-  top: 50%;
-  right: 100%; /* To the left of the tooltip */
-  margin-top: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent #364F6B transparent transparent;
-}
-
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
+  font-size: 15px;
+  margin-bottom: 80px;
 }
