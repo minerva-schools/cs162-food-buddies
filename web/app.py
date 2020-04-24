@@ -133,3 +133,13 @@ def edit(update):
         current_user.city_id = city.id
     db.session.commit()
     return redirect(url_for('main_route.preference'))
+
+
+@main_routes.route('/followup', methods=['GET','POST'])
+@login_required
+def followup():
+    if request.method == "GET":
+        return render_template('followup.html', firstName=current_user.first_name.capitalize())
+    elif request.method == "POST":
+        # decide whether to link the form data to the table
+        return redirect(url_for('main_route.preference'))
