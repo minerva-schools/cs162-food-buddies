@@ -20,12 +20,14 @@ def index():
 
 def get_img_path():
     '''helper function to get the path to user profile image'''
-    if current_user.profile_img_name: # if there is a user-uploaded image
-        image_name = current_user.profile_img_name # strings in db
+    # query the current profile image
+    user = db.session.query(User).filter(User.id==current_user.id).first()
+    if user.profile_img_name: # if there is a user-uploaded image
+        image_name = user.profile_img_name # strings in db
     else:
         image_name = "profilePicPlaceholder.png"
-    # construct image path to user profile photo
-    image_path = os.path.join(app.root_path, 'static/userProfilePics',image_name)
+    # construct relative image path for front-end
+    image_path = os.path.join( '../static/userProfilePics',image_name)
     return image_path
 
 
@@ -34,10 +36,12 @@ def get_img_path():
 def preference():
     if request.method == 'GET':
         city = db.session.query(City).filter(City.id == current_user.city_id).first()
-        return render_template('preference.html', user=current_user, city=city)
+        
+        return render_template('preference.html', user=current_user, city=city,
+            image_path=get_img_path())
+            
     elif request.method == 'POST':
         # check whether user preferences are already set
-
         preference = db.session.query(Preference).filter(Preference.user_id == current_user.id).first()
         if preference: # update preferences
                 # determine linking to other tables
@@ -48,14 +52,16 @@ def preference():
             preference.date_time = datetime.utcnow()
             if cuisine:
                 preference.cuisine_id = cuisine.id
-            preference.dinetime_id = dinetime.id
+            if dinetime:
+                preference.dinetime_id = dinetime.id
+            
             preference.require_vegetarian = ("vegetarian" in request.form)
             preference.require_vegan = ("vegan" in request.form)
             preference.require_halal = ("halal" in request.form)
             preference.require_gluten_free = ("glutenFree" in request.form)
             preference.require_dairy_free = ("dairyFree" in request.form)
-            preference.start_time = request.form['ava_from']
-            preference.end_time = request.form['ava_to']
+            preference.start_time = request.form.get('ava_from')
+            preference.end_time = request.form.get('ava_to')
             db.session.commit()
 
         else: # set user preferences
@@ -110,7 +116,7 @@ def loadMatches():
                                 join(Cuisine, Cuisine.id == Preference.cuisine_id).join(City,Preference.city_id == City.id). \
                                 filter(Preference.dinetime_id == user_pref.dinetime_id, Preference.city_id == current_user.city_id,\
                                 User.id != current_user.id).all()
-        return render_template("matches.html", matchedUsers=matchedUsers)
+        return render_template("matches.html", matchedUsers=matchedUsers, user=current_user, image_path=get_img_path())
 
     elif request.method == 'POST':
         # If the User updates their preferences on the page
@@ -121,7 +127,8 @@ def loadMatches():
         preference.date_time = datetime.utcnow()
         if cuisine:
             preference.cuisine_id = cuisine.id
-        preference.dinetime_id = dinetime.id
+        if dinetime:
+            preference.dinetime_id = dinetime.id
         preference.require_vegetarian = ("vegetarian" in request.form)
         preference.require_vegan = ("vegan" in request.form)
         preference.require_halal = ("halal" in request.form)
@@ -135,10 +142,13 @@ def loadMatches():
 @main_routes.route('/edit/<update>', methods=["POST"])
 @login_required
 def edit(update):
+
     if update == "first_name":
+        # front-end: update current user's first_name
         current_user.first_name = str(request.form.get("first_name")).capitalize()
     elif update == "last_name":
         current_user.last_name = str(request.form.get("last_name")).capitalize()
+        
     elif update == "email":
         current_user.email = str(request.form.get("email")).lower()
     elif update == "contact_method":
@@ -149,7 +159,8 @@ def edit(update):
         preference = db.session.query(Preference).filter(Preference.user_id == current_user.id).first()
         preference.city_id = city.id
         current_user.city_id = city.id
-    db.session.commit()
+    db.session.commit() # commit user data change
+    
     return redirect(url_for('main_route.preference'))
 
 

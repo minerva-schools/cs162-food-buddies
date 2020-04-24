@@ -20,7 +20,7 @@ class User(db.Model, UserMixin):
     city_id = db.Column(db.Integer, db.ForeignKey('City.id'))
     first_name = db.Column(db.String(100))
     last_name = db.Column(db.String(100))
-    email = db.Column(db.String(100), unique=True) # each Minervan has a unique gmail address
+    email = db.Column(db.String(100)) 
     password = db.Column(db.String(200))
     contact_method = db.Column(db.String(100))
     contact_info = db.Column(db.String(300))
@@ -112,23 +112,23 @@ def insert_dummy_users(*args, **kwargs):
 
     DummyUsers = [
             [2,'Jingren', 'Wang', 'jingren.wang@minerva.kgi.edu',
-        hashedPW[88888888], 'Phone', '+82 105-557-7494'], # Seoul
+        hashedPW[88888888], 'Phone', '+82 105-557-7494', 'user_1.jpg'], # Seoul
             [2,'David', 'Mitchell', 'david.mitchell@minerva.kgi.edu',
-        hashedPW['password'], 'WhatsApp', '+82 415-557-7494'], # Seoul
+        hashedPW['password'], 'WhatsApp', '+82 415-557-7494','user_2.jpg'], # Seoul
             [2,'Stephen', 'Cole', 'stephen.cole@minerva.kgi.edu',
-        hashedPW[55555555], 'Messenger', 'facebook.com/stephen.cole'], # Seoul
+        hashedPW[55555555], 'Messenger', 'facebook.com/stephen.cole',None], # Seoul
             [5,'Mary', 'Burns', 'mary.burns@minerva.kgi.edu',
-        hashedPW[77777777], 'Phone', '+54 155-5516-605'], # Buenos Aires
+        hashedPW[77777777], 'Phone', '+54 155-5516-605',None], # Buenos Aires
             [5,'Phil', 'Collins', 'phil.collins@minerva.kgi.edu',
-        hashedPW[66666666], 'WhatsApp', '+54 415-5516-605'], # Buenos Aires
+        hashedPW[66666666], 'WhatsApp', '+54 415-5516-605',None], # Buenos Aires
             [1,'James', 'Gorden', 'james.gorden@minerva.kgi.edu',
-        hashedPW[66666666], 'Phone', '+1 729-591-1038'], # San Francisco
+        hashedPW[66666666], 'Phone', '+1 729-591-1038',None], # San Francisco
             [1,'Kia', 'Louis', 'kia.louis@minerva.kgi.edu',
-        hashedPW[55555555], 'Phone', '+1 813-028-4012'], # San Francisco
+        hashedPW[55555555], 'Phone', '+1 813-028-4012',None], # San Francisco
             [1,'Bea', 'Evans', 'bea.evans@minerva.kgi.edu',
-        hashedPW[88888888], 'WhatsApp', '+1 415-028-4012'], # San Francisco
+        hashedPW[88888888], 'WhatsApp', '+1 415-028-4012',None], # San Francisco
             [1,'Charles', 'Smith', 'charles.smith@minerva.kgi.edu',
-        hashedPW[77777777], 'Messenger', 'facebook.com/charles.smith'] # San Francisco
+        hashedPW[77777777], 'Messenger', 'facebook.com/charles.smith',None] # San Francisco
         ]
 
     for user_info in DummyUsers:

@@ -47,7 +47,7 @@
 
                 <div class="row d-flex align-items-center" style="margin-top:10%;">
                     <div class="col-2 justify-content-center d-none d-md-block">
-                        <p><img src='{{ imagePath }}' alt="Profile Picture" class="rounded-circle"  id="profilePic"></p>
+                        <p><img src={{ image_path }} alt="Profile Picture" class="rounded-circle"  id="profilePic"></p>
                         <p id="edit"> <a href=""  data-toggle="modal" data-target="#editProfile">Edit Profile</a></p>
                     </div>
 
@@ -176,7 +176,7 @@
                         <div class="col">
                             <div class="row justify-content-center mb-3">
                                 <img
-                                    src='{{ imagePath }}' alt="User Profile Picture" class="rounded-circle"  id="pictureEdit">
+                                    src='{{ image_path }}' alt="User Profile Picture" class="rounded-circle"  id="pictureEdit">
                             </div>
                             <div class="row justify-content-center">
                                 <form action="" method="POST" enctype='multipart/form-data' style="width: 100%;">
@@ -219,7 +219,7 @@
                     </div>
 
                     <div class="row">
-                        <form action=" " method="POST" style="width: 100%;">
+                        <form action="{{ url_for('main_route.edit', update='last_name') }}" method="POST" style="width: 100%;">
                             <label>Last Name</label>
                             <div class="form-row">
                                 <div class="input-group mb-3">
