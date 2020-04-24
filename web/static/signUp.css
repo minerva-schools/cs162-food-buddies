@@ -1,0 +1,70 @@
+html, body {
+    height:100%;
+  }
+  
+body {
+    background-color: rgb(255, 250, 254);
+    font-family: 'Arvo', serif;
+  }
+
+#mainContainer {
+    height: 100%;
+  }
+
+#mainRow {
+    height: 100%;
+  }
+
+#informativeText {
+    text-align: center;
+    color: #F5F5F5;
+  }
+
+.informativeHalf{
+    background: #364F6B;
+  }
+
+.signupHalf{
+    background: #F5F5F5;
+  }
+
+#signupTitle{
+    color: #364F6B;
+    text-align: center;
+    margin-bottom:10px; 
+    font-weight: bold;
+   }
+
+#signupButton{
+    width: 100%;
+  }
+.signupForm{
+    width: 50%;
+   }
+
+#signupSubTitle{
+    color: #364F6B;
+    text-align: center;
+    margin-bottom:20px; 
+    font-size: 15px;
+    opacity: 70%;
+}
+
+#terms{
+    color: #364F6B;
+    text-align: center;
+    font-size: 13px;
+  }
+
+#login{
+    color: #364F6B;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#TermnCond{
+  text-align: center;
+  font-size: 15px;
+  margin-bottom: 80px;
+}

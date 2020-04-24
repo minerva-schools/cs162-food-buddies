@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Tab icon -->
+    <link rel="icon" href="{{ url_for('static', filename='icons/mainIcon.ico') }}">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- FontAwesome file -->
+    <script src="https://kit.fontawesome.com/e7a847d88f.js" crossorigin="anonymous"></script>
+
+   <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+
+    <!-- CSS file -->
+    <link rel="stylesheet" href="../static/preference.css">
+
+
+    <title>Preferences</title>
+</head>
+
+<body>
+    {% with messages = get_flashed_messages(category_filter=["error"]) %}
+    {% if messages %}
+    <div class="alert alert-danger" role="alert" style="text-align: center; margin-bottom: 0%; width: 100%;">
+      {{ messages[0] }}
+    </div>
+    {% endif %}
+    {% endwith %}
+    <div class="container-fluid" id="mainContainer">
+
+        <div class="row" id ="mainRow">
+
+            <div class="col informativeHalf d-none d-lg-flex align-items-center justify-content-center" >
+                <div id="informativeText">
+                    <h1><i class="fas fa-utensils"></i> FoodBuddies</h1>
+                    <p>Looking for a companion for your next meal?</p>
+                </div>
+            </div>
+
+            <div class="col preferenceHalf" >
+            <div class="container">
+                <div class="row d-flex justify-content-end">
+                    <form class="form-inline" action="{{ url_for('authentication.log_out') }}">
+                        <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Log Out</button>
+                    </form>
+                </div>
+
+
+                <div class="row d-flex align-items-center" style="margin-top:7%;">
+                    <div class="col-2 justify-content-center d-none d-md-block">
+                        <p><img src={{ image_path }} alt="Profile Picture" class="rounded-circle"  id="profilePic"></p>
+                        <p id="edit"> <a href=""  data-toggle="modal" data-target="#editProfile">Edit Profile</a></p>
+                    </div>
+
+                    <div class ="col-10 col-md-5">
+                        <p id="title">Hi {{ user.first_name.capitalize() }}!</p>
+                        <p id="subtitle">Let us know more about your next meal preference</p>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                <div class="preferenceForm" >
+
+                        <form action="{{ url_for('main_route.preference') }}" method="POST">
+
+
+                            <div class="form-group" style="margin-bottom: 5%;">
+
+                                <label class="preferenceFood">Tell us about your dietary preferences</label>
+
+                                <div class="btn-group-toggle d-flex justify-content-around preferenceFood" data-toggle="buttons">
+                                    <label class="btn btn-outline-info checkButton">
+                                        <input class="form-check-input" type="checkbox" name="vegetarian"> Vegetarian
+                                    </label>
+                                    <label class="btn btn-outline-info checkButton">
+                                        <input class="form-check-input " type="checkbox" name="glutenFree"> Gluten-Free
+                                    </label>
+                                </div>
+
+                                <div class="btn-group-toggle d-flex justify-content-around preferenceFood" data-toggle="buttons">
+                                    <label class="btn btn-outline-info checkButton">
+                                        <input class="form-check-input" type="checkbox" name="vegan"> Vegan
+                                    </label>
+                                    <label class="btn btn-outline-info checkButton">
+                                        <input class="form-check-input" type="checkbox" name="halal"> Halal
+                                    </label>
+                                </div>
+
+                                <div class="btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
+                                    <label class="btn btn-outline-info checkButton">
+                                        <input class="form-check-input" type="checkbox" name="dairyFree" value={{ dairyFree }}> Dairy-Free
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                            <label class="foodTime">When are you planning to have this meal?</label>
+                            <div class="btn-group-toggle foodTime d-flex justify-content-around" data-toggle="buttons">
+                                <label class="btn btn-outline-info radioButton">
+                                <input type="radio" name="mealTime" value="Breakfast" autocomplete="off"> Breakfast
+                                </label>
+                                <label class="btn btn-outline-info radioButton active">
+                                <input type="radio" name="mealTime" value="Lunch" autocomplete="off" checked> Lunch
+                                </label>
+                                <label class="btn btn-outline-info radioButton">
+                                <input type="radio" name="mealTime" value="Dinner" autocomplete="off"> Dinner
+                                </label>
+                            </div>
+                            </div>
+
+                            <div class="form-group">
+                            <label class="foodTime">What is your cuisine preference for today?</label>
+                            <div class="input-group">
+                                <select name='cuisine_selected' class="custom-select" required>
+                                    <option  value="" disabled selected hidden>Cuisine</option>
+                                    <option  value="American">American</option>
+                                    <option  value="Asian">Asian</option>
+                                    <option  value="European">European</option>
+                                    <option  value="Latin American">Latin American</option>
+                                    <option  value="Middle Eastern">Middle Eastern</option>
+                                    <option  value="Subcontinental">Subcontinental</option>
+                                </select>
+                            </div>
+                            </div>
+
+
+                            <label class="preferenceFood">Availability</label>
+                            <div class= "foodTime d-flex justify-content-around">
+                                <div class="input-group col-6">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">From</span>
+                                    </div>
+                                    <input class="form-control" type="time" name="ava_from" value="13:00:00" required>
+                                </div>
+                                <div class="input-group col-6">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">To</span>
+                                    </div>
+                                    <input class="form-control" type="time" name="ava_to" value="14:00:00" required>
+                                </div>
+                            </div>
+
+                            <div class="row d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary mb-4" id="nextButton">Let's find you a buddy!  <i class="fas fa-arrow-right"></i></button>
+                            </div>
+
+                        </form>
+
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- Edit Modal -->
+
+    <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+
+              <h5 class="modal-title">Edit Profile</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row mb-3">
+
+                        <div class="col">
+                            <div class="row justify-content-center mb-3">
+                                <img
+                                    src='{{ image_path }}' alt="User Profile Picture" class="rounded-circle"  id="pictureEdit">
+                            </div>
+                            <div class="row justify-content-center">
+                                <label>Upload/Change Picture</label>
+                                <form  action="{{ url_for('main_route.edit', update='profile_image') }}" method="POST" enctype='multipart/form-data' style="width: 100%;">
+
+                                    <div class="input-group mb-3">
+                                        <div class="custom-file" style="width: 70%;">
+                                            <input name="new_img" type="file"  class="custom-file-input" id="inputGroupFile01">
+                                            <label class="custom-file-label" for="inputGroupFile01">Choose picture</label>
+                                         </div>  
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-primary" type="submit">Upload</button>
+                                        </div>
+                                    </div>
+
+
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <form action="{{ url_for('main_route.edit', update='first_name') }}" method="POST" style="width: 100%;">
+
+                            <label>First Name</label>
+                            <div class="form-row">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="first_name" placeholder="{{ user.first_name.capitalize() }}" required>
+                                    <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="submit">Change</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="row">
+                        <form action="{{ url_for('main_route.edit', update='last_name') }}" method="POST" style="width: 100%;">
+                            <label>Last Name</label>
+                            <div class="form-row">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="last_name" placeholder="{{ user.last_name.capitalize() }}" required>
+                                    <div class="input-group-append">
+                                      <button class="btn btn-outline-primary" type="submit">Change</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <div class="row">
+                        <form action="{{ url_for('main_route.edit', update='email') }}" method="POST" style="width: 100%;">
+                            <label>Email</label>
+                            <div class="form-row">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" pattern="[\w.%+-]+@minerva\.kgi\.edu" name="email" title="Only Minerva domain emails are currently accepted" placeholder="{{ user.email }}" required>
+                                    <div class="input-group-append">
+                                      <button class="btn btn-outline-primary" type="submit">Change</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row mb-3">
+                        <form action="{{ url_for('main_route.edit', update='city_name') }}" method="POST" style="width: 100%;">
+                            <label>Location</label>
+                            <div class="input-group">
+                                <select name='city_selected' class="custom-select" required>
+                                    <option  value="" disabled hidden>Location (city)</option>
+                                    <option  value="San Francisco" {% if city.city_name == "San Francisco" %} selected {% endif %}>San Francisco</option>
+                                    <option  value="Seoul" {% if city.city_name == "Seoul" %} selected {% endif %}>Seoul</option>
+                                    <option  value="Hyderabad" {% if city.city_name == "Hyderabad" %} selected {% endif %}>Hyderabad</option>
+                                    <option  value="Berlin" {% if city.city_name == "Berlin" %} selected {% endif %}>Berlin</option>
+                                    <option  value="Buenos Aires" {% if city.city_name == "Buenos Aires" %} selected {% endif %}>Buenos Aires</option>
+                                    <option  value="London" {% if city.city_name == "London" %} selected {% endif %}>London</option>
+                                    <option  value="Taipei"{% if city.city_name == "Taipei" %} selected {% endif %}>Taipei</option>
+                                </select>
+                                <div class="input-group-append">
+                                  <button class="btn btn-outline-primary" type="submit">Change</button>
+                                </div>
+                              </div>
+                        </form>
+                    </div>
+                    <div class="row mb-4">
+                        <form action="{{ url_for('main_route.edit', update='contact_method') }}" method="POST" style="width: 100%;">
+                          <label>Contact Info</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <select class="custom-select" name ="contact_method" required>
+                                      <option value="" disabled  hidden>Method</option>
+                                      <option value="Messenger" {% if user.contact_method == "Messenger" %} selected {% endif %}>Messenger</option>
+                                      <option value="WhatsApp" {% if user.contact_method == "WhatsApp" %} selected {% endif %}>WhatsApp</option>
+                                      <option value="Phone" {% if user.contact_method == "Phone" %} selected {% endif %}>Phone</option>
+                                    </select>
+                                  </div>
+                                <input type="text" class="form-control" name="contact_info" placeholder="{{ user.contact_info }}" required>
+                                <div class="input-group-append">
+                                  <button class="btn btn-outline-primary" type="submit">Change</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="row">
+                        <form action="{{ url_for('authentication.verifyEmail') }}" method="POST">
+                        </form>
+                        <div class="row justify-content-center" style="width: 100%;">
+                            <form action="{{ url_for('authentication.verifyEmail') }}" method="POST">
+                                <br>
+                                <button type="submit"  class="btn btn-outline-warning">Request password change</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+<!--              <button type="button" class="btn btn-secondary" data-dismiss="modal">Done</button>-->
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

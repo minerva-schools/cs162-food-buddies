@@ -1,8 +1,9 @@
 # Project specific files to ignore
 web/web.db
+web/test.db
 venv_unit/
 venv_integration/
-
+web/keys.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -110,3 +111,7 @@ venv.bak/
 .mypy_cache/
 
 *.DS_Store
+
+# Profile Picture
+*/static/userProfilePics
+!*/static/userProfilePics/profilePicPlaceholder.png

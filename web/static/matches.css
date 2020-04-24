@@ -1,0 +1,150 @@
+html, body, {
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+}
+body {
+  background-color: #FEFEFE;
+  font-family: 'Arvo', serif;
+}
+.grid-container{
+	display: grid;
+	grid-template-columns: minmax(200px, auto);
+	grid-auto-rows: minmax(150px, auto);
+	grid-row-gap:20px;
+	grid-column: 10px; 
+
+
+	
+}
+#lgout{
+	color: #ffffff;
+	margin-right: 5%;
+        margin-top: 1%;
+}
+
+.grid-item1{
+
+	background-color: #364F6B;
+	grid-column-start: 1 ;
+	grid-column-end: 3;
+	grid-row-start: 1;
+	grid-row-end: 1;
+	color: #ffffff;
+
+}
+.grid-item2{
+	grid-row-start: 2;
+        grid-row-end: 3;
+         margin-left: 5%;
+	
+
+}
+.grid-item3{
+
+	background-color: #f3f3f3;
+	grid-row-start: 2;
+	grid-auto-rows: auto;
+  margin-left: 5%;
+
+
+}
+.grid-item4{
+
+	
+	grid-row-start: 3;
+	
+	align-self: center;
+
+
+}
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  
+}
+.flex-container > #firstmatch {
+  background-color: #ffffff;
+  width: 600px;
+  margin: 10px;
+  text-align: left;
+  line-height: 15px;
+  font-size: 15px;
+  padding: 50px;
+  align-self: center;
+}
+.flex-container > #secondmatch {
+  background-color: #ffffff;
+  width: 600px;
+  margin: 10px;
+  text-align: center;
+  line-height: 15px;
+  font-size: 15px;
+  padding: 50px;
+  align-self: center;
+}
+.flex-container > #thirdmatch {
+  background-color: #ffffff;
+  width: 600px;
+  margin: 10px;
+  text-align: left;
+  line-height: 15px;
+  font-size: 15px;
+  padding: 50px;
+  align-self: center;
+}
+#profilePic {
+  width: 20%;
+  margin-right: 10%;
+}
+#nomatch{
+  width: 80%;
+  
+  align-content:center;
+}
+.preferenceFood{
+  margin-bottom: 5%;
+  font-size: 17px;
+  margin-right: 20%;
+  font-weight: bold;
+}
+
+.foodTime {
+  margin-bottom: 5%;
+  font-size: 17px;
+  margin-right: 45%;
+  font-weight: bold;
+}
+.cuisines {
+  margin-bottom: 4%;
+  font-size: 17px;
+  font-weight: bold;
+
+}
+.matches{
+ margin-bottom: 4%;
+ font-size: 17px;
+ font-weight: bold; 
+}
+.availability{
+  .preferenceFood{
+  margin-bottom: 5%;
+  font-size: 17px;
+  margin-right: 20%;
+}
+.checkButton{
+  width: 150px;
+  height: 40px;
+  text-align: center;
+}
+
+.radioButton{
+  width: 130px;
+  height: 40px;
+  text-align: center;
+}
+.update{
+  margin-left: 10%;
+}

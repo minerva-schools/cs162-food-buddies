@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+    <!-- Tab icon -->
+    <link rel="icon" href="{{ url_for('static', filename='icons/mainIcon.ico') }}">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- FontAwesome file -->
+    <script src="https://kit.fontawesome.com/e7a847d88f.js" crossorigin="anonymous"></script>
+
+   <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+
+    <!-- CSS file -->
+    <link rel="stylesheet" href="../static/login.css">
+
+
+    <title>FoodBuddies</title>
+</head>
+<body>
+    <div class="container-fluid" id="mainContainer">
+
+        <div class="row" id ="mainRow">
+
+          <div class="col informativeHalf d-none d-md-flex align-items-center justify-content-center" >
+            <div id="informativeText">
+                <h1><i class="fas fa-utensils"></i> FoodBuddies</h1>
+                <p>Looking for a companion for your next meal?</p>
+            </div>
+          </div>
+
+          <div class="col loginHalf  d-flex align-items-center justify-content-center" >
+            <div class="loginForm" >
+              <h3 id="loginTitle">Login</h3>
+
+                {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                {% if messages %}
+                <div class="alert alert-danger" role="alert" style="text-align: center;">
+                  {{ messages[0] }}
+                </div>
+                {% endif %}
+                {% endwith %}
+
+                {% with inform = get_flashed_messages(category_filter=["inform"]) %}
+                {% if inform %}
+                <div class="alert alert-success" role="alert" style="text-align: center;">
+                  {{ inform[0] }}
+                </div>
+                {% endif %}
+                {% endwith %}
+
+                {% with inform = get_flashed_messages(category_filter=["success"]) %}
+                {% if inform %}
+                <div class="alert alert-success" role="alert" style="text-align: center;">
+                  {{ inform[0] }}
+                </div>
+                {% endif %}
+                {% endwith %}
+
+
+                <form action="{{ url_for('authentication.login') }}" method="POST">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1"><i class="fas fa-envelope"></i></span>
+                        </div>
+                        <input type="email" name="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input type="password" name="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="loggedIn">
+                        <label class="form-check-label" for="loggedIn"  id="loggedIn">Keep me logged in!</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-4" id="loginButton">Log in  <i class="fas fa-sign-in-alt"></i></button>
+                </form>
+                <p id="forgotPass"><a href="" data-toggle="modal" data-target="#fogotPassword" id="forgotPass">Forgot password ?</a></p>
+
+                <p id="createAcc">Don't have an account? <a href={{ url_for('authentication.sign_up') }}>Sign up here <i class="fas fa-arrow-alt-circle-right"></i></a></p>
+
+                <!--Verify Email Modal -->
+                <div class="modal fade" id="fogotPassword" tabindex="-1" role="dialog"  aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Forgot Password</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form id="verifyEmail" action="{{ url_for('authentication.verifyEmail') }}" method="POST">
+                          <label class="mb-3">Please enter the email you used during registration</label>
+                          <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                  <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                              </div>
+                              <input type="email" class="form-control" placeholder="Email" aria-label="Email"
+                              name="verEmail" required>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button form ="verifyEmail" type="submit" class="btn btn-primary" >Send me an Email!</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+          </div>
+        </div>
+    </div>
+
+  <!-- Bootstrap JS files -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</body>
+</html>
