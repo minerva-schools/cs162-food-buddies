@@ -171,8 +171,16 @@ def edit(update):
 
         
     elif update == "email":
-        current_user.email = str(request.form.get("email")).lower()
-       
+        email = str(request.form.get("email")).lower()
+        user = db.session.query(User).filter(User.email == email).first()
+        if not user:
+            if email.split("@")[1] == "minerva.kgi.edu":
+                current_user.email = email
+            else:
+                flash("Unfortunately, we can only offer support to Minerva users",'error')
+        else:
+            flash("An account using this email already exists",'error')
+
     elif update == "contact_method":
         current_user.contact_method = request.form.get('contact_method')
         current_user.contact_info = request.form.get('contact_info')
