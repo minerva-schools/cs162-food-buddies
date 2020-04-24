@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Tab icon -->
+    <link rel="icon" href="{{ url_for('static', filename='icons/mainIcon.ico') }}">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- FontAwesome file -->
+    <script src="https://kit.fontawesome.com/e7a847d88f.js" crossorigin="anonymous"></script>
+
+   <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+
+    <!-- CSS file -->
+    <link rel="stylesheet" href="../static/followup.css">
+
+
+    <title>Follow Up</title>
+</head>
+
+<body>
+
+    <div class="container-fluid" id="mainContainer">
+
+        <div class="row" id ="mainRow">
+
+            <div class="col informativeHalf d-none d-lg-flex align-items-center justify-content-center" >
+                <div id="informativeText">
+                    <h1><i class="fas fa-utensils"></i> FoodBuddies</h1>
+                    <p>Let us know how it went!</p>
+                </div>
+            </div>
+
+            <div class="col followupHalf" >
+            <div class="container">
+                <div class="row d-flex justify-content-end">
+                    <form class="form-inline" action="{{ url_for('authentication.log_out') }}">
+                        <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Log Out</button>
+                    </form>
+                </div>
+
+                <div class="row d-flex align-items-center" style="margin-top:10%;">
+                    <div class="col-2 justify-content-center d-none d-md-block">
+                        <p><img src="../static/profilePicPlaceholder.png" alt="Profile Picture" class="rounded-circle"  id="profilePic"></p>
+                    </div>
+
+                    <div class ="col-10 col-md-5">
+                        <p id="title">Hi {{ firstName }}!</p>
+                        <p id="subtitle">We want to know about your experience!</p>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                <div class="followupForm" >
+
+                        <form action="{{ url_for('main_route.followup') }}" method="POST">
+
+
+                            <div class="form-group" style="margin-bottom: 5%;">
+
+                                <label class="followupFood">Tell us what happened after we showed you your matches</label>
+
+                                <div class="btn-group-toggle d-flex justify-content-around followupFood" data-toggle="buttons">Who reached out first?
+                                    <label class="btn btn-outline-info radioButton">
+                                        <input class="form-check-input" type="radio" name="reachingout" value ="I did"> I did
+                                    </label>
+                                    <label class="btn btn-outline-info radioButton">
+                                        <input class="form-check-input " type="radio" name="reachingout" value ="other person"> The other person
+                                    </label>
+                                    <label class="btn btn-outline-info radioButton">
+                                        <input class="form-check-input " type="radio" name="reachingout" value ="noone"> No one
+                                    </label>
+                                </div>
+
+                                <div class="btn-group-toggle d-flex justify-content-around followupFood" data-toggle="buttons">How was contact made?
+                                    <label class="btn btn-outline-info radioButton">
+                                        <input class="form-check-input" type="radio" name="contact" value ="prefmethod"> Preferred Method of Contact
+                                    </label>
+                                    <label class="btn btn-outline-info radioButton">
+                                        <input class="form-check-input" type="radio" name="contact" value ="other"> Other
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                            <label class="foodTime">How accurate did you find our matching?</label>
+                            <div class="btn-group-toggle foodTime d-flex justify-content-around" data-toggle="buttons">
+                                <label class="btn btn-outline-info radioButton active">
+                                <input type="radio" name="accuracy" value="1" autocomplete="off"> 1 (way off)
+                                </label>
+                                <label class="btn btn-outline-info radioButton">
+                                <input type="radio" name="mealTime" value="2" autocomplete="off"> 2
+                                </label>
+                                <label class="btn btn-outline-info radioButton">
+                                <input type="radio" name="mealTime" value="3" autocomplete="off" checked> 3
+                                </label>
+                                <label class="btn btn-outline-info radioButton">
+                                <input type="radio" name="mealTime" value="4" autocomplete="off"> 4
+                                </label>
+                                <label class="btn btn-outline-info radioButton">
+                                <input type="radio" name="mealTime" value="5" autocomplete="off"> 5 (very accurate)
+                                </label>
+                            </div>
+                            </div>
+
+
+                            <div class ="col-10 col-md-5">
+                                <p id="title">Okay {{ firstName }},</p>
+                                <p id="subtitle">Thank you for sharing</p>
+                                <p id="subtitle">This helps us improve your experience</p>
+                            </div>
+
+                            <div class="row d-flex justify-content-end" data-toggle="buttons">
+                                <button type="submit" class="btn btn-primary mb-4" id="nextButton">Look for another Foodbuddy!<i class="fas fa-arrow-right"></i></button>
+                            </div>
+
+                        </form>
+
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
