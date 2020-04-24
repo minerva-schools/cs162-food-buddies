@@ -5,9 +5,13 @@
 resetPassword.html - to reset their password;
 * signUp.html - a sign up page where the user has to input a Minerva email (@minerva.kgi.edu), their current Rotation city, a chosen password and repeat it, and their preferred method of contact since the app does not have a chat function, and it is up to the user to reach out to the Foodbuddies we match them with;
 * preference.html - where the user can select their dietary restrictions, the meal (breakfast, lunch, or dinner), the cuisine, and can input a window of availability for the meal;
-* The matching page;
+* matches.html the matching page where the user is presented with matches that could potentially be their Foodbuddies. The user can see each match, their meal preferences, and their preferred method of contact so that they can contact them to coordinate. There are three main layers to the matching process: first we match on all preferences of the user, if this strict matching doesn’t yield a match, we omit dietary restrictions in the matching, if this yields nothing as well, then we yield cuisine as well;
 * followup.html - a follow up survey page where we ask the user to provide us with details of what happened after the matching page (did they contact a match, were they contacted, how, how accurate was the matching, etc.). At the end, the user can choose to go back to the preferences pages or log out;
 * 404.html - the error page for requesting an invalid page or no access to the requested page.
+* A pop-up to input the email in case the user forgot their password;
+* A page where the user can edit their password;
+* A pop-up for the user to edit their user information.
+
 
 #### This version of the Foodbuddies web app has the following notable features:
 * The Sign Up page checks if the email is a Minerva email (@minerva.kgi.edu), if the passwords match, and if they fulfill the minimal password requirements;
