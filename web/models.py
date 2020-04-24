@@ -112,9 +112,9 @@ def insert_dummy_users(*args, **kwargs):
 
     DummyUsers = [
             [2,'Jingren', 'Wang', 'jingren.wang@minerva.kgi.edu',
-        hashedPW[88888888], 'Phone', '+82 105-557-7494', 'user_1.jpg'], # Seoul
+        hashedPW[88888888], 'Phone', '+82 105-557-7494', None], # Seoul
             [2,'David', 'Mitchell', 'david.mitchell@minerva.kgi.edu',
-        hashedPW['password'], 'WhatsApp', '+82 415-557-7494','user_2.jpg'], # Seoul
+        hashedPW['password'], 'WhatsApp', '+82 415-557-7494',None], # Seoul
             [2,'Stephen', 'Cole', 'stephen.cole@minerva.kgi.edu',
         hashedPW[55555555], 'Messenger', 'facebook.com/stephen.cole',None], # Seoul
             [5,'Mary', 'Burns', 'mary.burns@minerva.kgi.edu',
@@ -130,8 +130,9 @@ def insert_dummy_users(*args, **kwargs):
             [1,'Charles', 'Smith', 'charles.smith@minerva.kgi.edu',
         hashedPW[77777777], 'Messenger', 'facebook.com/charles.smith',None] # San Francisco
         ]
-
+        
     for user_info in DummyUsers:
+        
         if user_info[7]:
             user_img_name = str(user_info[7])
         else:

@@ -8,6 +8,7 @@ from .models import db, User, City, Cuisine, Preference, DineTime, Followup
 # to save uploaded images to folder
 import os
 import random
+import copy
 
 # create an app factory
 main_routes = Blueprint('main_route',__name__,template_folder='templates')
@@ -16,7 +17,6 @@ main_routes = Blueprint('main_route',__name__,template_folder='templates')
 @main_routes.route('/')
 def index():
     return render_template('login.html')
-
 
 def get_img_path():
     '''helper function to get the path to user profile image'''
@@ -143,22 +143,47 @@ def loadMatches():
 @login_required
 def edit(update):
 
-    if update == "first_name":
+    if update == "profile_image":
+        file = request.files['new_img'] # retrieve the File object
+        srcfile_name = file.filename.lower()
+        ext = os.path.splitext(srcfile_name)[-1].lower() # get the extension
+        # delete any old file
+        if current_user.profile_img_name!=None:
+            os.remove(os.path.join(app.root_path, 'static/userProfilePics',current_user.profile_img_name))
+            # name the new profile
+        filename_db = 'user_'+str(current_user.id)+'_'+str(random.randint(1000,9999))+ext # the
+        # double check file validity
+        if '.' not in filename_db:
+            filename_db = filename_db +'.jpg'
+        # save this new file to user upload folder
+        file.save(os.path.join(app.root_path, 'static/userProfilePics',filename_db))
+        # update corresponding file_name in db upon first upload
+        db.session.query(User).filter(User.id==current_user.id).update({'profile_img_name': filename_db})
+#        db.session.commit() # commit new image filename to db
+
+
+    elif update == "first_name":
         # front-end: update current user's first_name
         current_user.first_name = str(request.form.get("first_name")).capitalize()
+        
     elif update == "last_name":
         current_user.last_name = str(request.form.get("last_name")).capitalize()
+
         
     elif update == "email":
         current_user.email = str(request.form.get("email")).lower()
+       
     elif update == "contact_method":
         current_user.contact_method = request.form.get('contact_method')
         current_user.contact_info = request.form.get('contact_info')
+        
+       
     elif update == "city_name":
         city = db.session.query(City).filter(City.city_name==request.form.get('city_selected')).first()
         preference = db.session.query(Preference).filter(Preference.user_id == current_user.id).first()
         preference.city_id = city.id
         current_user.city_id = city.id
+      
     db.session.commit() # commit user data change
     
     return redirect(url_for('main_route.preference'))
@@ -168,7 +193,8 @@ def edit(update):
 @login_required
 def followup():
     if request.method == "GET":
-        return render_template('followup.html', firstName=current_user.first_name.capitalize())
+        return render_template('followup.html', user=current_user, image_path=get_img_path())
+        
     elif request.method == "POST":
         # determine linking to other tables
         preference = db.session.query(Preference).filter(Preference.user_id == current_user.id).first()

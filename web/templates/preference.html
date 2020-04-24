@@ -179,7 +179,7 @@
                                     src='{{ image_path }}' alt="User Profile Picture" class="rounded-circle"  id="pictureEdit">
                             </div>
                             <div class="row justify-content-center">
-                                <form action="" method="POST" enctype='multipart/form-data' style="width: 100%;">
+                                <form action="{{ url_for('main_route.edit', update='profile_image') }}" method="POST" enctype='multipart/form-data' style="width: 100%;">
 
                                     <label>Upload/Change Picture</label>
                                     <div class="custom-file" style="width: 70%;">
@@ -301,7 +301,7 @@
             </div>
 
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Done</button>
+<!--              <button type="button" class="btn btn-secondary" data-dismiss="modal">Done</button>-->
             </div>
           </div>
         </div>

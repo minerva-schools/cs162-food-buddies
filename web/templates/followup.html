@@ -47,11 +47,11 @@
 
                 <div class="row d-flex align-items-center" style="margin-top:10%;">
                     <div class="col-2 justify-content-center d-none d-md-block">
-                        <p><img src="../static/profilePicPlaceholder.png" alt="Profile Picture" class="rounded-circle"  id="profilePic"></p>
+                        <p><img src="{{image_path}}" alt="Profile Picture" class="rounded-circle"  id="profilePic"></p>
                     </div>
 
                     <div class ="col-10 col-md-5">
-                        <p id="title">Hi {{ firstName }}!</p>
+                        <p id="title">Hi {{ user.first_name }}!</p>
                         <p id="subtitle">We want to know about your experience!</p>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
 
 
                             <div class ="col-10 col-md-5">
-                                <p id="title">Okay {{ firstName }},</p>
+                                <p id="title">Okay {{ user.first_name }},</p>
                                 <p id="subtitle">Thank you for sharing</p>
                                 <p id="subtitle">This helps us improve your experience</p>
                             </div>
