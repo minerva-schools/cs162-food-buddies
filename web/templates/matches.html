@@ -27,12 +27,12 @@
   <div class="grid-container">
     <div class="grid-item1">
       <div class="row d-flex justify-content-end">
-        <form class="form-inline" action="{{ url_for('authentication.log_out') id="lgout" }}">
+        <form class="form-inline" action="{{ url_for('authentication.log_out') }}" id="lgout">
            <button class="btn btn-outline-light my-2 my-sm-0" type="submit" > Log Out  </button>
-        </form>  
+        </form>
       </div>
-       
-      
+
+
       <div class="col informativeHalf d-none d-md-flex align-items-center justify-content-center" >
             <div id="informativeText">
                 <h1><i class="fas fa-utensils"></i> FoodBuddies</h1>
@@ -48,9 +48,9 @@
           <label class="preferenceFood"> Your Preferences </label>
           <div class="btn-group-toggle d-flex justify-content-around preferenceFood" data-toggle="buttons">
             <label class="btn btn-outline-info checkButton">
-              <input class="form-check-input" type="checkbox" name ="vegetarian"> Vegetarian 
+              <input class="form-check-input" type="checkbox" name ="vegetarian"> Vegetarian
             </label>
-            <label class="btn btn-outline-info checkButton"> 
+            <label class="btn btn-outline-info checkButton">
               <input class="form-check-input " type="checkbox"  name ="glutenFree"> Gluten-Free
             </label>
             <label class="btn btn-outline-info checkButton">
@@ -84,7 +84,7 @@
                </div>
              </div>
             <br>
-          
+
             <br>
             <br>
             <div class="form-group">
@@ -105,19 +105,19 @@
             <br>
           <br>
             <div class="btn-group-toggle d-flex justify-content-around update" data-toggle="buttons">
-          
+
               <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" > Update Preferences</button>
             </div>
         </form>
 
-                                    
+
       </div>
 
        <div class="grid-item3">
         <label class="matches" > Your Matches!</label>
         <div class="flex-container">
-        {% if users in Preference %}
-        {% for users in Preference %}
+        {% if users in matchedUsers %}
+        {% for users in matchedUsers %}
           <div id="firstmatch">
            <div class="container">
             <p><img src="../static/profilePicPlaceholder.png" alt="Profile Picture" class="rounded-circle"  id="profilePic"></p>
@@ -145,11 +145,11 @@
 	    <p> Preferred Contact Method: {{ user.contact_method }} </p>
 	    <p> Contact Info: {{ user.contact_info }} </p>
            </div>
-                         
+
           </div>
         {% endfor %}
         {% else %}
-          
+
           <div id="secondmatch">
             <div class="container">
             <p><img src="../static/nomatching.png" alt=""   id="nomatch"></p>
@@ -165,10 +165,10 @@
       </div>
 
        </div>
-      <br> 
+      <br>
 
 
-    
+
   </div>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

@@ -17,3 +17,13 @@ def test_redirect_preferences():
     r = requests.get('http://127.0.0.1:5000/preference')
     assert r.status_code == 200
     assert 'You need to login for accessing this page!' in r.text
+
+def test_redirect_matches():
+    r = requests.get('http://127.0.0.1:5000/matches')
+    assert r.status_code == 200
+    assert 'You need to login for accessing this page!' in r.text
+
+# def test_redirect_followup():
+#     r = client.get('http://127.0.0.1:5000/followup')
+#     assert r.status_code == 200
+#     assert b'You need to login for accessing this page!' in r.text
