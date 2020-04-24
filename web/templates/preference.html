@@ -179,23 +179,19 @@
                                     src='{{ image_path }}' alt="User Profile Picture" class="rounded-circle"  id="pictureEdit">
                             </div>
                             <div class="row justify-content-center">
-                                <form action="{{ url_for('main_route.edit', update='profile_image') }}" method="POST" enctype='multipart/form-data' style="width: 100%;">
+                                <label>Upload/Change Picture</label>
+                                <form  action="{{ url_for('main_route.edit', update='profile_image') }}" method="POST" enctype='multipart/form-data' style="width: 100%;">
 
-                                    <label>Upload/Change Picture</label>
-                                    <div class="custom-file" style="width: 70%;">
-
-                                             <input name="new_img" type="file"  class="custom-file-input" id="inputGroupFile01">
-
-                                             <label class="custom-file-label" for="inputGroupFile01">Choose picture</label>
-
-<!--                                             <input type=submit value=Upload>-->
-
-
-
-                                            <div class="input-group-append">
-                                                <button class="btn btn-outline-primary" type="submit">Change</button>
-                                            </div>
+                                    <div class="input-group mb-3">
+                                        <div class="custom-file" style="width: 70%;">
+                                            <input name="new_img" type="file"  class="custom-file-input" id="inputGroupFile01">
+                                            <label class="custom-file-label" for="inputGroupFile01">Choose picture</label>
+                                         </div>  
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-primary" type="submit">Upload</button>
+                                        </div>
                                     </div>
+
 
                                 </form>
                             </div>
